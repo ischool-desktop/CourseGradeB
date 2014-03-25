@@ -109,7 +109,8 @@ namespace CourseGradeB
                 }
                 #endregion
 
-                teacherField.Reload();
+                if(teacherField!=null)
+                    teacherField.Reload();
                 #endregion
             };
         }

@@ -9,6 +9,7 @@ using DataRationality;
 using K12.Presentation;
 using JHSchool;
 using Framework;
+using CourseGradeB.CourseExtendControls;
 
 
 namespace CourseGradeB
@@ -18,12 +19,22 @@ namespace CourseGradeB
         [MainMethod("")]
         public static void Main()
         {
-            RibbonBarItem rbItem = Student.Instance.RibbonBarItems["教務"];
 
-            Course.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<CourseExtendControls.BasicInfoItem>());
+            // 課程加入教師檢視
+            Course.Instance.AddView(new TeacherCategoryView());
 
-            RibbonBarButton rbButton;
+            #region 資料項目
+            // 基本資料
+            Course.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<BasicInfoItem>());
+
+            // 修課學生
+            Course.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<SCAttendItem>());
+            
+            #endregion
+            
             #region 課程/編輯
+            RibbonBarItem rbItem = Student.Instance.RibbonBarItems["教務"];
+            RibbonBarButton rbButton;
             rbItem = Course.Instance.RibbonBarItems["編輯"];
             rbButton = rbItem["新增"];
             rbButton.Size = RibbonBarButton.MenuButtonSize.Large;
@@ -94,6 +105,44 @@ namespace CourseGradeB
                 CouItem.Enable = (Course.Instance.SelectedList.Count < 2) && User.Acl["JHSchool.Course.Ribbon0010"].Executable;
             };
             #endregion
+
+            #region 匯出/匯入
+
+            RibbonBarButton rbItemExport = Student.Instance.RibbonBarItems["資料統計"]["匯出"];
+            RibbonBarButton rbItemImport = Student.Instance.RibbonBarItems["資料統計"]["匯入"];
+
+            RibbonBarItem rbItemCourseImportExport = Course.Instance.RibbonBarItems["資料統計"];
+            rbItemCourseImportExport["匯出"]["匯出課程修課學生"].Enable = User.Acl["JHSchool.Course.Ribbon0031"].Executable;
+            rbItemCourseImportExport["匯出"]["匯出課程修課學生"].Click += delegate
+            {
+                SmartSchool.API.PlugIn.Export.Exporter exporter = new CourseGradeB.ImportExport.Course.ExportCourseStudents("");
+                CourseGradeB.ImportExport.Course.ExportStudentV2 wizard = new CourseGradeB.ImportExport.Course.ExportStudentV2(exporter.Text, exporter.Image);
+                exporter.InitializeExport(wizard);
+                wizard.ShowDialog();
+            };
+            rbItemCourseImportExport["匯入"]["匯入課程修課學生"].Enable = User.Acl["JHSchool.Course.Ribbon0021"].Executable;
+            rbItemCourseImportExport["匯入"]["匯入課程修課學生"].Click += delegate
+            {
+                SmartSchool.API.PlugIn.Import.Importer importer = new CourseGradeB.ImportExport.Course.ImportCourseStudents("");
+                CourseGradeB.ImportExport.Course.ImportStudentV2 wizard = new CourseGradeB.ImportExport.Course.ImportStudentV2(importer.Text, importer.Image);
+                importer.InitializeImport(wizard);
+                wizard.ShowDialog();
+            };			
+
+            #endregion
+
+            #region 權限註冊
+            // 學生學期歷程
+            Catalog ribbon = RoleAclSource.Instance["學生"]["功能按鈕"];
+            ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0169", "匯出學期歷程"));
+            ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0170", "匯入學期歷程"));
+
+            // 課程
+            ribbon = RoleAclSource.Instance["課程"]["功能按鈕"];
+            ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0031", "匯出課程修課學生"));
+            ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0021", "匯入課程修課學生"));
+            #endregion
+
         }
     }
 }

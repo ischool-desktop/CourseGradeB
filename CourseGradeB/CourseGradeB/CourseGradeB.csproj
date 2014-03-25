@@ -147,18 +147,22 @@
     <Reference Include="SmartSchool.API.PlugIn, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\SmartSchool.API.PlugIn.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SmartSchool.Common.DotNetBar, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\SmartSchool.Common.DotNetBar.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SmartSchool.Customization.PlugIn, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\SmartSchool.Customization.PlugIn.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SmartSchool.ErrorReporting, Version=1.0.2.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\SmartSchool.ErrorReporting.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -171,12 +175,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseExtendControls\BasicInfoItem.cs" />
+    <Compile Include="CourseExtendControls\BasicInfoItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CourseExtendControls\BasicInfoItem.designer.cs" />
     <Compile Include="CourseExtendControls\NavViewNode.cs" />
-    <Compile Include="CourseExtendControls\Ribbon\AddCourse.cs" />
+    <Compile Include="CourseExtendControls\Ribbon\AddCourse.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CourseExtendControls\Ribbon\AddCourse.Designer.cs" />
-    <Compile Include="CourseExtendControls\TeacherCategoryView.cs" />
+    <Compile Include="CourseExtendControls\SCAttendItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CourseExtendControls\SCAttendItem.designer.cs" />
+    <Compile Include="CourseExtendControls\TeacherCategoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CourseExtendControls\TeacherCategoryView.Designer.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="Editor\TCInstructRecordEditor.cs" />
@@ -184,6 +198,26 @@
     <Compile Include="Feature\Legacy\EditCourse.cs" />
     <Compile Include="Feature\Legacy\QueryCourse.cs" />
     <Compile Include="Feature\Legacy\QueryTemplate.cs" />
+    <Compile Include="ImportExport\Course\ExportCourseStudents.cs" />
+    <Compile Include="ImportExport\Course\ExportStudentV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportExport\Course\ExportStudentV2.designer.cs" />
+    <Compile Include="ImportExport\Course\ImportCourseStudents.cs" />
+    <Compile Include="ImportExport\Course\ImportStudentV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportExport\Course\ImportStudentV2.designer.cs" />
+    <Compile Include="ImportExport\ExportSemesterHistory.cs" />
+    <Compile Include="ImportExport\ExportStudentV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportExport\ExportStudentV2.designer.cs" />
+    <Compile Include="ImportExport\ImportSemesterHistory.cs" />
+    <Compile Include="ImportExport\ImportStudentV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportExport\ImportStudentV2.designer.cs" />
     <Compile Include="PeriodCredit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -272,7 +306,12 @@
   <ItemGroup>
     <EmbeddedResource Include="CourseExtendControls\BasicInfoItem.resx" />
     <EmbeddedResource Include="CourseExtendControls\Ribbon\AddCourse.resx" />
+    <EmbeddedResource Include="CourseExtendControls\SCAttendItem.resx" />
     <EmbeddedResource Include="CourseExtendControls\TeacherCategoryView.resx" />
+    <EmbeddedResource Include="ImportExport\Course\ExportStudentV2.resx" />
+    <EmbeddedResource Include="ImportExport\Course\ImportStudentV2.resx" />
+    <EmbeddedResource Include="ImportExport\ExportStudentV2.resx" />
+    <EmbeddedResource Include="ImportExport\ImportStudentV2.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
