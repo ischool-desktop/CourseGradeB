@@ -137,12 +137,40 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0169", "匯出學期歷程"));
             ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0170", "匯入學期歷程"));
 
+            //班級
+            ribbon = RoleAclSource.Instance["班級"]["功能按鈕"];
+            ribbon.Add(new RibbonFeature("JHSchool.Class.Ribbon0070", "班級開課"));
+
             // 課程
             ribbon = RoleAclSource.Instance["課程"]["功能按鈕"];
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0031", "匯出課程修課學生"));
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0021", "匯入課程修課學生"));
+
             #endregion
 
+            #region 班級功能
+
+            rbButton = K12.Presentation.NLDPanels.Class.RibbonBarItems["教務"]["班級開課"];
+            rbButton.Enable = User.Acl["JHSchool.Class.Ribbon0070"].Executable;
+            rbButton.Image = Properties.Resources.organigram_refresh_64;
+            rbButton["直接開課"].Click += delegate
+            {
+                if (Class.Instance.SelectedList.Count > 0)
+                    new CourseGradeB.CreateCoursesDirectly();
+            };
+
+            #endregion
+
+            #region 教務作業功能
+            FISCA.Presentation.RibbonBarItem item1 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "基本設定"];
+            item1["對照/代碼"].Image = Properties.Resources.notepad_lock_64;
+            item1["對照/代碼"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
+
+            FISCA.Presentation.RibbonBarItem item2 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "批次作業/檢視"];
+            item2["成績作業"].Image = Properties.Resources.calc_save_64;
+            item2["成績作業"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
+
+            #endregion
         }
     }
 }

@@ -192,8 +192,21 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CourseExtendControls\TeacherCategoryView.Designer.cs" />
+    <Compile Include="ClassExtendControls\CreateClassCourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassExtendControls\CreateClassCourseForm.Designer.cs">
+      <DependentUpon>CreateClassCourseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateCoursesDirectly.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="Editor\TCInstructRecordEditor.cs" />
+    <Compile Include="ClassExtendControls\ErrorViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassExtendControls\ErrorViewer.Designer.cs">
+      <DependentUpon>ErrorViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Feature\Legacy\AddCourse.cs" />
     <Compile Include="Feature\Legacy\EditCourse.cs" />
     <Compile Include="Feature\Legacy\QueryCourse.cs" />
@@ -299,8 +312,11 @@
     <Content Include="Library\SmartSchool.ErrorReporting.xml" />
     <Content Include="Resources\btnAddCourse.png" />
     <Content Include="Resources\btnDeleteCourse.png" />
+    <None Include="Resources\calc_save_64.png" />
     <Content Include="Resources\DefaultDomainList.xml" />
     <Content Include="Resources\DefaultSubjectOrdinal.xml" />
+    <None Include="Resources\notepad_lock_64.png" />
+    <None Include="Resources\organigram_refresh_64.png" />
     <Content Include="Resources\teacher_64.png" />
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +324,9 @@
     <EmbeddedResource Include="CourseExtendControls\Ribbon\AddCourse.resx" />
     <EmbeddedResource Include="CourseExtendControls\SCAttendItem.resx" />
     <EmbeddedResource Include="CourseExtendControls\TeacherCategoryView.resx" />
+    <EmbeddedResource Include="ClassExtendControls\CreateClassCourseForm.resx">
+      <DependentUpon>CreateClassCourseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImportExport\Course\ExportStudentV2.resx" />
     <EmbeddedResource Include="ImportExport\Course\ImportStudentV2.resx" />
     <EmbeddedResource Include="ImportExport\ExportStudentV2.resx" />
