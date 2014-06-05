@@ -1,4 +1,4 @@
-﻿namespace CourseGradeB.ClassExtendControls
+﻿namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
 {
     partial class CreateClassCourseForm
     {

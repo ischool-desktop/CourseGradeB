@@ -5,7 +5,7 @@ using Aspose.Cells;
 using Framework;
 using JHSchool;
 
-namespace CourseGradeB.ClassExtendControls
+namespace CourseGradeB.Calculation
 {
     public partial class ErrorViewer : FISCA.Presentation.Controls.BaseForm
     {

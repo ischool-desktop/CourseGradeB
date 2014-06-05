@@ -132,7 +132,7 @@ namespace CourseGradeB
             #endregion
 
             #region 權限註冊
-            // 學生學期歷程
+            // 學生
             Catalog ribbon = RoleAclSource.Instance["學生"]["功能按鈕"];
             ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0169", "匯出學期歷程"));
             ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0170", "匯入學期歷程"));
@@ -146,6 +146,11 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0031", "匯出課程修課學生"));
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0021", "匯入課程修課學生"));
 
+            //教務作業
+            ribbon = RoleAclSource.Instance["教務作業"];
+            ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon0000", "評量名稱管理"));
+            ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.DomainList", "領域清單"));
+            ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.SubjectList", "科目清單"));
             #endregion
 
             #region 班級功能
@@ -156,7 +161,7 @@ namespace CourseGradeB
             rbButton["直接開課"].Click += delegate
             {
                 if (Class.Instance.SelectedList.Count > 0)
-                    new CourseGradeB.CreateCoursesDirectly();
+                    new CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesDirectly();
             };
 
             #endregion
@@ -170,6 +175,26 @@ namespace CourseGradeB
             item2["成績作業"].Image = Properties.Resources.calc_save_64;
             item2["成績作業"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
 
+            rbItem = EduAdmin.Instance.RibbonBarItems["基本設定"];
+            rbItem["管理"].Size = RibbonBarButton.MenuButtonSize.Large;
+            rbItem["管理"].Image = Properties.Resources.network_lock_64;
+            rbItem["管理"]["評量名稱管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon0000"].Executable;
+            rbItem["管理"]["評量名稱管理"].Click += delegate
+            {
+                new CourseGradeB.CourseExtendControls.Ribbon.ExamManager().ShowDialog();
+            };
+
+            rbItem["管理"]["領域資料管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.DomainList"].Executable;
+            rbItem["管理"]["領域資料管理"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.DomainListTable().ShowDialog();
+            };
+
+            rbItem["管理"]["科目資料管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.SubjectList"].Executable;
+            rbItem["管理"]["科目資料管理"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectListTable().ShowDialog();
+            };
             #endregion
         }
     }

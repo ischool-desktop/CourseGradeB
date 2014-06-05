@@ -1,4 +1,4 @@
-﻿namespace CourseGradeB.ClassExtendControls
+﻿namespace CourseGradeB.Calculation
 {
     partial class ErrorViewer
     {

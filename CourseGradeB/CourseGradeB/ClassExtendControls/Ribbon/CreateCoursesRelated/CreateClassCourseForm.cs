@@ -10,8 +10,9 @@ using Framework;
 using FISCA.Presentation;
 using JHSchool.Data;
 using JHSchool;
+using CourseGradeB.Calculation;
 
-namespace CourseGradeB.ClassExtendControls
+namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
 {
     public partial class CreateClassCourseForm : FISCA.Presentation.Controls.BaseForm
     {
@@ -334,7 +335,6 @@ namespace CourseGradeB.ClassExtendControls
         {
             this.Close();
         }
-
 
     }
 }

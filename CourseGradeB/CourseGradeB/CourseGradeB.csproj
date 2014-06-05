@@ -192,20 +192,39 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CourseExtendControls\TeacherCategoryView.Designer.cs" />
-    <Compile Include="ClassExtendControls\CreateClassCourseForm.cs">
+    <Compile Include="ClassExtendControls\Ribbon\CreateCoursesRelated\CreateClassCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClassExtendControls\CreateClassCourseForm.Designer.cs">
+    <Compile Include="ClassExtendControls\Ribbon\CreateCoursesRelated\CreateClassCourseForm.Designer.cs">
       <DependentUpon>CreateClassCourseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateCoursesDirectly.cs" />
+    <Compile Include="ClassExtendControls\Ribbon\CreateCoursesDirectly.cs" />
     <Compile Include="Domain.cs" />
-    <Compile Include="Editor\TCInstructRecordEditor.cs" />
-    <Compile Include="ClassExtendControls\ErrorViewer.cs">
+    <Compile Include="EduAdminExtendControls\Ribbon\DomainListTable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClassExtendControls\ErrorViewer.Designer.cs">
+    <Compile Include="EduAdminExtendControls\Ribbon\DomainListTable.Designer.cs">
+      <DependentUpon>DomainListTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SubjectListTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SubjectListTable.Designer.cs">
+      <DependentUpon>SubjectListTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Feature\Legacy\EditExam.cs" />
+    <Compile Include="Editor\TCInstructRecordEditor.cs" />
+    <Compile Include="Calculation\ErrorViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calculation\ErrorViewer.Designer.cs">
       <DependentUpon>ErrorViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CourseExtendControls\Ribbon\ExamManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CourseExtendControls\Ribbon\ExamManager.Designer.cs">
+      <DependentUpon>ExamManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Feature\Legacy\AddCourse.cs" />
     <Compile Include="Feature\Legacy\EditCourse.cs" />
@@ -239,6 +258,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Feature\Legacy\QueryExam.cs" />
     <Compile Include="Subject.cs" />
     <Compile Include="TCInstruct.cs" />
     <Compile Include="TCInstructRecord.cs" />
@@ -317,6 +337,7 @@
     <Content Include="Resources\DefaultSubjectOrdinal.xml" />
     <None Include="Resources\notepad_lock_64.png" />
     <None Include="Resources\organigram_refresh_64.png" />
+    <None Include="Resources\network_lock_64.png" />
     <Content Include="Resources\teacher_64.png" />
   </ItemGroup>
   <ItemGroup>
@@ -324,8 +345,11 @@
     <EmbeddedResource Include="CourseExtendControls\Ribbon\AddCourse.resx" />
     <EmbeddedResource Include="CourseExtendControls\SCAttendItem.resx" />
     <EmbeddedResource Include="CourseExtendControls\TeacherCategoryView.resx" />
-    <EmbeddedResource Include="ClassExtendControls\CreateClassCourseForm.resx">
+    <EmbeddedResource Include="ClassExtendControls\Ribbon\CreateCoursesRelated\CreateClassCourseForm.resx">
       <DependentUpon>CreateClassCourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\DomainListTable.resx">
+      <DependentUpon>DomainListTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportExport\Course\ExportStudentV2.resx" />
     <EmbeddedResource Include="ImportExport\Course\ImportStudentV2.resx" />
