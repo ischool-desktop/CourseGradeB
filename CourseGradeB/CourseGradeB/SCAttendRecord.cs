@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Framework;
+using JHSchool;
 
-namespace JHSchool.Evaluation
+namespace CourseGradeB
 {
     /// <summary>
     /// 學生修課資訊
@@ -46,7 +47,7 @@ namespace JHSchool.Evaluation
             RefCourseID = courseID;
             ID = id;
             decimal d = 0;
-            if ( decimal.TryParse(score, out d) )
+            if (decimal.TryParse(score, out d))
                 Score = d;
             else
                 Score = null;

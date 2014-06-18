@@ -48,11 +48,11 @@ namespace CourseGradeB.CourseExtendControls
         {
             InitializeComponent();
 
-            Title = "基本資料";            
-            
+            Title = "基本資料";
+
             _oldLogDataDict = new Dictionary<string, string>();
             _newLogDataDict = new Dictionary<string, string>();
-            
+
             _teachers = new List<TeacherInfo>();
             _classes = new List<ClassInfo>();
             _errors = new EnhancedErrorProvider();
@@ -62,9 +62,9 @@ namespace CourseGradeB.CourseExtendControls
 
             TCInstruct.Instance.ItemUpdated += new EventHandler<ItemUpdatedEventArgs>(Instance_ItemUpdated);
             this.Disposed += new EventHandler(BasicInfoItem_Disposed);
-           
+
         }
-        
+
         private void BasicInfoItem_Disposed(object sender, EventArgs e)
         {
             TCInstruct.Instance.ItemUpdated -= new EventHandler<ItemUpdatedEventArgs>(Instance_ItemUpdated);
@@ -78,27 +78,29 @@ namespace CourseGradeB.CourseExtendControls
 
         private void InitializeDomainList()
         {
-            cboDomain.Items.Add(new ComboItem()); //空白
+            cboRequired.Items.Add(new ComboItem()); //空白
+            cboRequired.Items.Add("必修");
+            cboRequired.Items.Add("選修");
 
-            foreach (string each in Domain.SelectGeneral()) //一般領域
-            {
-                ComboItem item = new ComboItem();
-                item.Text = each;
-                cboDomain.Items.Add(item);
-            }
+            //foreach (string each in Domain.SelectGeneral()) //一般領域
+            //{
+            //    ComboItem item = new ComboItem();
+            //    item.Text = each;
+            //    cboDomain.Items.Add(item);
+            //}
 
-            ComboItem elasticItem = new ComboItem(); //彈性課程
-            elasticItem.FontStyle = System.Drawing.FontStyle.Bold;
-            elasticItem.ForeColor = System.Drawing.Color.Red;
-            elasticItem.Text = "彈性課程";
-            cboDomain.Items.Add(elasticItem);
+            //ComboItem elasticItem = new ComboItem(); //彈性課程
+            //elasticItem.FontStyle = System.Drawing.FontStyle.Bold;
+            //elasticItem.ForeColor = System.Drawing.Color.Red;
+            //elasticItem.Text = "彈性課程";
+            //cboDomain.Items.Add(elasticItem);
 
-            foreach (string each in Domain.SelectSpecial()) //特教領域
-            {
-                ComboItem item = new ComboItem();
-                item.Text = each;
-                cboDomain.Items.Add(item);
-            }
+            //foreach (string each in Domain.SelectSpecial()) //特教領域
+            //{
+            //    ComboItem item = new ComboItem();
+            //    item.Text = each;
+            //    cboDomain.Items.Add(item);
+            //}
         }
 
         private void Multi_Teacher_ValueChanged(object sender, EventArgs e)
@@ -212,7 +214,7 @@ namespace CourseGradeB.CourseExtendControls
 
                 txtCourseName.Text = content.GetText("Course/CourseName");
                 txtSubject.Text = content.GetText("Course/Subject");
-               
+
 
                 #region 處理節次...權數。
                 string period = content.GetText("Course/Period");
@@ -222,10 +224,24 @@ namespace CourseGradeB.CourseExtendControls
                 txtPeriodCredit.Text = pc.ToString();
                 #endregion
 
-                cboDomain.Text = content.GetText("Course/Domain");
+                //cboDomain.Text = content.GetText("Course/Domain");
+                cboRequired.Text = content.GetText("Course/IsRequired");
+                switch (content.GetText("Course/IsRequired"))
+                {
+                    case "選":
+                        cboRequired.Text = "選修";
+                        break;
+                    case "必":
+                        cboRequired.Text = "必修";
+                        break;
+                    default:
+                        cboRequired.Text = "";
+                        break;
+                }
+
                 cboSchoolYear.Text = content.GetText("Course/SchoolYear");
                 cboSemester.Text = content.GetText("Course/Semester");
-               
+
                 cboClass.SelectedItem = content.GetText("Course/RefClassID"); //ComboBox 奧義
                 //cboExamTemplate.SelectedItem = content.GetText("Course/RefExamTemplateID"); //ComboBox 奧義
 
@@ -241,18 +257,6 @@ namespace CourseGradeB.CourseExtendControls
 
                 //cboEntry.Text = content.GetText("Course/ScoreType");
                 _multi_teacher.BindData(RunningID, content.GetElement("Course/Teachers"));
-                //switch (content.GetText("Course/IsRequired"))
-                //{
-                //    case "選":
-                //        cboRequired.SelectedIndex = 2;
-                //        break;
-                //    case "必":
-                //        cboRequired.SelectedIndex = 1;
-                //        break;
-                //    default:
-                //        cboRequired.Text = "";
-                //        break;
-                //}
 
                 //switch (content.GetText("Course/RequiredBy"))
                 //{
@@ -272,7 +276,7 @@ namespace CourseGradeB.CourseExtendControls
                 WatchValue("Subject", txtSubject.Text);
                 //WatchValue("SubjectLevel", cboSubjectLevel.Text);
                 WatchValue("PeriodCredit", txtPeriodCredit.Text);
-                WatchValue("Domain", cboDomain.Text);
+                WatchValue("IsRequired", cboRequired.Text);
                 WatchValue("SchoolYear", cboSchoolYear.Text);
                 WatchValue("Semester", cboSemester.Text);
                 //WatchValue("RefTeacherID", cboTeacher.SelectedItem);
@@ -296,8 +300,8 @@ namespace CourseGradeB.CourseExtendControls
                 _oldLogDataDict.Add("學年度", cboSchoolYear.Text);
                 _oldLogDataDict.Add("節權數", txtPeriodCredit.Text);
                 _oldLogDataDict.Add("學期", cboSemester.Text);
-                _oldLogDataDict.Add("領域", cboDomain.Text);
-                
+                _oldLogDataDict.Add("必選修", cboRequired.Text);
+
                 if (_multi_teacher.Teacher1Button.Teacher == null)
                     _oldLogDataDict.Add("教師一", "");
                 else
@@ -444,7 +448,7 @@ namespace CourseGradeB.CourseExtendControls
                 _newLogDataDict.Add("學年度", cboSchoolYear.Text);
                 _newLogDataDict.Add("節權數", txtPeriodCredit.Text);
                 _newLogDataDict.Add("學期", cboSemester.Text);
-                _newLogDataDict.Add("領域", cboDomain.Text);
+                _newLogDataDict.Add("必選修", cboRequired.Text);
                 if (_multi_teacher.Teacher1Button.Teacher == null)
                     _newLogDataDict.Add("教師一", "");
                 else
@@ -461,7 +465,7 @@ namespace CourseGradeB.CourseExtendControls
                     _newLogDataDict.Add("教師三", _multi_teacher.Teacher3Button.Teacher.TeacherName);
 
 
-                    
+
                 //#region Log 記錄修改後的資料
 
                 //machine.AddAfter(labelX1.Text.Replace("　", "").Replace(" ", ""), txtCourseName.Text);
@@ -541,9 +545,9 @@ namespace CourseGradeB.CourseExtendControls
                     _update_required = true;
                 }
 
-                if (items.ContainsKey("Domain"))
+                if (items.ContainsKey("IsRequired"))
                 {
-                    req.AddElement("Course/Field", "Domain", cboDomain.Text);
+                    req.AddElement("Course/Field", "IsRequired", cboRequired.Text.Replace("修", ""));
                     _update_required = true;
                 }
 
@@ -620,7 +624,7 @@ namespace CourseGradeB.CourseExtendControls
                 foreach (KeyValuePair<string, string> data in _oldLogDataDict)
                 {
                     if (_newLogDataDict.ContainsKey(data.Key))
-                    {                        
+                    {
                         // 有差異
                         if (data.Value != _newLogDataDict[data.Key])
                         {
@@ -633,7 +637,7 @@ namespace CourseGradeB.CourseExtendControls
                 // 當資料有改變記 log
                 if (DataChange)
                 {
-                    FISCA.LogAgent.ApplicationLog.Log("課程基本資料","修改課程基本資料","course",RunningID,sblog.ToString());
+                    FISCA.LogAgent.ApplicationLog.Log("課程基本資料", "修改課程基本資料", "course", RunningID, sblog.ToString());
                 }
 
                 Course.Instance.SyncDataBackground(RunningID);
@@ -748,10 +752,10 @@ namespace CourseGradeB.CourseExtendControls
             }
         }
 
-        private void cboDomain_TextChanged(object sender, EventArgs e)
+        private void cboRequired_TextChanged(object sender, EventArgs e)
         {
             if (!_initialing)
-                ChangeValue("Domain", cboDomain.Text);
+                ChangeValue("IsRequired", cboRequired.Text);
         }
 
         private void ComboBoxItem_Validating(object sender, CancelEventArgs e)

@@ -11,6 +11,9 @@ using FISCA.Presentation;
 using JHSchool.Data;
 using JHSchool;
 using CourseGradeB.Calculation;
+using FISCA.DSAUtil;
+using CourseGradeB.EduAdminExtendControls;
+using FISCA.UDT;
 
 namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
 {
@@ -19,10 +22,15 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
         private EnhancedErrorProvider _error;
         private BackgroundWorker _worker;
         private List<JHClassRecord> _classes;
+        AccessHelper _A = new AccessHelper();
 
         public CreateClassCourseForm(List<JHClassRecord> classes)
         {
             InitializeComponent();
+
+            cboRequired.Items.Add("");
+            cboRequired.Items.Add("必修");
+            cboRequired.Items.Add("選修");
 
             _classes = classes;
 
@@ -76,6 +84,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
             string domain = objs[2] as string;
             string subject = objs[3] as string;
             string periodcredit = objs[4] as string;
+            string required = objs[5] as string;
 
             PeriodCredit pc = new PeriodCredit();
             pc.Parse(periodcredit);
@@ -140,6 +149,8 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
             #region 開課
             Dictionary<string, string> classNewCourse = new Dictionary<string, string>();
 
+            DSXmlHelper req = new DSXmlHelper("UpdateRequest");
+
             foreach (JHClassRecord cla in _classes)
             {
                 JHCourseRecord newCourse = new JHCourseRecord();
@@ -154,9 +165,20 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
                 newCourse.RefClassID = cla.ID;
 
                 classNewCourse.Add(cla.ID, JHCourse.Insert(newCourse));
+                req.AddElement("Course");
+                req.AddElement("Course", "Field");
+                req.AddElement("Course/Field", "IsRequired", required.Replace("修", ""));
+                req.AddElement("Course", "Condition");
+                req.AddElement("Course/Condition", "ID", classNewCourse[cla.ID]);
+
                 counter++;
                 _worker.ReportProgress((int)(counter * 100d / total), "正在進行開課…");
             }
+
+            //更新必選修
+            if (classNewCourse.Count > 0)
+                JHSchool.Feature.Legacy.EditCourse.UpdateCourse(new DSRequest(req));
+
             #endregion
 
             #region 加入學生修課
@@ -240,21 +262,15 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
         {
             try
             {
-                cboDomain.Items.Clear();
-
-                foreach (string domain in Subject.Domains)
-                    cboDomain.Items.Add(domain);
-
-                cboDomain.SelectedIndex = 0;
-
                 cboSubject.Items.Clear();
 
-                foreach (string subject in Subject.Subjects)
-                    cboSubject.Items.Add(subject);
+                List<SubjectRecord> list= _A.Select<SubjectRecord>();
+                foreach (SubjectRecord sr in _A.Select<SubjectRecord>())
+                    cboSubject.Items.Add(sr.Name);
+
             }
             catch (Exception ex)
             {
-                cboDomain.Items.Clear();
                 cboSubject.Items.Clear();
             }
         }
@@ -301,7 +317,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
                 }
                 else if (ctrl is ComboBox)
                 {
-                    if (ctrl.Name == "cboDomain") continue;
+                    //if (ctrl.Name == "cboDomain") continue;
 
                     if (string.IsNullOrEmpty((ctrl as ComboBox).Text))
                         _error.SetError(ctrl, "不可為空白");
@@ -324,9 +340,11 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
                 _worker.RunWorkerAsync(new object[] {
                     cboSchoolYear.Text,
                     cboSemester.Text,
-                    cboDomain.Text,
+                    //cboDomain.Text,
+                    "",
                     cboSubject.Text.Trim(),
-                    txtPeriodCredit.Text.Trim() });
+                    txtPeriodCredit.Text.Trim(),
+                    cboRequired.Text });
             }
             this.DialogResult = DialogResult.OK;
         }

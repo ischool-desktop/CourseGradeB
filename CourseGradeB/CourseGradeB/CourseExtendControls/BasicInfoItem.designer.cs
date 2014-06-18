@@ -60,7 +60,7 @@ namespace CourseGradeB.CourseExtendControls
             this.btnTeacher3 = new DevComponents.DotNetBar.ButtonItem();
             this.cboMultiTeacher = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX14 = new DevComponents.DotNetBar.LabelX();
-            this.cboDomain = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cboRequired = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.picWaiting)).BeginInit();
             this.SuspendLayout();
             // 
@@ -307,28 +307,29 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX14.Name = "labelX14";
             this.labelX14.Size = new System.Drawing.Size(70, 23);
             this.labelX14.TabIndex = 18;
-            this.labelX14.Text = "領         域";
+            this.labelX14.Text = "必選修";
             this.labelX14.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
-            // cboDomain
+            // cboRequired
             // 
-            this.cboDomain.DisplayMember = "Text";
-            this.cboDomain.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboDomain.FormattingEnabled = true;
-            this.cboDomain.ItemHeight = 19;
-            this.cboDomain.Location = new System.Drawing.Point(113, 108);
-            this.cboDomain.Name = "cboDomain";
-            this.cboDomain.Size = new System.Drawing.Size(151, 25);
-            this.cboDomain.TabIndex = 26;
-            this.cboDomain.Tag = "ForceValidate";
-            this.cboDomain.TextChanged += new System.EventHandler(this.cboDomain_TextChanged);
-            this.cboDomain.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxItem_Validating);
+            this.cboRequired.DisplayMember = "Text";
+            this.cboRequired.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboRequired.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRequired.FormattingEnabled = true;
+            this.cboRequired.ItemHeight = 19;
+            this.cboRequired.Location = new System.Drawing.Point(113, 108);
+            this.cboRequired.Name = "cboRequired";
+            this.cboRequired.Size = new System.Drawing.Size(151, 25);
+            this.cboRequired.TabIndex = 26;
+            this.cboRequired.Tag = "";
+            this.cboRequired.TextChanged += new System.EventHandler(this.cboRequired_TextChanged);
+            this.cboRequired.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxItem_Validating);
             // 
             // BasicInfoItem
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.cboDomain);
+            this.Controls.Add(this.cboRequired);
             this.Controls.Add(this.btnTeachers);
             this.Controls.Add(this.cboClass);
             this.Controls.Add(this.cboSchoolYear);
@@ -366,7 +367,7 @@ namespace CourseGradeB.CourseExtendControls
             this.Controls.SetChildIndex(this.cboClass, 0);
             this.Controls.SetChildIndex(this.btnTeachers, 0);
             this.Controls.SetChildIndex(this.picWaiting, 0);
-            this.Controls.SetChildIndex(this.cboDomain, 0);
+            this.Controls.SetChildIndex(this.cboRequired, 0);
             ((System.ComponentModel.ISupportInitialize)(this.picWaiting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -397,7 +398,7 @@ namespace CourseGradeB.CourseExtendControls
         private DevComponents.DotNetBar.ButtonItem btnTeacher3;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboMultiTeacher;
         private DevComponents.DotNetBar.LabelX labelX14;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboDomain;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboRequired;
 
     }
 }

@@ -31,20 +31,25 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.txtPeriodCredit = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.btnOK = new DevComponents.DotNetBar.ButtonX();
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
-            this.cboDomain = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cboSemester = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cboSchoolYear = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cboSubject = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.cboRequired = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.SuspendLayout();
             // 
             // labelX1
             // 
             this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Location = new System.Drawing.Point(8, 11);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(58, 23);
@@ -54,6 +59,11 @@
             // labelX2
             // 
             this.labelX2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX2.BackgroundStyle.Class = "";
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Location = new System.Drawing.Point(140, 11);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(46, 23);
@@ -63,20 +73,16 @@
             // labelX3
             // 
             this.labelX3.BackColor = System.Drawing.Color.Transparent;
-            this.labelX3.Location = new System.Drawing.Point(192, 47);
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(21, 46);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(45, 23);
             this.labelX3.TabIndex = 1;
             this.labelX3.Text = "科目：";
-            // 
-            // labelX4
-            // 
-            this.labelX4.BackColor = System.Drawing.Color.Transparent;
-            this.labelX4.Location = new System.Drawing.Point(8, 47);
-            this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(45, 23);
-            this.labelX4.TabIndex = 1;
-            this.labelX4.Text = "領域：";
             // 
             // txtPeriodCredit
             // 
@@ -84,6 +90,7 @@
             // 
             // 
             this.txtPeriodCredit.Border.Class = "TextBoxBorder";
+            this.txtPeriodCredit.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtPeriodCredit.Location = new System.Drawing.Point(314, 10);
             this.txtPeriodCredit.Name = "txtPeriodCredit";
             this.txtPeriodCredit.Size = new System.Drawing.Size(45, 25);
@@ -93,6 +100,11 @@
             // labelX5
             // 
             this.labelX5.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX5.BackgroundStyle.Class = "";
+            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX5.Location = new System.Drawing.Point(249, 11);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(64, 23);
@@ -122,17 +134,6 @@
             this.btnExit.TabIndex = 6;
             this.btnExit.Text = "離開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // cboDomain
-            // 
-            this.cboDomain.DisplayMember = "Text";
-            this.cboDomain.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboDomain.FormattingEnabled = true;
-            this.cboDomain.ItemHeight = 19;
-            this.cboDomain.Location = new System.Drawing.Point(55, 46);
-            this.cboDomain.Name = "cboDomain";
-            this.cboDomain.Size = new System.Drawing.Size(120, 25);
-            this.cboDomain.TabIndex = 3;
             // 
             // cboSemester
             // 
@@ -164,29 +165,57 @@
             this.cboSubject.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboSubject.FormattingEnabled = true;
             this.cboSubject.ItemHeight = 19;
-            this.cboSubject.Location = new System.Drawing.Point(239, 46);
+            this.cboSubject.Location = new System.Drawing.Point(66, 46);
             this.cboSubject.Name = "cboSubject";
             this.cboSubject.Size = new System.Drawing.Size(120, 25);
             this.cboSubject.TabIndex = 3;
             this.cboSubject.TextChanged += new System.EventHandler(this.cboSubject_TextChanged);
+            // 
+            // labelX4
+            // 
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.Class = "";
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Location = new System.Drawing.Point(208, 46);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(75, 23);
+            this.labelX4.TabIndex = 7;
+            this.labelX4.Text = "必選修";
+            // 
+            // cboRequired
+            // 
+            this.cboRequired.DisplayMember = "Text";
+            this.cboRequired.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboRequired.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRequired.FormattingEnabled = true;
+            this.cboRequired.ItemHeight = 19;
+            this.cboRequired.Location = new System.Drawing.Point(268, 44);
+            this.cboRequired.Name = "cboRequired";
+            this.cboRequired.Size = new System.Drawing.Size(91, 25);
+            this.cboRequired.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboRequired.TabIndex = 8;
             // 
             // CreateClassCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(367, 116);
+            this.Controls.Add(this.cboRequired);
+            this.Controls.Add(this.labelX4);
             this.Controls.Add(this.cboSchoolYear);
             this.Controls.Add(this.cboSemester);
             this.Controls.Add(this.cboSubject);
-            this.Controls.Add(this.cboDomain);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.labelX5);
             this.Controls.Add(this.txtPeriodCredit);
-            this.Controls.Add(this.labelX4);
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.labelX1);
+            this.DoubleBuffered = true;
             this.Name = "CreateClassCourseForm";
             this.Text = "班級直接開課";
             this.ResumeLayout(false);
@@ -198,14 +227,14 @@
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.LabelX labelX4;
         private DevComponents.DotNetBar.Controls.TextBoxX txtPeriodCredit;
         private DevComponents.DotNetBar.LabelX labelX5;
         private DevComponents.DotNetBar.ButtonX btnOK;
         private DevComponents.DotNetBar.ButtonX btnExit;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboDomain;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboSemester;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboSchoolYear;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboSubject;
+        private DevComponents.DotNetBar.LabelX labelX4;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboRequired;
     }
 }

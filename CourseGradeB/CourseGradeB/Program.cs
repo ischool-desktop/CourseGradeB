@@ -9,7 +9,10 @@ using DataRationality;
 using K12.Presentation;
 using JHSchool;
 using Framework;
+using FISCA.Data;
+using System.Data;
 using CourseGradeB.CourseExtendControls;
+using CourseGradeB.EduAdminExtendControls;
 
 
 namespace CourseGradeB
@@ -19,12 +22,12 @@ namespace CourseGradeB
         [MainMethod("")]
         public static void Main()
         {
-
             // 課程加入教師檢視
             Course.Instance.AddView(new TeacherCategoryView());
 
             #region 資料項目
             // 基本資料
+            //Course.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<BasicInfoItem>());
             Course.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<BasicInfoItem>());
 
             // 修課學生
@@ -104,6 +107,40 @@ namespace CourseGradeB
                 // 課程刪除不能多選
                 CouItem.Enable = (Course.Instance.SelectedList.Count < 2) && User.Acl["JHSchool.Course.Ribbon0010"].Executable;
             };
+
+            //指定評分樣板
+            CouItem = Course.Instance.RibbonBarItems["指定"]["指定評分樣板"];
+            Course.Instance.SelectedListChanged += delegate
+            {
+                CouItem.Enable = (Course.Instance.SelectedList.Count > 0);
+            };
+            CouItem.Click += delegate
+            {
+                new CourseGradeB.CourseExtendControls.Ribbon.GiveRefExamTemplateForm(K12.Presentation.NLDPanels.Course.SelectedSource).ShowDialog();
+            };
+
+            RibbonBarItem scores = JHSchool.Course.Instance.RibbonBarItems["教務"];
+            scores["成績輸入"].Size = RibbonBarButton.MenuButtonSize.Medium;
+            scores["成績輸入"].Image = Properties.Resources.exam_write_64;
+            scores["成績輸入"].Enable = Framework.User.Acl["JHSchool.Course.Ribbon0070"].Executable;
+            scores["成績輸入"].Click += delegate
+            {
+                if (K12.Presentation.NLDPanels.Course.SelectedSource.Count == 1)
+                {
+                    CourseRecord courseRecord = Course.Instance.SelectedList[0];
+                    int key = int.Parse(courseRecord.ID);
+                    int value = Global.Instance.CourseExtendCatch.ContainsKey(key) ? Global.Instance.CourseExtendCatch[key] : -1;
+                    if (value == -1)
+                         FISCA.Presentation.Controls.MsgBox.Show("課程 '" + courseRecord.Name + "' 沒有評量設定。");
+                    else
+                         new CourseGradeB.CourseExtendControls.Ribbon.CourseScoreInputForm(courseRecord).ShowDialog();
+                }
+            };
+            K12.Presentation.NLDPanels.Course.SelectedSourceChanged += delegate
+            {
+                scores["成績輸入"].Enable = K12.Presentation.NLDPanels.Course.SelectedSource.Count == 1 && Framework.User.Acl["JHSchool.Course.Ribbon0070"].Executable;
+            };
+                
             #endregion
 
             #region 匯出/匯入
@@ -145,12 +182,13 @@ namespace CourseGradeB
             ribbon = RoleAclSource.Instance["課程"]["功能按鈕"];
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0031", "匯出課程修課學生"));
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0021", "匯入課程修課學生"));
+            ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0070", "成績輸入"));
 
             //教務作業
             ribbon = RoleAclSource.Instance["教務作業"];
             ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon0000", "評量名稱管理"));
-            ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.DomainList", "領域清單"));
-            ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.SubjectList", "科目清單"));
+            ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.SubjectManager", "科目資料管理"));
+            ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.ExamTemplateManager", "評分樣板設定"));
             #endregion
 
             #region 班級功能
@@ -184,18 +222,47 @@ namespace CourseGradeB
                 new CourseGradeB.CourseExtendControls.Ribbon.ExamManager().ShowDialog();
             };
 
-            rbItem["管理"]["領域資料管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.DomainList"].Executable;
-            rbItem["管理"]["領域資料管理"].Click += delegate
-            {
-                new CourseGradeB.EduAdminExtendControls.Ribbon.DomainListTable().ShowDialog();
-            };
-
-            rbItem["管理"]["科目資料管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.SubjectList"].Executable;
+            rbItem["管理"]["科目資料管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.SubjectManager"].Executable;
             rbItem["管理"]["科目資料管理"].Click += delegate
             {
-                new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectListTable().ShowDialog();
+                new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectManager().ShowDialog();
+            };
+
+            rbItem["設定"].Image = Properties.Resources.sandglass_unlock_64;
+            rbItem["設定"].Size = RibbonBarButton.MenuButtonSize.Large;
+            rbItem["設定"]["評分樣板設定"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.ExamTemplateManager"].Executable;
+            rbItem["設定"]["評分樣板設定"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.ExamTemplateManager().ShowDialog();
             };
             #endregion
+
+            ResCourseData();
+        }
+
+        private static void ResCourseData()
+        {
+            //評分樣板顯示
+            ListPaneField CourseRefExamTemplate = new ListPaneField("評分樣板");
+            
+            CourseRefExamTemplate.GetVariable += delegate(object sender, GetVariableEventArgs e)
+            {
+                int key;
+                bool done = int.TryParse(e.Key,out key);
+                if(done)
+                {
+                    e.Value = Global.Instance.GetExamTemplateName(key);
+                }
+            };
+            K12.Presentation.NLDPanels.Course.AddListPaneField(CourseRefExamTemplate);
+
+            FISCA.InteractionService.SubscribeEvent("Res_CourseExt", (sender, args) =>
+            {
+                //取得更新資料
+                Global.Instance.Refresh();
+                //重讀
+                CourseRefExamTemplate.Reload();
+            });
         }
     }
 }
