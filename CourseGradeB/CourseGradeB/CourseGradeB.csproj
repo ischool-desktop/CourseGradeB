@@ -144,6 +144,8 @@
       <HintPath>Library\K12.Presentation.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
     <Reference Include="SmartSchool.API.PlugIn, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\SmartSchool.API.PlugIn.dll</HintPath>
@@ -164,9 +166,14 @@
       <HintPath>Library\SmartSchool.ErrorReporting.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -175,6 +182,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassExtendControls\Ribbon\HrtSelectSchoolYear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassExtendControls\Ribbon\HrtSelectSchoolYear.Designer.cs">
+      <DependentUpon>HrtSelectSchoolYear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConductRecord.cs" />
     <Compile Include="CourseExtendControls\CourseExtendRecord.cs" />
     <Compile Include="CourseExtendControls\NavViewNode.cs" />
     <Compile Include="CourseExtendControls\BasicInfoItem.cs">
@@ -198,6 +212,12 @@
     </Compile>
     <Compile Include="CourseExtendControls\Ribbon\GiveRefExamTemplateForm.Designer.cs">
       <DependentUpon>GiveRefExamTemplateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CourseExtendControls\Ribbon\SubjectConductInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CourseExtendControls\Ribbon\SubjectConductInputForm.Designer.cs">
+      <DependentUpon>SubjectConductInputForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CourseExtendControls\SCAttendItem.cs">
       <SubType>UserControl</SubType>
@@ -229,12 +249,6 @@
     <Compile Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.Designer.cs">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="EduAdminExtendControls\Ribbon\SubjectAddForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EduAdminExtendControls\Ribbon\SubjectAddForm.Designer.cs">
-      <DependentUpon>SubjectAddForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="EduAdminExtendControls\Ribbon\SubjectManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,7 +274,31 @@
     <Compile Include="Feature\Legacy\EditCourse.cs" />
     <Compile Include="Feature\Legacy\QueryCourse.cs" />
     <Compile Include="Feature\Legacy\QueryTemplate.cs" />
-    <Compile Include="Global.cs" />
+    <Compile Include="StuAdminExtendControls\ConductSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StuAdminExtendControls\ConductSettingForm.Designer.cs">
+      <DependentUpon>ConductSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StuAdminExtendControls\ConductSetting.cs" />
+    <Compile Include="ClassExtendControls\Ribbon\HrtConductInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassExtendControls\Ribbon\HrtConductInputForm.Designer.cs">
+      <DependentUpon>HrtConductInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StuAdminExtendControls\SubjectConductAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StuAdminExtendControls\SubjectConductAddForm.Designer.cs">
+      <DependentUpon>SubjectConductAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StuAdminExtendControls\SubjectConductSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StuAdminExtendControls\SubjectConductSettingForm.Designer.cs">
+      <DependentUpon>SubjectConductSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportExport\Course\ExportCourseStudents.cs" />
     <Compile Include="ImportExport\Course\ExportStudentV2.cs">
       <SubType>Form</SubType>
@@ -363,6 +401,7 @@
     <Content Include="Library\SmartSchool.ErrorReporting.dll" />
     <Content Include="Library\SmartSchool.ErrorReporting.pdb" />
     <Content Include="Library\SmartSchool.ErrorReporting.xml" />
+    <None Include="Resources\ajax-loader.gif" />
     <Content Include="Resources\btnAddCourse.png" />
     <Content Include="Resources\btnDeleteCourse.png" />
     <None Include="Resources\calc_save_64.png" />
@@ -376,6 +415,9 @@
     <Content Include="Resources\teacher_64.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClassExtendControls\Ribbon\HrtSelectSchoolYear.resx">
+      <DependentUpon>HrtSelectSchoolYear.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CourseExtendControls\BasicInfoItem.resx">
       <DependentUpon>BasicInfoItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,6 +427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CourseExtendControls\Ribbon\GiveRefExamTemplateForm.resx">
       <DependentUpon>GiveRefExamTemplateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CourseExtendControls\Ribbon\SubjectConductInputForm.resx">
+      <DependentUpon>SubjectConductInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CourseExtendControls\SCAttendItem.resx" />
     <EmbeddedResource Include="CourseExtendControls\TeacherCategoryView.resx" />
@@ -397,9 +442,6 @@
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.resx">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SubjectAddForm.resx">
-      <DependentUpon>SubjectAddForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SubjectManager.resx">
       <DependentUpon>SubjectManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -410,6 +452,18 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StuAdminExtendControls\ConductSettingForm.resx">
+      <DependentUpon>ConductSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClassExtendControls\Ribbon\HrtConductInputForm.resx">
+      <DependentUpon>HrtConductInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StuAdminExtendControls\SubjectConductAddForm.resx">
+      <DependentUpon>SubjectConductAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StuAdminExtendControls\SubjectConductSettingForm.resx">
+      <DependentUpon>SubjectConductSettingForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

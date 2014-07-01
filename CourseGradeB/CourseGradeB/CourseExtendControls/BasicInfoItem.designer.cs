@@ -61,6 +61,8 @@ namespace CourseGradeB.CourseExtendControls
             this.cboMultiTeacher = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX14 = new DevComponents.DotNetBar.LabelX();
             this.cboRequired = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.cboGradeYear = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.picWaiting)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,7 +76,7 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX1.Location = new System.Drawing.Point(36, 20);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(70, 23);
-            this.labelX1.TabIndex = 0;
+            this.labelX1.TabIndex = 10;
             this.labelX1.Text = "課程名稱";
             this.labelX1.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -89,7 +91,7 @@ namespace CourseGradeB.CourseExtendControls
             this.txtCourseName.MaxLength = 50;
             this.txtCourseName.Name = "txtCourseName";
             this.txtCourseName.Size = new System.Drawing.Size(151, 25);
-            this.txtCourseName.TabIndex = 1;
+            this.txtCourseName.TabIndex = 0;
             this.txtCourseName.TextChanged += new System.EventHandler(this.txtCourseName_TextChanged);
             // 
             // txtSubject
@@ -103,7 +105,7 @@ namespace CourseGradeB.CourseExtendControls
             this.txtSubject.MaxLength = 50;
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.Size = new System.Drawing.Size(151, 25);
-            this.txtSubject.TabIndex = 3;
+            this.txtSubject.TabIndex = 1;
             this.txtSubject.TextChanged += new System.EventHandler(this.txtSubject_TextChanged);
             // 
             // labelX2
@@ -116,7 +118,7 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX2.Location = new System.Drawing.Point(36, 49);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(70, 23);
-            this.labelX2.TabIndex = 2;
+            this.labelX2.TabIndex = 11;
             this.labelX2.Text = "科目名稱";
             this.labelX2.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -130,7 +132,7 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX4.Location = new System.Drawing.Point(290, 20);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(70, 23);
-            this.labelX4.TabIndex = 12;
+            this.labelX4.TabIndex = 15;
             this.labelX4.Text = "所屬班級";
             this.labelX4.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -144,7 +146,7 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX5.Location = new System.Drawing.Point(290, 49);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(70, 23);
-            this.labelX5.TabIndex = 14;
+            this.labelX5.TabIndex = 16;
             this.labelX5.Text = "學 年 度";
             this.labelX5.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -158,7 +160,7 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX6.Location = new System.Drawing.Point(290, 78);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(70, 23);
-            this.labelX6.TabIndex = 16;
+            this.labelX6.TabIndex = 17;
             this.labelX6.Text = "學         期";
             this.labelX6.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -172,7 +174,7 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX7.Location = new System.Drawing.Point(36, 78);
             this.labelX7.Name = "labelX7";
             this.labelX7.Size = new System.Drawing.Size(70, 23);
-            this.labelX7.TabIndex = 18;
+            this.labelX7.TabIndex = 12;
             this.labelX7.Text = "節數/權數";
             this.labelX7.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -186,7 +188,7 @@ namespace CourseGradeB.CourseExtendControls
             this.cboClass.MaxDropDownItems = 6;
             this.cboClass.Name = "cboClass";
             this.cboClass.Size = new System.Drawing.Size(151, 25);
-            this.cboClass.TabIndex = 13;
+            this.cboClass.TabIndex = 5;
             this.cboClass.Tag = "ForceValidate";
             this.cboClass.SelectedIndexChanged += new System.EventHandler(this.cboClass_SelectedIndexChanged);
             this.cboClass.TextChanged += new System.EventHandler(this.cboClass_TextChanged);
@@ -203,7 +205,7 @@ namespace CourseGradeB.CourseExtendControls
             this.cboSchoolYear.Location = new System.Drawing.Point(364, 48);
             this.cboSchoolYear.Name = "cboSchoolYear";
             this.cboSchoolYear.Size = new System.Drawing.Size(151, 25);
-            this.cboSchoolYear.TabIndex = 15;
+            this.cboSchoolYear.TabIndex = 6;
             this.cboSchoolYear.Tag = "";
             this.cboSchoolYear.TextChanged += new System.EventHandler(this.cboSchoolYear_TextChanged);
             this.cboSchoolYear.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxItem_Validating);
@@ -221,7 +223,7 @@ namespace CourseGradeB.CourseExtendControls
             this.cboSemester.Location = new System.Drawing.Point(364, 77);
             this.cboSemester.Name = "cboSemester";
             this.cboSemester.Size = new System.Drawing.Size(151, 25);
-            this.cboSemester.TabIndex = 17;
+            this.cboSemester.TabIndex = 7;
             this.cboSemester.Tag = "";
             this.cboSemester.TextChanged += new System.EventHandler(this.cboSemester_TextChanged);
             this.cboSemester.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxItem_Validating);
@@ -244,7 +246,7 @@ namespace CourseGradeB.CourseExtendControls
             this.txtPeriodCredit.Location = new System.Drawing.Point(113, 77);
             this.txtPeriodCredit.Name = "txtPeriodCredit";
             this.txtPeriodCredit.Size = new System.Drawing.Size(151, 25);
-            this.txtPeriodCredit.TabIndex = 19;
+            this.txtPeriodCredit.TabIndex = 2;
             this.txtPeriodCredit.TextChanged += new System.EventHandler(this.txtCredit_TextChanged);
             // 
             // btnTeachers
@@ -260,7 +262,7 @@ namespace CourseGradeB.CourseExtendControls
             this.btnTeacher1,
             this.btnTeacher2,
             this.btnTeacher3});
-            this.btnTeachers.TabIndex = 10;
+            this.btnTeachers.TabIndex = 9;
             // 
             // btnTeacher1
             // 
@@ -291,7 +293,7 @@ namespace CourseGradeB.CourseExtendControls
             this.cboMultiTeacher.MaxDropDownItems = 6;
             this.cboMultiTeacher.Name = "cboMultiTeacher";
             this.cboMultiTeacher.Size = new System.Drawing.Size(151, 25);
-            this.cboMultiTeacher.TabIndex = 11;
+            this.cboMultiTeacher.TabIndex = 8;
             this.cboMultiTeacher.Tag = "ForceValidate";
             this.cboMultiTeacher.TextChanged += new System.EventHandler(this.cboMultiTeacher_TextChanged);
             this.cboMultiTeacher.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxItem_Validating);
@@ -306,7 +308,7 @@ namespace CourseGradeB.CourseExtendControls
             this.labelX14.Location = new System.Drawing.Point(36, 108);
             this.labelX14.Name = "labelX14";
             this.labelX14.Size = new System.Drawing.Size(70, 23);
-            this.labelX14.TabIndex = 18;
+            this.labelX14.TabIndex = 13;
             this.labelX14.Text = "必選修";
             this.labelX14.TextAlignment = System.Drawing.StringAlignment.Far;
             // 
@@ -320,15 +322,45 @@ namespace CourseGradeB.CourseExtendControls
             this.cboRequired.Location = new System.Drawing.Point(113, 108);
             this.cboRequired.Name = "cboRequired";
             this.cboRequired.Size = new System.Drawing.Size(151, 25);
-            this.cboRequired.TabIndex = 26;
+            this.cboRequired.TabIndex = 3;
             this.cboRequired.Tag = "";
             this.cboRequired.TextChanged += new System.EventHandler(this.cboRequired_TextChanged);
             this.cboRequired.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxItem_Validating);
+            // 
+            // labelX3
+            // 
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(36, 139);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(70, 23);
+            this.labelX3.TabIndex = 14;
+            this.labelX3.Text = "開課年級";
+            this.labelX3.TextAlignment = System.Drawing.StringAlignment.Far;
+            // 
+            // cboGradeYear
+            // 
+            this.cboGradeYear.DisplayMember = "Text";
+            this.cboGradeYear.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboGradeYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGradeYear.FormattingEnabled = true;
+            this.cboGradeYear.ItemHeight = 19;
+            this.cboGradeYear.Location = new System.Drawing.Point(113, 137);
+            this.cboGradeYear.Name = "cboGradeYear";
+            this.cboGradeYear.Size = new System.Drawing.Size(151, 25);
+            this.cboGradeYear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboGradeYear.TabIndex = 4;
+            this.cboGradeYear.TextChanged += new System.EventHandler(this.cboGradeYear_TextChanged);
             // 
             // BasicInfoItem
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.cboGradeYear);
+            this.Controls.Add(this.labelX3);
             this.Controls.Add(this.cboRequired);
             this.Controls.Add(this.btnTeachers);
             this.Controls.Add(this.cboClass);
@@ -348,7 +380,7 @@ namespace CourseGradeB.CourseExtendControls
             this.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(550, 0);
             this.Name = "BasicInfoItem";
-            this.Size = new System.Drawing.Size(550, 155);
+            this.Size = new System.Drawing.Size(550, 180);
             this.Load += new System.EventHandler(this.BasicInfoItem_Load);
             this.DoubleClick += new System.EventHandler(this.BasicInfo_DoubleClick);
             this.Controls.SetChildIndex(this.txtPeriodCredit, 0);
@@ -368,6 +400,8 @@ namespace CourseGradeB.CourseExtendControls
             this.Controls.SetChildIndex(this.btnTeachers, 0);
             this.Controls.SetChildIndex(this.picWaiting, 0);
             this.Controls.SetChildIndex(this.cboRequired, 0);
+            this.Controls.SetChildIndex(this.labelX3, 0);
+            this.Controls.SetChildIndex(this.cboGradeYear, 0);
             ((System.ComponentModel.ISupportInitialize)(this.picWaiting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -399,6 +433,8 @@ namespace CourseGradeB.CourseExtendControls
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboMultiTeacher;
         private DevComponents.DotNetBar.LabelX labelX14;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboRequired;
+        private DevComponents.DotNetBar.LabelX labelX3;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboGradeYear;
 
     }
 }

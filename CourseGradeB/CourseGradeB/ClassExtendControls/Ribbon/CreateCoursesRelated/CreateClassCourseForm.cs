@@ -14,6 +14,7 @@ using CourseGradeB.Calculation;
 using FISCA.DSAUtil;
 using CourseGradeB.EduAdminExtendControls;
 using FISCA.UDT;
+using CourseGradeB.CourseExtendControls;
 
 namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
 {
@@ -164,7 +165,14 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
                 newCourse.Semester = semester;
                 newCourse.RefClassID = cla.ID;
 
-                classNewCourse.Add(cla.ID, JHCourse.Insert(newCourse));
+                //建立Course時也將CourseExtendRecord建立
+                string course_id = JHCourse.Insert(newCourse);
+                CourseExtendRecord courseEx = new CourseExtendRecord();
+                courseEx.Ref_course_id = int.Parse(course_id);
+                courseEx.GradeYear = cla.GradeYear == null ? 1 : int.Parse(cla.GradeYear + "");
+                courseEx.Save();
+
+                classNewCourse.Add(cla.ID, course_id);
                 req.AddElement("Course");
                 req.AddElement("Course", "Field");
                 req.AddElement("Course/Field", "IsRequired", required.Replace("修", ""));

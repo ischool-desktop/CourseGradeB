@@ -98,5 +98,17 @@ namespace CourseGradeB
                 _record.RefExamID = value;
             }
         }
+
+        public string RefStudentID
+        {
+            get
+            {
+                return _record.RefStudentID;
+            }
+            set
+            {
+                _record.RefStudentID = value;
+            }
+        }
     }
 }

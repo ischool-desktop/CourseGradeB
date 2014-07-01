@@ -16,6 +16,7 @@ using FCode = Framework.Security.FeatureCodeAttribute;
 using DevComponents.Editors;
 using JHSchool.Data;
 using JHSchool;
+using FISCA.UDT;
 
 namespace CourseGradeB.CourseExtendControls
 {
@@ -28,6 +29,7 @@ namespace CourseGradeB.CourseExtendControls
         private static List<ExamTemplateInfo> _template;
         private List<string> _entries;
         private MultiTeacherController _multi_teacher;
+        private AccessHelper _A;
 
         private static bool _init_required;
         private bool _initialing = false;
@@ -50,6 +52,7 @@ namespace CourseGradeB.CourseExtendControls
 
             Title = "基本資料";
 
+            _A = new AccessHelper();
             _oldLogDataDict = new Dictionary<string, string>();
             _newLogDataDict = new Dictionary<string, string>();
 
@@ -81,6 +84,9 @@ namespace CourseGradeB.CourseExtendControls
             cboRequired.Items.Add(new ComboItem()); //空白
             cboRequired.Items.Add("必修");
             cboRequired.Items.Add("選修");
+
+            for (int i = 1; i <= 12; i++)
+                cboGradeYear.Items.Add(i);
 
             //foreach (string each in Domain.SelectGeneral()) //一般領域
             //{
@@ -243,6 +249,13 @@ namespace CourseGradeB.CourseExtendControls
                 cboSemester.Text = content.GetText("Course/Semester");
 
                 cboClass.SelectedItem = content.GetText("Course/RefClassID"); //ComboBox 奧義
+
+                //開課年級
+                List<CourseExtendRecord> records = _A.Select<CourseExtendRecord>("ref_course_id=" + RunningID);
+                if (records.Count > 0)
+                    cboGradeYear.Text = records[0].GradeYear + "";
+                else
+                    cboGradeYear.Text = "1";
                 //cboExamTemplate.SelectedItem = content.GetText("Course/RefExamTemplateID"); //ComboBox 奧義
 
                 //if (content.GetText("Course/NotIncludedInCredit") == "否")
@@ -277,6 +290,7 @@ namespace CourseGradeB.CourseExtendControls
                 //WatchValue("SubjectLevel", cboSubjectLevel.Text);
                 WatchValue("PeriodCredit", txtPeriodCredit.Text);
                 WatchValue("IsRequired", cboRequired.Text);
+                WatchValue("CourseGradeYear", cboGradeYear.Text);
                 WatchValue("SchoolYear", cboSchoolYear.Text);
                 WatchValue("Semester", cboSemester.Text);
                 //WatchValue("RefTeacherID", cboTeacher.SelectedItem);
@@ -301,6 +315,7 @@ namespace CourseGradeB.CourseExtendControls
                 _oldLogDataDict.Add("節權數", txtPeriodCredit.Text);
                 _oldLogDataDict.Add("學期", cboSemester.Text);
                 _oldLogDataDict.Add("必選修", cboRequired.Text);
+                _oldLogDataDict.Add("開課年級", cboGradeYear.Text);
 
                 if (_multi_teacher.Teacher1Button.Teacher == null)
                     _oldLogDataDict.Add("教師一", "");
@@ -449,6 +464,7 @@ namespace CourseGradeB.CourseExtendControls
                 _newLogDataDict.Add("節權數", txtPeriodCredit.Text);
                 _newLogDataDict.Add("學期", cboSemester.Text);
                 _newLogDataDict.Add("必選修", cboRequired.Text);
+                _newLogDataDict.Add("開課年級", cboGradeYear.Text);
                 if (_multi_teacher.Teacher1Button.Teacher == null)
                     _newLogDataDict.Add("教師一", "");
                 else
@@ -549,6 +565,24 @@ namespace CourseGradeB.CourseExtendControls
                 {
                     req.AddElement("Course/Field", "IsRequired", cboRequired.Text.Replace("修", ""));
                     _update_required = true;
+                }
+
+                //儲存開課年級
+                if (items.ContainsKey("CourseGradeYear"))
+                {
+                    List<CourseExtendRecord> list = _A.Select<CourseExtendRecord>("ref_course_id=" + RunningID.ToString());
+                    if (list.Count > 0)
+                    {
+                        list[0].GradeYear = int.Parse(cboGradeYear.Text);
+                        list[0].Save();
+                    }
+                    else
+                    {
+                        CourseExtendRecord newRecord = new CourseExtendRecord();
+                        newRecord.Ref_course_id = int.Parse(RunningID);
+                        newRecord.GradeYear = int.Parse(cboGradeYear.Text);
+                        newRecord.Save();
+                    }
                 }
 
                 //if (items.ContainsKey("RequiredBy"))
@@ -756,6 +790,12 @@ namespace CourseGradeB.CourseExtendControls
         {
             if (!_initialing)
                 ChangeValue("IsRequired", cboRequired.Text);
+        }
+
+        private void cboGradeYear_TextChanged(object sender, EventArgs e)
+        {
+            if (!_initialing)
+                ChangeValue("CourseGradeYear", cboGradeYear.Text);
         }
 
         private void ComboBoxItem_Validating(object sender, CancelEventArgs e)
@@ -976,7 +1016,8 @@ namespace CourseGradeB.CourseExtendControls
                     synclist.AddRange(JHSchool.Feature.Legacy.EditCourse.AddCourseTeacher(helper));
                 }
 
-                TCInstruct.Instance.SyncDataBackground(synclist);
+                //TCInstruct.Instance.SyncDataBackground(synclist);
+                TCInstruct.Instance.SyncData(synclist);
             }
 
             public event EventHandler ValueChanged;

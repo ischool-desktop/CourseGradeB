@@ -28,22 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblSave = new DevComponents.DotNetBar.LabelX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.cboExamList = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblExam = new DevComponents.DotNetBar.LabelX();
             this.lblCourseName = new DevComponents.DotNetBar.LabelX();
-            this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.chClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chStudentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chInputScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.chInputAssignmentScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chInputScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chStudentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.tabControl1 = new DevComponents.DotNetBar.TabControl();
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabScore = new DevComponents.DotNetBar.TabItem(this.components);
+            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSave
@@ -76,6 +88,7 @@
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 10;
             this.btnClose.Text = "關閉";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnSave
             // 
@@ -132,6 +145,58 @@
             this.lblCourseName.TabIndex = 7;
             this.lblCourseName.Text = "課程名稱 (授課教師)";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::CourseGradeB.Properties.Resources.ajax_loader;
+            this.pictureBox1.Location = new System.Drawing.Point(368, 149);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
+            // chInputAssignmentScore
+            // 
+            this.chInputAssignmentScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.chInputAssignmentScore.HeaderText = "平時分數";
+            this.chInputAssignmentScore.Name = "chInputAssignmentScore";
+            // 
+            // chInputScore
+            // 
+            this.chInputScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.chInputScore.HeaderText = "定期分數";
+            this.chInputScore.Name = "chInputScore";
+            // 
+            // chStudentNumber
+            // 
+            this.chStudentNumber.Frozen = true;
+            this.chStudentNumber.HeaderText = "學號";
+            this.chStudentNumber.Name = "chStudentNumber";
+            this.chStudentNumber.ReadOnly = true;
+            // 
+            // chName
+            // 
+            this.chName.Frozen = true;
+            this.chName.HeaderText = "姓名";
+            this.chName.Name = "chName";
+            this.chName.ReadOnly = true;
+            // 
+            // chSeatNo
+            // 
+            this.chSeatNo.Frozen = true;
+            this.chSeatNo.HeaderText = "座號";
+            this.chSeatNo.Name = "chSeatNo";
+            this.chSeatNo.ReadOnly = true;
+            this.chSeatNo.Width = 65;
+            // 
+            // chClassName
+            // 
+            this.chClassName.Frozen = true;
+            this.chClassName.HeaderText = "班級";
+            this.chClassName.Name = "chClassName";
+            this.chClassName.ReadOnly = true;
+            // 
             // dgv
             // 
             this.dgv.AllowUserToAddRows = false;
@@ -160,73 +225,97 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgv.Location = new System.Drawing.Point(6, 71);
+            this.dgv.Location = new System.Drawing.Point(4, 0);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersWidth = 25;
             this.dgv.RowTemplate.Height = 24;
-            this.dgv.Size = new System.Drawing.Size(780, 380);
+            this.dgv.Size = new System.Drawing.Size(764, 346);
             this.dgv.TabIndex = 6;
             this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
             this.dgv.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellEndEdit);
             // 
-            // chClassName
+            // tabControl1
             // 
-            this.chClassName.Frozen = true;
-            this.chClassName.HeaderText = "班級";
-            this.chClassName.Name = "chClassName";
-            this.chClassName.ReadOnly = true;
+            this.tabControl1.BackColor = System.Drawing.Color.Transparent;
+            this.tabControl1.CanReorderTabs = true;
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
+            this.tabControl1.Location = new System.Drawing.Point(12, 72);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedTabFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.tabControl1.SelectedTabIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(774, 379);
+            this.tabControl1.TabIndex = 14;
+            this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
+            this.tabControl1.Tabs.Add(this.tabScore);
+            this.tabControl1.Text = "tabControl1";
             // 
-            // chSeatNo
+            // tabControlPanel1
             // 
-            this.chSeatNo.Frozen = true;
-            this.chSeatNo.HeaderText = "座號";
-            this.chSeatNo.Name = "chSeatNo";
-            this.chSeatNo.ReadOnly = true;
-            this.chSeatNo.Width = 65;
+            this.tabControlPanel1.Controls.Add(this.pictureBox1);
+            this.tabControlPanel1.Controls.Add(this.dgv);
+            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 29);
+            this.tabControlPanel1.Name = "tabControlPanel1";
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel1.Size = new System.Drawing.Size(774, 350);
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel1.Style.GradientAngle = 90;
+            this.tabControlPanel1.TabIndex = 1;
+            this.tabControlPanel1.TabItem = this.tabScore;
             // 
-            // chName
+            // tabScore
             // 
-            this.chName.Frozen = true;
-            this.chName.HeaderText = "姓名";
-            this.chName.Name = "chName";
-            this.chName.ReadOnly = true;
+            this.tabScore.AttachedControl = this.tabControlPanel1;
+            this.tabScore.Name = "tabScore";
+            this.tabScore.Text = "成績輸入";
             // 
-            // chStudentNumber
+            // dataGridViewX1
             // 
-            this.chStudentNumber.Frozen = true;
-            this.chStudentNumber.HeaderText = "學號";
-            this.chStudentNumber.Name = "chStudentNumber";
-            this.chStudentNumber.ReadOnly = true;
-            // 
-            // chInputScore
-            // 
-            this.chInputScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.chInputScore.HeaderText = "定期分數";
-            this.chInputScore.Name = "chInputScore";
-            // 
-            // chInputAssignmentScore
-            // 
-            this.chInputAssignmentScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.chInputAssignmentScore.HeaderText = "平時分數";
-            this.chInputAssignmentScore.Name = "chInputAssignmentScore";
+            this.dataGridViewX1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dataGridViewX1.Location = new System.Drawing.Point(204, 0);
+            this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.RowTemplate.Height = 24;
+            this.dataGridViewX1.Size = new System.Drawing.Size(564, 346);
+            this.dataGridViewX1.TabIndex = 1;
             // 
             // CourseScoreInputForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(792, 486);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lblSave);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cboExamList);
             this.Controls.Add(this.lblExam);
             this.Controls.Add(this.lblCourseName);
-            this.Controls.Add(this.dgv);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CourseScoreInputForm";
             this.Text = "課程成績輸入";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CourseScoreInputForm_FormClosing);
             this.Load += new System.EventHandler(this.CourseScoreInputForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabControlPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -239,12 +328,17 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboExamList;
         private DevComponents.DotNetBar.LabelX lblExam;
         private DevComponents.DotNetBar.LabelX lblCourseName;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chClassName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chSeatNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chStudentNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chInputScore;
+        protected System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn chInputAssignmentScore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chInputScore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chStudentNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chSeatNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chClassName;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
+        private DevComponents.DotNetBar.TabControl tabControl1;
+        private DevComponents.DotNetBar.TabControlPanel tabControlPanel1;
+        private DevComponents.DotNetBar.TabItem tabScore;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
     }
 }

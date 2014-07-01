@@ -1,6 +1,6 @@
-﻿namespace CourseGradeB.EduAdminExtendControls.Ribbon
+﻿namespace CourseGradeB.StuAdminExtendControls
 {
-    partial class SubjectManager
+    partial class SubjectConductSettingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,23 +29,50 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.itemPanle1 = new DevComponents.DotNetBar.ItemPanel();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
+            this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
+            // 
+            // itemPanle1
+            // 
+            this.itemPanle1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.itemPanle1.BackgroundStyle.Class = "ItemPanel";
+            this.itemPanle1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemPanle1.ContainerControlProcessDialogKey = true;
+            this.itemPanle1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemPanle1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.itemPanle1.Location = new System.Drawing.Point(13, 13);
+            this.itemPanle1.Name = "itemPanle1";
+            this.itemPanle1.Size = new System.Drawing.Size(173, 359);
+            this.itemPanle1.TabIndex = 0;
+            this.itemPanle1.Text = "itemPanel1";
+            // 
+            // btnSave
+            // 
+            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSave.Location = new System.Drawing.Point(750, 349);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "儲存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // dgv
             // 
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colName,
-            this.colEnName,
             this.colGroup,
-            this.colType});
+            this.colTitle});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -55,64 +82,35 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgv.Location = new System.Drawing.Point(13, 13);
+            this.dgv.Location = new System.Drawing.Point(193, 13);
             this.dgv.Name = "dgv";
             this.dgv.RowTemplate.Height = 24;
-            this.dgv.Size = new System.Drawing.Size(676, 269);
-            this.dgv.TabIndex = 0;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.HeaderText = "科目名稱";
-            this.colName.Name = "colName";
-            // 
-            // colEnName
-            // 
-            this.colEnName.HeaderText = "英文名稱";
-            this.colEnName.Name = "colEnName";
-            this.colEnName.Width = 150;
+            this.dgv.Size = new System.Drawing.Size(632, 330);
+            this.dgv.TabIndex = 4;
             // 
             // colGroup
             // 
-            this.colGroup.HeaderText = "群組名稱";
+            this.colGroup.HeaderText = "Group";
             this.colGroup.Name = "colGroup";
-            this.colGroup.Width = 150;
             // 
-            // colType
+            // colTitle
             // 
-            this.colType.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.colType.HeaderText = "組別";
-            this.colType.Items.AddRange(new object[] {
-            "Regular",
-            "Honor"});
-            this.colType.Name = "colType";
-            this.colType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colType.Width = 150;
+            this.colTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTitle.HeaderText = "Title";
+            this.colTitle.Name = "colTitle";
             // 
-            // btnSave
-            // 
-            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSave.BackColor = System.Drawing.Color.Transparent;
-            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(614, 288);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "儲存";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // NewSubjectManager
+            // SubjectConductSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 319);
-            this.Controls.Add(this.btnSave);
+            this.ClientSize = new System.Drawing.Size(837, 377);
             this.Controls.Add(this.dgv);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.itemPanle1);
             this.DoubleBuffered = true;
-            this.Name = "NewSubjectManager";
-            this.Text = "科目設定";
+            this.Name = "SubjectConductSettingForm";
+            this.Text = "科目補充設定";
+            this.Load += new System.EventHandler(this.SubjectConductSettingForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
 
@@ -120,11 +118,10 @@
 
         #endregion
 
-        private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
+        private DevComponents.DotNetBar.ItemPanel itemPanle1;
         private DevComponents.DotNetBar.ButtonX btnSave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEnName;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGroup;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
     }
 }

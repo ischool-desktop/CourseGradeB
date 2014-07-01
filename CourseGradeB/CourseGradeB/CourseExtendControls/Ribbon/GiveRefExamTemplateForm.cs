@@ -73,7 +73,7 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                 foreach (CourseExtendRecord r in list)
                 {
                     if (!dic.ContainsKey(r.Ref_course_id))
-                        dic.Add(r.Ref_course_id,r);
+                        dic.Add(r.Ref_course_id, r);
                 }
 
                 List<CourseExtendRecord> insert = new List<CourseExtendRecord>();
@@ -90,7 +90,7 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                         }
                         else
                         {
-                            dic[id].Ref_exam_template_id = int.Parse(ref_exam_template_id);
+                            //dic[id].Ref_exam_template_id = int.Parse(ref_exam_template_id);
                             update.Add(dic[id]);
                         }
                     }
@@ -100,7 +100,7 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                         {
                             CourseExtendRecord record = new CourseExtendRecord();
                             record.Ref_course_id = id;
-                            record.Ref_exam_template_id = int.Parse(ref_exam_template_id);
+                            //record.Ref_exam_template_id = int.Parse(ref_exam_template_id);
                             insert.Add(record);
                         }
                     }
