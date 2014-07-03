@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.itemPanel1 = new DevComponents.DotNetBar.ItemPanel();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.lblSave = new DevComponents.DotNetBar.LabelX();
@@ -145,32 +145,33 @@
             this.colGroup,
             this.colTitle,
             this.colGrade});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgv.Location = new System.Drawing.Point(4, 4);
             this.dgv.Name = "dgv";
             this.dgv.RowTemplate.Height = 24;
             this.dgv.Size = new System.Drawing.Size(489, 323);
             this.dgv.TabIndex = 0;
+            this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
             this.dgv.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellEndEdit);
             // 
             // colGroup
             // 
-            this.colGroup.HeaderText = "Group";
+            this.colGroup.HeaderText = "類別";
             this.colGroup.Name = "colGroup";
             this.colGroup.ReadOnly = true;
             // 
             // colTitle
             // 
             this.colTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTitle.HeaderText = "Title";
+            this.colTitle.HeaderText = "標題";
             this.colTitle.Name = "colTitle";
             this.colTitle.ReadOnly = true;
             // 
@@ -180,7 +181,7 @@
             this.colGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.colGrade.DropDownWidth = 121;
             this.colGrade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colGrade.HeaderText = "Grade";
+            this.colGrade.HeaderText = "等第";
             this.colGrade.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.colGrade.IntegralHeight = false;
             this.colGrade.ItemHeight = 17;
@@ -226,6 +227,7 @@
             this.Controls.Add(this.groupPanel1);
             this.Controls.Add(this.itemPanel1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SubjectConductInputForm";
             this.Text = "SubjectConduct輸入";
             this.Load += new System.EventHandler(this.SubjectConductInputForm_Load);

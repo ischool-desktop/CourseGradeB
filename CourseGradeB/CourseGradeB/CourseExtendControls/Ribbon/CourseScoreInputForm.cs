@@ -103,18 +103,20 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
             }
             else if (course_grade_year == 1 || course_grade_year == 2)
             {
-                chInputScore.Visible = false;
-                chInputAssignmentScore.Visible = false;
+                MessageBox.Show("1或2年級的課程無法輸入成績...");
+                this.Close();
             }
+            else
+            {
+                //取得修課學生
+                FillStudentsToDataGridView();
 
-            //取得修課學生
-            FillStudentsToDataGridView();
+                cboExamList.Items.Clear();
+                cboExamList.Items.Add(new ExamComboBoxItem("Middle Term", 1));
+                cboExamList.Items.Add(new ExamComboBoxItem("Final Term", 2));
 
-            cboExamList.Items.Clear();
-            cboExamList.Items.Add(new ExamComboBoxItem("Middle Term", 1));
-            cboExamList.Items.Add(new ExamComboBoxItem("Final Term", 2));
-
-            cboExamList.SelectedIndex = 0;
+                cboExamList.SelectedIndex = 0;
+            }
         }
 
         private void CheckExamIDExist()

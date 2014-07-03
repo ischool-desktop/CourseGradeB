@@ -45,6 +45,7 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
 
             _course = course;
 
+            colGrade.Items.Add("");
             colGrade.Items.Add("O");
             colGrade.Items.Add("M");
             colGrade.Items.Add("S");
@@ -60,6 +61,11 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
             if (_gradeYear == -1)
             {
                 MessageBox.Show("課程未設開課年級...");
+                this.Close();
+            }
+            else if (_gradeYear == 12)
+            {
+                MessageBox.Show("7-12年級課程無須輸入");
                 this.Close();
             }
             else
@@ -352,6 +358,8 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                 FiscaLogWriter(buttonItem, logStr);
                 _dirtyCellList.Clear();
                 lblSave.Visible = false;
+
+                MessageBox.Show(buttonItem.Text + " 資料已儲存");
             }
         }
 
@@ -435,6 +443,12 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                 _key = key;
                 _value = value;
             }
+        }
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colGrade.Index)
+                dgv.BeginEdit(true);
         }
     }
 }

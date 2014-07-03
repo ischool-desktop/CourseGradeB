@@ -3,12 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace CourseGradeB.StuAdminExtendControls
 {
     [FISCA.UDT.TableName("ischool.eval.config")]
     public class ConductSetting : ActiveRecord
     {
+        public ConductSetting()
+        {
+        }
+
+        public ConductSetting(int grade)
+        {
+            Grade = grade;
+            Conduct = GetRoot();
+        }
         [FISCA.UDT.Field(Field = "grade")]
         public int Grade { get; set; }
         	
@@ -38,5 +49,15 @@ namespace CourseGradeB.StuAdminExtendControls
 
         [FISCA.UDT.Field(Field = "conduct")]
         public string Conduct { get; set; }
+
+        private static XmlElement root;
+
+        public string GetRoot()
+        {
+            if(root == null)
+                root = new XmlDocument().CreateElement("Conducts");
+
+            return root.OuterXml;
+        }
     }
 }

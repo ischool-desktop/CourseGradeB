@@ -87,16 +87,17 @@
             this.dgv.RowTemplate.Height = 24;
             this.dgv.Size = new System.Drawing.Size(632, 330);
             this.dgv.TabIndex = 4;
+            this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
             // 
             // colGroup
             // 
-            this.colGroup.HeaderText = "Group";
+            this.colGroup.HeaderText = "指標類別";
             this.colGroup.Name = "colGroup";
             // 
             // colTitle
             // 
             this.colTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTitle.HeaderText = "Title";
+            this.colTitle.HeaderText = "指標標題";
             this.colTitle.Name = "colTitle";
             // 
             // SubjectConductSettingForm
@@ -108,6 +109,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.itemPanle1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SubjectConductSettingForm";
             this.Text = "科目補充設定";
             this.Load += new System.EventHandler(this.SubjectConductSettingForm_Load);

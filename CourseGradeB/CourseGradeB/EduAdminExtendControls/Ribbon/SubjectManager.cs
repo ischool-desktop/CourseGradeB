@@ -103,11 +103,21 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 if (insert.Count > 0)
                     _A.InsertValues(insert);
+
+                //EventHandler eh = FISCA.InteractionService.PublishEvent("SubjectChange");
+                //eh(null, EventArgs.Empty);
+
+                this.Close();
             }
             else
             {
                 MessageBox.Show("資料有誤,請確認後再儲存");
             }
+        }
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dgv.BeginEdit(true);
         }
     }
 }

@@ -133,6 +133,13 @@ namespace CourseGradeB.StuAdminExtendControls
                     _setting.Save();
                 }
             }
+
+            this.Close();
+        }
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dgv.BeginEdit(true);
         }
     }
 

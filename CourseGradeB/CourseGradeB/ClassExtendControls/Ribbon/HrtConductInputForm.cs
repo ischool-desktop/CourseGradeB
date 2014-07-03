@@ -46,6 +46,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
             _RunningItem = new ButtonItem();
             _conductRecordDic = new Dictionary<string, ConductRecord>();
 
+            colGrade.Items.Add("");
             colGrade.Items.Add("O");
             colGrade.Items.Add("M");
             colGrade.Items.Add("S");
@@ -333,6 +334,8 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                 FiscaLogWriter(buttonItem, logStr);
                 _dirtyCellList.Clear();
                 lblSave.Visible = false;
+
+                MessageBox.Show(buttonItem.Text + " 資料已儲存");
             }
         }
 
@@ -422,6 +425,12 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
         private void txtComment_Leave(object sender, EventArgs e)
         {
             lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text);
+        }
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == colGrade.Index)
+                dgv.BeginEdit(true);
         }
     }
 }

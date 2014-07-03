@@ -139,6 +139,7 @@
             // 
             this.cboSemester.DisplayMember = "Text";
             this.cboSemester.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboSemester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSemester.FormattingEnabled = true;
             this.cboSemester.ItemHeight = 19;
             this.cboSemester.Location = new System.Drawing.Point(188, 10);
@@ -151,6 +152,7 @@
             // 
             this.cboSchoolYear.DisplayMember = "Text";
             this.cboSchoolYear.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboSchoolYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSchoolYear.FormattingEnabled = true;
             this.cboSchoolYear.ItemHeight = 19;
             this.cboSchoolYear.Location = new System.Drawing.Point(68, 10);
@@ -163,6 +165,7 @@
             // 
             this.cboSubject.DisplayMember = "Text";
             this.cboSubject.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboSubject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSubject.FormattingEnabled = true;
             this.cboSubject.ItemHeight = 19;
             this.cboSubject.Location = new System.Drawing.Point(66, 46);
@@ -202,20 +205,21 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 116);
+            this.ClientSize = new System.Drawing.Size(381, 116);
             this.Controls.Add(this.cboRequired);
-            this.Controls.Add(this.labelX4);
             this.Controls.Add(this.cboSchoolYear);
             this.Controls.Add(this.cboSemester);
             this.Controls.Add(this.cboSubject);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.labelX5);
             this.Controls.Add(this.txtPeriodCredit);
+            this.Controls.Add(this.labelX4);
+            this.Controls.Add(this.labelX5);
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.labelX1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CreateClassCourseForm";
             this.Text = "班級直接開課";
             this.ResumeLayout(false);

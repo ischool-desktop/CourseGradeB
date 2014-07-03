@@ -60,6 +60,7 @@
             this.dgv.RowTemplate.Height = 24;
             this.dgv.Size = new System.Drawing.Size(676, 269);
             this.dgv.TabIndex = 0;
+            this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
             // 
             // colName
             // 
@@ -103,15 +104,16 @@
             this.btnSave.Text = "儲存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // NewSubjectManager
+            // SubjectManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 319);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dgv);
+            this.Controls.Add(this.btnSave);
             this.DoubleBuffered = true;
-            this.Name = "NewSubjectManager";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "SubjectManager";
             this.Text = "科目設定";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);

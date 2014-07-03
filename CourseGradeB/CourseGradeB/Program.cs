@@ -47,6 +47,7 @@ namespace CourseGradeB
             ribbon = RoleAclSource.Instance["教務作業"];
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon0000", "評量名稱管理"));
             ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.SubjectManager", "科目資料管理"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SetHoursOpeningForm", "開放時間管理"));
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.ExamTemplateManager", "評分樣板設定"));
 
             //學務作業
@@ -61,9 +62,9 @@ namespace CourseGradeB
 
             // 修課學生
             Course.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<SCAttendItem>());
-            
+
             #endregion
-            
+
             #region 課程/編輯
             RibbonBarItem rbItem = Student.Instance.RibbonBarItems["教務"];
             RibbonBarButton rbButton;
@@ -120,7 +121,7 @@ namespace CourseGradeB
                             #endregion
 
                             JHSchool.Data.JHCourse.Delete(record);
-                            
+
                             // 加這主要是重新整理
                             Course.Instance.SyncDataBackground(record.ID);
                         }
@@ -162,7 +163,7 @@ namespace CourseGradeB
                     //if (value == -1)
                     //     FISCA.Presentation.Controls.MsgBox.Show("課程 '" + courseRecord.Name + "' 沒有評量設定。");
                     //else
-                         new CourseGradeB.CourseExtendControls.Ribbon.CourseScoreInputForm(courseRecord).ShowDialog();
+                    new CourseGradeB.CourseExtendControls.Ribbon.CourseScoreInputForm(courseRecord).ShowDialog();
                 }
             };
             K12.Presentation.NLDPanels.Course.SelectedSourceChanged += delegate
@@ -186,7 +187,7 @@ namespace CourseGradeB
             {
                 conduct["指標輸入"].Enable = K12.Presentation.NLDPanels.Course.SelectedSource.Count == 1 && Framework.User.Acl["JHSchool.Course.Ribbon0070.SubjectConductInputForm"].Executable;
             };
-                
+
             #endregion
 
             #region 匯出/匯入
@@ -210,7 +211,7 @@ namespace CourseGradeB
                 CourseGradeB.ImportExport.Course.ImportStudentV2 wizard = new CourseGradeB.ImportExport.Course.ImportStudentV2(importer.Text, importer.Image);
                 importer.InitializeImport(wizard);
                 wizard.ShowDialog();
-            };			
+            };
 
             #endregion
 
@@ -244,17 +245,17 @@ namespace CourseGradeB
             #endregion
 
             #region 教務作業功能
-            FISCA.Presentation.RibbonBarItem item1 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "基本設定"];
-            item1["對照/代碼"].Image = Properties.Resources.notepad_lock_64;
-            item1["對照/代碼"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
+            FISCA.Presentation.RibbonBarItem eduitem1 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "基本設定"];
+            eduitem1["對照/代碼"].Image = Properties.Resources.notepad_lock_64;
+            eduitem1["對照/代碼"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
 
-            FISCA.Presentation.RibbonBarItem item2 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "批次作業/檢視"];
-            item2["成績作業"].Image = Properties.Resources.calc_save_64;
-            item2["成績作業"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
+            FISCA.Presentation.RibbonBarItem eduitem2 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "批次作業/檢視"];
+            eduitem2["成績作業"].Image = Properties.Resources.calc_save_64;
+            eduitem2["成績作業"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
 
-            rbItem = EduAdmin.Instance.RibbonBarItems["基本設定"];
-            rbItem["管理"].Size = RibbonBarButton.MenuButtonSize.Large;
-            rbItem["管理"].Image = Properties.Resources.network_lock_64;
+            RibbonBarItem eduitem3 = EduAdmin.Instance.RibbonBarItems["基本設定"];
+            eduitem3["管理"].Size = RibbonBarButton.MenuButtonSize.Large;
+            eduitem3["管理"].Image = Properties.Resources.network_lock_64;
 
             //rbItem["管理"]["評量名稱管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon0000"].Executable;
             //rbItem["管理"]["評量名稱管理"].Click += delegate
@@ -262,10 +263,16 @@ namespace CourseGradeB
             //    new CourseGradeB.CourseExtendControls.Ribbon.ExamManager().ShowDialog();
             //};
 
-            rbItem["管理"]["科目資料管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.SubjectManager"].Executable;
-            rbItem["管理"]["科目資料管理"].Click += delegate
+            eduitem3["管理"]["科目資料管理"].Enable = User.Acl["JHSchool.EduAdmin.Ribbon.SubjectManager"].Executable;
+            eduitem3["管理"]["科目資料管理"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectManager().ShowDialog();
+            };
+
+            eduitem3["管理"]["開放時間管理"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SetHoursOpeningForm"].Executable;
+            eduitem3["管理"]["開放時間管理"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.SetHoursOpeningForm().ShowDialog();
             };
 
             //rbItem["設定"].Image = Properties.Resources.sandglass_unlock_64;
@@ -279,41 +286,43 @@ namespace CourseGradeB
             #endregion
 
             #region 學務作業功能
-            FISCA.Presentation.RibbonBarItem item3 = FISCA.Presentation.MotherForm.RibbonBarItems["學務作業", "基本設定"];
+            FISCA.Presentation.RibbonBarItem stuitem1 = FISCA.Presentation.MotherForm.RibbonBarItems["學務作業", "基本設定"];
             //item3["管理"].Image = Properties.Resources.network_lock_64;
             //item3["管理"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
-            item3["管理"]["指標管理"].Enable = User.Acl["JHSchool.StuAdmin.Ribbon.ConductTitleManager"].Executable;
-            item3["管理"]["指標管理"].Click += delegate
+            stuitem1["管理"]["指標管理"].Enable = User.Acl["JHSchool.StuAdmin.Ribbon.ConductTitleManager"].Executable;
+            stuitem1["管理"]["指標管理"].Click += delegate
             {
                 new CourseGradeB.StuAdminExtendControls.ConductSettingForm().ShowDialog();
             };
             #endregion
-            //ResCourseData();
+
+            ResCourseData();
         }
 
-        //private static void ResCourseData()
-        //{
-        //    //評分樣板顯示
-        //    ListPaneField CourseRefExamTemplate = new ListPaneField("評分樣板");
-            
-        //    CourseRefExamTemplate.GetVariable += delegate(object sender, GetVariableEventArgs e)
-        //    {
-        //        int key;
-        //        bool done = int.TryParse(e.Key,out key);
-        //        if(done)
-        //        {
-        //            e.Value = Global.Instance.GetExamTemplateName(key);
-        //        }
-        //    };
-        //    K12.Presentation.NLDPanels.Course.AddListPaneField(CourseRefExamTemplate);
+        private static void ResCourseData()
+        {
+            //課程科目屬性
+            ListPaneField CourseSubjectType = new ListPaneField("科目組別");
+            CourseSubjectType.PreloadVariable += delegate(object sender, PreloadVariableEventArgs e)
+            {
+                Tool.Instance.Courses = K12.Data.Course.SelectByIDs(e.Keys);
+                Tool.Instance.Refresh();
+            };
 
-        //    FISCA.InteractionService.SubscribeEvent("Res_CourseExt", (sender, args) =>
-        //    {
-        //        //取得更新資料
-        //        Global.Instance.Refresh();
-        //        //重讀
-        //        CourseRefExamTemplate.Reload();
-        //    });
-        //}
+            CourseSubjectType.GetVariable += delegate(object sender, GetVariableEventArgs e)
+            {
+                e.Value = Tool.Instance.GetSubjectType(e.Key);
+            };
+
+            K12.Presentation.NLDPanels.Course.AddListPaneField(CourseSubjectType);
+
+            //FISCA.InteractionService.SubscribeEvent("SubjectChange", (sender, args) =>
+            //{
+            //    //取得更新資料
+            //    Tool.Instance.Refresh();
+            //    //重讀
+            //    CourseSubjectType.Reload();
+            //});
+        }
     }
 }

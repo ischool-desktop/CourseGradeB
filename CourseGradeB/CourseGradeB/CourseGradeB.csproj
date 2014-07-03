@@ -249,6 +249,12 @@
     <Compile Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.Designer.cs">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SetHoursOpeningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SetHoursOpeningForm.Designer.cs">
+      <DependentUpon>SetHoursOpeningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EduAdminExtendControls\Ribbon\SubjectManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,10 +280,10 @@
     <Compile Include="Feature\Legacy\EditCourse.cs" />
     <Compile Include="Feature\Legacy\QueryCourse.cs" />
     <Compile Include="Feature\Legacy\QueryTemplate.cs" />
-    <Compile Include="StuAdminExtendControls\ConductSettingForm.cs">
+    <Compile Include="StuAdminExtendControls\Ribbon\ConductSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StuAdminExtendControls\ConductSettingForm.Designer.cs">
+    <Compile Include="StuAdminExtendControls\Ribbon\ConductSettingForm.Designer.cs">
       <DependentUpon>ConductSettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StuAdminExtendControls\ConductSetting.cs" />
@@ -287,16 +293,16 @@
     <Compile Include="ClassExtendControls\Ribbon\HrtConductInputForm.Designer.cs">
       <DependentUpon>HrtConductInputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StuAdminExtendControls\SubjectConductAddForm.cs">
+    <Compile Include="StuAdminExtendControls\Ribbon\SubjectConductAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StuAdminExtendControls\SubjectConductAddForm.Designer.cs">
+    <Compile Include="StuAdminExtendControls\Ribbon\SubjectConductAddForm.Designer.cs">
       <DependentUpon>SubjectConductAddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StuAdminExtendControls\SubjectConductSettingForm.cs">
+    <Compile Include="StuAdminExtendControls\Ribbon\SubjectConductSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StuAdminExtendControls\SubjectConductSettingForm.Designer.cs">
+    <Compile Include="StuAdminExtendControls\Ribbon\SubjectConductSettingForm.Designer.cs">
       <DependentUpon>SubjectConductSettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportExport\Course\ExportCourseStudents.cs" />
@@ -333,6 +339,7 @@
     <Compile Include="Subject.cs" />
     <Compile Include="TCInstruct.cs" />
     <Compile Include="TCInstructRecord.cs" />
+    <Compile Include="Tool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Library\Aspose.BarCode.dll" />
@@ -442,6 +449,9 @@
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.resx">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SetHoursOpeningForm.resx">
+      <DependentUpon>SetHoursOpeningForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SubjectManager.resx">
       <DependentUpon>SubjectManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -453,16 +463,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="StuAdminExtendControls\ConductSettingForm.resx">
+    <EmbeddedResource Include="StuAdminExtendControls\Ribbon\ConductSettingForm.resx">
       <DependentUpon>ConductSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClassExtendControls\Ribbon\HrtConductInputForm.resx">
       <DependentUpon>HrtConductInputForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StuAdminExtendControls\SubjectConductAddForm.resx">
+    <EmbeddedResource Include="StuAdminExtendControls\Ribbon\SubjectConductAddForm.resx">
       <DependentUpon>SubjectConductAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StuAdminExtendControls\SubjectConductSettingForm.resx">
+    <EmbeddedResource Include="StuAdminExtendControls\Ribbon\SubjectConductSettingForm.resx">
       <DependentUpon>SubjectConductSettingForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

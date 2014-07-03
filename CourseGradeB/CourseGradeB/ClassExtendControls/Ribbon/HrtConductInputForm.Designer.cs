@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.itemPanel1 = new DevComponents.DotNetBar.ItemPanel();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.lblSave = new DevComponents.DotNetBar.LabelX();
-            this.btnSave = new DevComponents.DotNetBar.ButtonX();
+            this.txtComment = new System.Windows.Forms.TextBox();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGrade = new DevComponents.DotNetBar.Controls.DataGridViewComboBoxExColumn();
+            this.lblSave = new DevComponents.DotNetBar.LabelX();
+            this.btnSave = new DevComponents.DotNetBar.ButtonX();
+            this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.cboTerm = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.txtComment = new System.Windows.Forms.TextBox();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
@@ -109,6 +109,68 @@
             this.groupPanel1.TabIndex = 1;
             this.groupPanel1.Text = "目前無選擇任何學生";
             // 
+            // txtComment
+            // 
+            this.txtComment.Location = new System.Drawing.Point(500, 34);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(213, 337);
+            this.txtComment.TabIndex = 16;
+            this.txtComment.Leave += new System.EventHandler(this.txtComment_Leave);
+            // 
+            // dgv
+            // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colGroup,
+            this.colTitle,
+            this.colGrade});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgv.Location = new System.Drawing.Point(4, 4);
+            this.dgv.Name = "dgv";
+            this.dgv.RowTemplate.Height = 24;
+            this.dgv.Size = new System.Drawing.Size(489, 396);
+            this.dgv.TabIndex = 0;
+            this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
+            this.dgv.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellEndEdit);
+            // 
+            // colGroup
+            // 
+            this.colGroup.HeaderText = "類別";
+            this.colGroup.Name = "colGroup";
+            this.colGroup.ReadOnly = true;
+            // 
+            // colTitle
+            // 
+            this.colTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTitle.HeaderText = "標題";
+            this.colTitle.Name = "colTitle";
+            this.colTitle.ReadOnly = true;
+            // 
+            // colGrade
+            // 
+            this.colGrade.DropDownHeight = 106;
+            this.colGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.colGrade.DropDownWidth = 121;
+            this.colGrade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colGrade.HeaderText = "等第";
+            this.colGrade.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.colGrade.IntegralHeight = false;
+            this.colGrade.ItemHeight = 17;
+            this.colGrade.Name = "colGrade";
+            this.colGrade.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colGrade.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            // 
             // lblSave
             // 
             this.lblSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -140,57 +202,18 @@
             this.btnSave.Text = "儲存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // dgv
+            // labelX2
             // 
-            this.dgv.AllowUserToAddRows = false;
-            this.dgv.AllowUserToDeleteRows = false;
-            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colGroup,
-            this.colTitle,
-            this.colGrade});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgv.Location = new System.Drawing.Point(4, 4);
-            this.dgv.Name = "dgv";
-            this.dgv.RowTemplate.Height = 24;
-            this.dgv.Size = new System.Drawing.Size(489, 396);
-            this.dgv.TabIndex = 0;
-            this.dgv.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellEndEdit);
             // 
-            // colGroup
             // 
-            this.colGroup.HeaderText = "Group";
-            this.colGroup.Name = "colGroup";
-            this.colGroup.ReadOnly = true;
             // 
-            // colTitle
-            // 
-            this.colTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTitle.HeaderText = "Title";
-            this.colTitle.Name = "colTitle";
-            this.colTitle.ReadOnly = true;
-            // 
-            // colGrade
-            // 
-            this.colGrade.DropDownHeight = 106;
-            this.colGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.colGrade.DropDownWidth = 121;
-            this.colGrade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colGrade.HeaderText = "Grade";
-            this.colGrade.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.colGrade.IntegralHeight = false;
-            this.colGrade.ItemHeight = 17;
-            this.colGrade.Name = "colGrade";
-            this.colGrade.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colGrade.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelX2.BackgroundStyle.Class = "";
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX2.Location = new System.Drawing.Point(500, 4);
+            this.labelX2.Name = "labelX2";
+            this.labelX2.Size = new System.Drawing.Size(87, 23);
+            this.labelX2.TabIndex = 15;
+            this.labelX2.Text = "班導師評語";
             // 
             // labelX1
             // 
@@ -215,32 +238,10 @@
             this.cboTerm.ItemHeight = 19;
             this.cboTerm.Location = new System.Drawing.Point(55, 10);
             this.cboTerm.Name = "cboTerm";
-            this.cboTerm.Size = new System.Drawing.Size(109, 25);
+            this.cboTerm.Size = new System.Drawing.Size(151, 25);
             this.cboTerm.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboTerm.TabIndex = 3;
             this.cboTerm.SelectedIndexChanged += new System.EventHandler(this.cboTerm_SelectedIndexChanged);
-            // 
-            // labelX2
-            // 
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.Class = "";
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(500, 4);
-            this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(87, 23);
-            this.labelX2.TabIndex = 15;
-            this.labelX2.Text = "班導師評語";
-            // 
-            // txtComment
-            // 
-            this.txtComment.Location = new System.Drawing.Point(500, 34);
-            this.txtComment.Multiline = true;
-            this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(213, 337);
-            this.txtComment.TabIndex = 16;
-            this.txtComment.Leave += new System.EventHandler(this.txtComment_Leave);
             // 
             // HrtConductInputForm
             // 
@@ -252,6 +253,7 @@
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.groupPanel1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "HrtConductInputForm";
             this.Text = "HrtConduct輸入";
             this.Load += new System.EventHandler(this.HrtConductInputForm_Load);
@@ -271,10 +273,10 @@
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboTerm;
         private DevComponents.DotNetBar.LabelX lblSave;
+        private DevComponents.DotNetBar.LabelX labelX2;
+        private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGroup;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
         private DevComponents.DotNetBar.Controls.DataGridViewComboBoxExColumn colGrade;
-        private DevComponents.DotNetBar.LabelX labelX2;
-        private System.Windows.Forms.TextBox txtComment;
     }
 }
