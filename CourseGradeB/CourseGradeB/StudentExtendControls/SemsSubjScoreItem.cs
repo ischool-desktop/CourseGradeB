@@ -1,4 +1,5 @@
 ﻿using FISCA.Presentation;
+using Framework;
 using K12.Data;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,14 @@ namespace CourseGradeB.StudentExtendControls
     internal partial class SemsSubjScoreItem : JHSchool.Legacy.PalmerwormItem
     {
         List<SemesterScoreRecord> _records;
+        bool _CanEdit;
         public SemsSubjScoreItem()
         {
             InitializeComponent();
             Title = "學期成績";
             _records = new List<SemesterScoreRecord>();
+            _CanEdit = User.Acl["JHSchool.Student.Detail.SemsScore"].Editable;
+            btnAdd.Enabled = btnEdit.Enabled = btnDelete.Enabled = _CanEdit;
         }
 
         protected override object OnBackgroundWorkerWorking()
@@ -129,7 +133,7 @@ namespace CourseGradeB.StudentExtendControls
 
         private void listView_DoubleClick(object sender, EventArgs e)
         {
-            if (listView.SelectedItems.Count == 1)
+            if (listView.SelectedItems.Count == 1 && _CanEdit)
             {
                 SemesterScoreRecord record = listView.SelectedItems[0].Tag as SemesterScoreRecord;
                 SemesterScoreEditor edit = new SemesterScoreEditor(record, RunningID);
