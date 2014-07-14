@@ -13,6 +13,7 @@ using FISCA.Data;
 using System.Data;
 using CourseGradeB.CourseExtendControls;
 using CourseGradeB.EduAdminExtendControls;
+using CourseGradeB.StudentExtendControls;
 
 
 namespace CourseGradeB
@@ -30,6 +31,9 @@ namespace CourseGradeB
             Catalog ribbon = RoleAclSource.Instance["學生"]["功能按鈕"];
             ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0169", "匯出學期歷程"));
             ribbon.Add(new RibbonFeature("JHSchool.Student.Ribbon0170", "匯入學期歷程"));
+            ribbon.Add(new RibbonFeature("JHSchool.Student.SubjectScoreCalculate", "計算科目成績"));
+            ribbon = RoleAclSource.Instance["學生"]["資料項目"];
+            ribbon.Add(new DetailItemFeature("JHSchool.Student.Detail.SemsScore", "學期成績"));
 
             //班級
             ribbon = RoleAclSource.Instance["班級"]["功能按鈕"];
@@ -42,12 +46,16 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0021", "匯入課程修課學生"));
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0070.CourseScoreInputForm", "成績輸入"));
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0070.SubjectConductInputForm", "指標輸入"));
+            ribbon = RoleAclSource.Instance["課程"]["資料項目"];
+            ribbon.Add(new DetailItemFeature("JHSchool.Course.Detail.BasicInfo", "基本資料"));
+            ribbon.Add(new DetailItemFeature("JHSchool.Course.Detail.AttendStudent", "修課學生"));
 
             //教務作業
             ribbon = RoleAclSource.Instance["教務作業"];
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon0000", "評量名稱管理"));
             ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.SubjectManager", "科目資料管理"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SetHoursOpeningForm", "開放時間管理"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear", "批次計算科目成績"));
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.ExamTemplateManager", "評分樣板設定"));
 
             //學務作業
@@ -62,6 +70,9 @@ namespace CourseGradeB
 
             // 修課學生
             Course.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<SCAttendItem>());
+
+            // 學期成績
+            Student.Instance.AddDetailBulider(new JHSchool.Legacy.ContentItemBulider<SemsSubjScoreItem>());
 
             #endregion
 
@@ -252,6 +263,12 @@ namespace CourseGradeB
             FISCA.Presentation.RibbonBarItem eduitem2 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "批次作業/檢視"];
             eduitem2["成績作業"].Image = Properties.Resources.calc_save_64;
             eduitem2["成績作業"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
+            eduitem2["成績作業"]["批次計算科目成績"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear"].Executable;
+
+            eduitem2["成績作業"]["批次計算科目成績"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear().ShowDialog();
+            };
 
             RibbonBarItem eduitem3 = EduAdmin.Instance.RibbonBarItems["基本設定"];
             eduitem3["管理"].Size = RibbonBarButton.MenuButtonSize.Large;
@@ -296,6 +313,22 @@ namespace CourseGradeB
             };
             #endregion
 
+            #region 學生功能
+            //註冊成績計算功能項目。
+            FISCA.Presentation.RibbonBarItem student_rbitem = FISCA.Presentation.MotherForm.RibbonBarItems["學生", "教務"];
+            student_rbitem["成績作業"].Size = RibbonBarButton.MenuButtonSize.Large;
+            student_rbitem["成績作業"].Image = Properties.Resources.calc_save_64;
+            student_rbitem["成績作業"]["計算科目成績"].Enable = false;
+            K12.Presentation.NLDPanels.Student.SelectedSourceChanged += delegate
+            {
+                student_rbitem["成績作業"]["計算科目成績"].Enable = K12.Presentation.NLDPanels.Student.SelectedSource.Count > 0 && User.Acl["JHSchool.Student.SubjectScoreCalculate"].Executable;
+            };
+
+            student_rbitem["成績作業"]["計算科目成績"].Click += delegate
+            {
+                new CourseGradeB.StudentExtendControls.Ribbon.SubjectScoreCalculate(K12.Presentation.NLDPanels.Student.SelectedSource).ShowDialog(); 
+            };
+            #endregion
             ResCourseData();
         }
 

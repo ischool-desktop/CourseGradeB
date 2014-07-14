@@ -61,7 +61,7 @@ namespace CourseGradeB.StuAdminExtendControls
                 dgv.Rows.Clear();
 
                 //item.Tag == ""代表此item未被編輯過,做初始設定
-                if (item.Tag == "")
+                if (item.Tag + "" == "")
                 {
                     foreach (XmlElement conduct in _doc.SelectNodes("//Conduct[@Subject='" + subject + "']"))
                     {
@@ -95,7 +95,7 @@ namespace CourseGradeB.StuAdminExtendControls
             foreach (ButtonItem buttonItem in itemPanle1.Items)
             {
                 //buttonItem.Tag == ""代表此item從未被編輯過
-                if (buttonItem.Tag != "")
+                if (buttonItem.Tag + "" != "")
                 {
                     string subject = buttonItem.Text;
 
@@ -105,6 +105,7 @@ namespace CourseGradeB.StuAdminExtendControls
 
                     ButtonTag tag = buttonItem.Tag as ButtonTag;
 
+                    List<string> check_list = new List<string>();
                     //foreach (DataGridViewRow row in dgv.Rows)
                     foreach (DataGridViewRow row in tag.Rows)
                     {
@@ -112,6 +113,7 @@ namespace CourseGradeB.StuAdminExtendControls
 
                         string group = row.Cells[colGroup.Index].Value + "";
                         string title = row.Cells[colTitle.Index].Value + "";
+                        string key = group + "_" + title;
 
                         XmlElement newElem = _doc.SelectSingleNode("//Conduct[@Group='" + group + "'][@Subject='" + subject + "']") as XmlElement;
                         if (newElem == null)
@@ -122,12 +124,18 @@ namespace CourseGradeB.StuAdminExtendControls
                             _doc.DocumentElement.AppendChild(newElem);
                         }
 
-                        XmlElement item = newElem.OwnerDocument.CreateElement("Item");
-                        item.SetAttribute("Title", title);
+                        //同group避免重複add相同item
+                        if (!check_list.Contains(key))
+                        {
+                            XmlElement item = newElem.OwnerDocument.CreateElement("Item");
+                            item.SetAttribute("Title", title);
 
-                        newElem.SetAttribute("Group", group);
+                            //newElem.SetAttribute("Group", group);
 
-                        newElem.AppendChild(item);
+                            newElem.AppendChild(item);
+
+                            check_list.Add(key);
+                        }
                     }
                     _setting.Conduct = _doc.OuterXml;
                     _setting.Save();

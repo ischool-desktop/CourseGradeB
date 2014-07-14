@@ -14,7 +14,7 @@ using JHSchool;
 namespace CourseGradeB.CourseExtendControls
 {
     //[Framework.AccessControl.FeatureCode("Content0210")]
-    [FCode("JHSchool.Course.Detail0030", "修課學生")]
+    [FCode("JHSchool.Course.Detail.AttendStudent", "修課學生")]
     internal partial class SCAttendItem : JHSchool.Legacy.PalmerwormItem
     {
         private List<AttendInfo> _delete_list;

@@ -109,6 +109,7 @@ namespace CourseGradeB.StuAdminExtendControls
             foreach (XmlNode node in doc.SelectNodes("//Conduct[@Common]"))
                 doc.DocumentElement.RemoveChild(node);
 
+            List<string> check_list = new List<string>();
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (row.IsNewRow) continue;
@@ -116,6 +117,7 @@ namespace CourseGradeB.StuAdminExtendControls
                 string group = row.Cells[colGroup.Index].Value + "";
                 string title = row.Cells[colTitle.Index].Value + "";
                 string common = row.Cells[colCommon.Index].Value + "" == "True" ? "True" : "False";
+                string key = group + "_" + title;
 
                 //搜尋具有common屬性,且group名稱符合的node
                 XmlElement elem = doc.SelectSingleNode("//Conduct[@Group='" + group + "'][@Common]") as XmlElement;
@@ -125,16 +127,20 @@ namespace CourseGradeB.StuAdminExtendControls
                 {
                     elem = doc.CreateElement("Conduct");
                     elem.SetAttribute("Group", group);
+                    elem.SetAttribute("Common", common);
                     doc.DocumentElement.AppendChild(elem);
                 }
 
-                //會複寫成最後一個item設定的Group跟Common
-                elem.SetAttribute("Common", common);
+                //同group避免重複add相同item
+                if (!check_list.Contains(key))
+                {
+                    XmlElement item = doc.CreateElement("Item");
+                    item.SetAttribute("Title", title);
 
-                XmlElement item = doc.CreateElement("Item");
-                item.SetAttribute("Title", title);
+                    elem.AppendChild(item);
 
-                elem.AppendChild(item);
+                    check_list.Add(key);
+                }
             }
 
             setting.Conduct = doc.OuterXml;

@@ -134,10 +134,10 @@
       <HintPath>Library\JHSchool.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="K12.Data, Version=2.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="K12.Data, Version=3.0.0.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\K12.Data.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="K12.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -261,6 +261,12 @@
     <Compile Include="EduAdminExtendControls\Ribbon\SubjectManager.Designer.cs">
       <DependentUpon>SubjectManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SubjectScoreCalculateByGradeyear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SubjectScoreCalculateByGradeyear.Designer.cs">
+      <DependentUpon>SubjectScoreCalculateByGradeyear.cs</DependentUpon>
+    </Compile>
     <Compile Include="EduAdminExtendControls\SubjectRecord.cs" />
     <Compile Include="Feature\Legacy\EditExam.cs" />
     <Compile Include="Editor\TCInstructRecordEditor.cs" />
@@ -336,7 +342,32 @@
     <Compile Include="Feature\Legacy\QueryExam.cs" />
     <Compile Include="SCAttendRecord.cs" />
     <Compile Include="SCETakeRecord.cs" />
+    <Compile Include="StudentExtendControls\Ribbon\SubjectScoreObj.cs" />
+    <Compile Include="StudentExtendControls\SemesterScoreAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentExtendControls\SemesterScoreAddForm.Designer.cs">
+      <DependentUpon>SemesterScoreAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentExtendControls\SemesterScoreEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentExtendControls\SemesterScoreEditor.Designer.cs">
+      <DependentUpon>SemesterScoreEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentExtendControls\SemsSubjScoreItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentExtendControls\SemsSubjScoreItem.Designer.cs">
+      <DependentUpon>SemsSubjScoreItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Subject.cs" />
+    <Compile Include="StudentExtendControls\Ribbon\SubjectScoreCalculate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentExtendControls\Ribbon\SubjectScoreCalculate.Designer.cs">
+      <DependentUpon>SubjectScoreCalculate.cs</DependentUpon>
+    </Compile>
     <Compile Include="TCInstruct.cs" />
     <Compile Include="TCInstructRecord.cs" />
     <Compile Include="Tool.cs" />
@@ -455,6 +486,9 @@
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SubjectManager.resx">
       <DependentUpon>SubjectManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SubjectScoreCalculateByGradeyear.resx">
+      <DependentUpon>SubjectScoreCalculateByGradeyear.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImportExport\Course\ExportStudentV2.resx" />
     <EmbeddedResource Include="ImportExport\Course\ImportStudentV2.resx" />
     <EmbeddedResource Include="ImportExport\ExportStudentV2.resx" />
@@ -474,6 +508,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StuAdminExtendControls\Ribbon\SubjectConductSettingForm.resx">
       <DependentUpon>SubjectConductSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentExtendControls\SemesterScoreAddForm.resx">
+      <DependentUpon>SemesterScoreAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentExtendControls\SemesterScoreEditor.resx">
+      <DependentUpon>SemesterScoreEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentExtendControls\SemsSubjScoreItem.resx">
+      <DependentUpon>SemsSubjScoreItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentExtendControls\Ribbon\SubjectScoreCalculate.resx">
+      <DependentUpon>SubjectScoreCalculate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

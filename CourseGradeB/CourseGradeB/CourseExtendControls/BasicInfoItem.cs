@@ -21,7 +21,7 @@ using FISCA.UDT;
 namespace CourseGradeB.CourseExtendControls
 {
     //[Framework.AccessControl.FeatureCode("Content0200")]
-    [FCode("JHSchool.Course.Detail0000", "基本資料")]
+    [FCode("JHSchool.Course.Detail.BasicInfo", "基本資料")]
     internal partial class BasicInfoItem : JHSchool.Legacy.PalmerwormItem
     {
         private static List<TeacherInfo> _teachers;

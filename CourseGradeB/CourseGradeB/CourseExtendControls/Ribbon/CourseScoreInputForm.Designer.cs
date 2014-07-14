@@ -39,17 +39,17 @@
             this.lblExam = new DevComponents.DotNetBar.LabelX();
             this.lblCourseName = new DevComponents.DotNetBar.LabelX();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chInputAssignmentScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chInputScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chStudentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
             this.tabScore = new DevComponents.DotNetBar.TabItem(this.components);
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.chClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chSeatNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chStudentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chInputScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chInputAssignmentScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
@@ -156,47 +156,6 @@
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
-            // chInputAssignmentScore
-            // 
-            this.chInputAssignmentScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.chInputAssignmentScore.HeaderText = "平時分數";
-            this.chInputAssignmentScore.Name = "chInputAssignmentScore";
-            // 
-            // chInputScore
-            // 
-            this.chInputScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.chInputScore.HeaderText = "定期分數";
-            this.chInputScore.Name = "chInputScore";
-            // 
-            // chStudentNumber
-            // 
-            this.chStudentNumber.Frozen = true;
-            this.chStudentNumber.HeaderText = "學號";
-            this.chStudentNumber.Name = "chStudentNumber";
-            this.chStudentNumber.ReadOnly = true;
-            // 
-            // chName
-            // 
-            this.chName.Frozen = true;
-            this.chName.HeaderText = "姓名";
-            this.chName.Name = "chName";
-            this.chName.ReadOnly = true;
-            // 
-            // chSeatNo
-            // 
-            this.chSeatNo.Frozen = true;
-            this.chSeatNo.HeaderText = "座號";
-            this.chSeatNo.Name = "chSeatNo";
-            this.chSeatNo.ReadOnly = true;
-            this.chSeatNo.Width = 65;
-            // 
-            // chClassName
-            // 
-            this.chClassName.Frozen = true;
-            this.chClassName.HeaderText = "班級";
-            this.chClassName.Name = "chClassName";
-            this.chClassName.ReadOnly = true;
-            // 
             // dgv
             // 
             this.dgv.AllowUserToAddRows = false;
@@ -293,6 +252,51 @@
             this.dataGridViewX1.Size = new System.Drawing.Size(564, 346);
             this.dataGridViewX1.TabIndex = 1;
             // 
+            // chClassName
+            // 
+            this.chClassName.Frozen = true;
+            this.chClassName.HeaderText = "班級";
+            this.chClassName.Name = "chClassName";
+            this.chClassName.ReadOnly = true;
+            this.chClassName.Width = 150;
+            // 
+            // chSeatNo
+            // 
+            this.chSeatNo.Frozen = true;
+            this.chSeatNo.HeaderText = "座號";
+            this.chSeatNo.Name = "chSeatNo";
+            this.chSeatNo.ReadOnly = true;
+            // 
+            // chName
+            // 
+            this.chName.Frozen = true;
+            this.chName.HeaderText = "姓名";
+            this.chName.Name = "chName";
+            this.chName.ReadOnly = true;
+            this.chName.Width = 150;
+            // 
+            // chStudentNumber
+            // 
+            this.chStudentNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.chStudentNumber.Frozen = true;
+            this.chStudentNumber.HeaderText = "學號";
+            this.chStudentNumber.Name = "chStudentNumber";
+            this.chStudentNumber.ReadOnly = true;
+            this.chStudentNumber.Width = 150;
+            // 
+            // chInputScore
+            // 
+            this.chInputScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.chInputScore.HeaderText = "定期分數";
+            this.chInputScore.Name = "chInputScore";
+            // 
+            // chInputAssignmentScore
+            // 
+            this.chInputAssignmentScore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.chInputAssignmentScore.HeaderText = "平時分數";
+            this.chInputAssignmentScore.Name = "chInputAssignmentScore";
+            this.chInputAssignmentScore.Visible = false;
+            // 
             // CourseScoreInputForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -329,16 +333,16 @@
         private DevComponents.DotNetBar.LabelX lblExam;
         private DevComponents.DotNetBar.LabelX lblCourseName;
         protected System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chInputAssignmentScore;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chInputScore;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chStudentNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chSeatNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chClassName;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
         private DevComponents.DotNetBar.TabControl tabControl1;
         private DevComponents.DotNetBar.TabControlPanel tabControlPanel1;
         private DevComponents.DotNetBar.TabItem tabScore;
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chClassName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chSeatNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chStudentNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chInputScore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chInputAssignmentScore;
     }
 }
