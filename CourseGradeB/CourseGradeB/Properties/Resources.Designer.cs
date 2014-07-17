@@ -63,16 +63,6 @@ namespace CourseGradeB.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
-        internal static System.Drawing.Bitmap ajax_loader {
-            get {
-                object obj = ResourceManager.GetObject("ajax_loader", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
         internal static System.Drawing.Bitmap btnAddCourse {
             get {
                 object obj = ResourceManager.GetObject("btnAddCourse", resourceCulture);
@@ -152,6 +142,16 @@ namespace CourseGradeB.Properties {
         internal static System.Drawing.Bitmap exam_write_64 {
             get {
                 object obj = ResourceManager.GetObject("exam_write_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap loadering {
+            get {
+                object obj = ResourceManager.GetObject("loadering", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

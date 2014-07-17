@@ -8,7 +8,7 @@ using System.Xml;
 namespace CourseGradeB
 {
      [FISCA.UDT.TableName("ischool.conduct")]
-    class ConductRecord : ActiveRecord
+    public class ConductRecord : ActiveRecord
     {
          [FISCA.UDT.Field(Field = "ref_student_id")]
          public int RefStudentId { get; set; }

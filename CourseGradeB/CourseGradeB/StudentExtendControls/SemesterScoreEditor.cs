@@ -80,6 +80,9 @@ namespace CourseGradeB.StudentExtendControls
             {
                 Save();
 
+                List<string> _ids = new List<string>() { _sid };
+                Tool.Instance.SetCumulateGPA(_ids, _ssr.SchoolYear, _ssr.Semester);
+
                 //record新資料for log
                 foreach (SubjectScore ss in _ssr.Subjects.Values)
                 {

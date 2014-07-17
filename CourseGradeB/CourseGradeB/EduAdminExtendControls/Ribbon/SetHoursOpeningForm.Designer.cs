@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvScore = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.gpScore = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.gpConduct = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.colGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMiddleBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMiddleEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinalBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinalEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvConduct = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMiddleBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMiddleEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinalBegin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinalEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScore)).BeginInit();
             this.gpScore.SuspendLayout();
             this.gpConduct.SuspendLayout();
@@ -63,14 +63,14 @@
             this.colMiddleEnd,
             this.colFinalBegin,
             this.colFinalEnd});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvScore.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvScore.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvScore.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvScore.Location = new System.Drawing.Point(5, 3);
             this.dgvScore.Name = "dgvScore";
@@ -176,40 +176,6 @@
             this.gpConduct.TabIndex = 3;
             this.gpConduct.Text = "指標開放設定";
             // 
-            // colGrade
-            // 
-            this.colGrade.HeaderText = "年級區間";
-            this.colGrade.Name = "colGrade";
-            this.colGrade.ReadOnly = true;
-            // 
-            // colMiddleBegin
-            // 
-            this.colMiddleBegin.HeaderText = "期中開始時間";
-            this.colMiddleBegin.Name = "colMiddleBegin";
-            this.colMiddleBegin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMiddleBegin.Width = 150;
-            // 
-            // colMiddleEnd
-            // 
-            this.colMiddleEnd.HeaderText = "期中結束時間";
-            this.colMiddleEnd.Name = "colMiddleEnd";
-            this.colMiddleEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMiddleEnd.Width = 150;
-            // 
-            // colFinalBegin
-            // 
-            this.colFinalBegin.HeaderText = "期末開始時間";
-            this.colFinalBegin.Name = "colFinalBegin";
-            this.colFinalBegin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colFinalBegin.Width = 150;
-            // 
-            // colFinalEnd
-            // 
-            this.colFinalEnd.HeaderText = "期末結束時間";
-            this.colFinalEnd.Name = "colFinalEnd";
-            this.colFinalEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colFinalEnd.Width = 150;
-            // 
             // dgvConduct
             // 
             this.dgvConduct.AllowUserToAddRows = false;
@@ -222,14 +188,14 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvConduct.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvConduct.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvConduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvConduct.Location = new System.Drawing.Point(6, 3);
             this.dgvConduct.Name = "dgvConduct";
@@ -272,6 +238,41 @@
             this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn5.Width = 150;
             // 
+            // colGrade
+            // 
+            this.colGrade.HeaderText = "年級區間";
+            this.colGrade.Name = "colGrade";
+            this.colGrade.ReadOnly = true;
+            this.colGrade.Visible = false;
+            // 
+            // colMiddleBegin
+            // 
+            this.colMiddleBegin.HeaderText = "期中開始時間";
+            this.colMiddleBegin.Name = "colMiddleBegin";
+            this.colMiddleBegin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMiddleBegin.Width = 150;
+            // 
+            // colMiddleEnd
+            // 
+            this.colMiddleEnd.HeaderText = "期中結束時間";
+            this.colMiddleEnd.Name = "colMiddleEnd";
+            this.colMiddleEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMiddleEnd.Width = 150;
+            // 
+            // colFinalBegin
+            // 
+            this.colFinalBegin.HeaderText = "期末開始時間";
+            this.colFinalBegin.Name = "colFinalBegin";
+            this.colFinalBegin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colFinalBegin.Width = 150;
+            // 
+            // colFinalEnd
+            // 
+            this.colFinalEnd.HeaderText = "期末結束時間";
+            this.colFinalEnd.Name = "colFinalEnd";
+            this.colFinalEnd.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colFinalEnd.Width = 150;
+            // 
             // SetHoursOpeningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -299,17 +300,17 @@
         private DevComponents.DotNetBar.ButtonX btnSave;
         private DevComponents.DotNetBar.Controls.GroupPanel gpScore;
         private DevComponents.DotNetBar.Controls.GroupPanel gpConduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGrade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMiddleBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMiddleEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinalBegin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinalEnd;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgvConduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGrade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMiddleBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMiddleEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinalBegin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinalEnd;
 
     }
 }

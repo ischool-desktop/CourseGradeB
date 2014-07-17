@@ -212,7 +212,9 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 string str = string.Join("\r\n", _logStr);
                 FISCA.LogAgent.ApplicationLog.Log("學生學期科目成績計算(教務)", "計算學生學期科目成績", str);
             }
-               
+
+            //更新累計GPA平均
+            Tool.Instance.SetCumulateGPA(_ids, _schoolYear, _semester);
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -278,5 +280,6 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 _Update_sems_history[obj.StudentId].SemesterHistoryItems.Add(item);
             }
         }
+
     }
 }

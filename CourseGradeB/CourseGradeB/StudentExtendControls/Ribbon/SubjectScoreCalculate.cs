@@ -22,6 +22,7 @@ namespace CourseGradeB.StudentExtendControls.Ribbon
         List<string> _Student_schoolyear_sems;
         List<string> _logStr;
 
+
         public SubjectScoreCalculate(List<string> ids)
         {
             InitializeComponent();
@@ -197,17 +198,14 @@ namespace CourseGradeB.StudentExtendControls.Ribbon
                 string str = string.Join("\r\n", _logStr);
                 FISCA.LogAgent.ApplicationLog.Log("學生學期科目成績計算(學生)", "計算學生學期科目成績", str);
             }
-               
+
+            //更新累計GPA平均
+            Tool.Instance.SetCumulateGPA(_ids, _schoolYear, _semester);
         }
 
         private void SubjectScoreCalculate_Load(object sender, EventArgs e)
         {
             //K12.Data.SemesterScore.Delete(K12.Data.SemesterScore.SelectAll());
-            //List<SemesterHistoryRecord> list = K12.Data.SemesterHistory.SelectByStudentIDs(_ids);
-            //foreach (SemesterHistoryRecord item in list)
-            //    item.SemesterHistoryItems.Clear();
-
-            //K12.Data.SemesterHistory.Update(list);
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -263,6 +261,7 @@ namespace CourseGradeB.StudentExtendControls.Ribbon
 
         private void CheckYearAndSemester(SubjectScoreObj obj)
         {
+            //若學生缺少該學年度學期的歷程,則自動建立
             string key = obj.StudentId + "_" + _schoolYear + "_" + _semester;
             if (!_Student_schoolyear_sems.Contains(key) && obj.GradeYear != 0)
             {
@@ -277,7 +276,6 @@ namespace CourseGradeB.StudentExtendControls.Ribbon
                 _Update_sems_history[obj.StudentId].SemesterHistoryItems.Add(item);
             }
         }
-
 
     }
 }

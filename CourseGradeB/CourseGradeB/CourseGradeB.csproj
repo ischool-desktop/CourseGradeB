@@ -249,6 +249,12 @@
     <Compile Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.Designer.cs">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SemsHistoryMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SemsHistoryMaker.Designer.cs">
+      <DependentUpon>SemsHistoryMaker.cs</DependentUpon>
+    </Compile>
     <Compile Include="EduAdminExtendControls\Ribbon\SetHoursOpeningForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -450,6 +456,7 @@
     <None Include="Resources\network_lock_64.png" />
     <None Include="Resources\sandglass_unlock_64.png" />
     <None Include="Resources\exam_write_64.png" />
+    <None Include="Resources\loadering.gif" />
     <Content Include="Resources\teacher_64.png" />
   </ItemGroup>
   <ItemGroup>
@@ -479,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.resx">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SemsHistoryMaker.resx">
+      <DependentUpon>SemsHistoryMaker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SetHoursOpeningForm.resx">
       <DependentUpon>SetHoursOpeningForm.cs</DependentUpon>

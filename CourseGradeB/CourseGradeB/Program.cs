@@ -56,6 +56,7 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.SubjectManager", "科目資料管理"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SetHoursOpeningForm", "開放時間管理"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear", "批次計算科目成績"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SemsHistoryMaker", "產生學期歷程"));
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.ExamTemplateManager", "評分樣板設定"));
 
             //學務作業
@@ -268,6 +269,14 @@ namespace CourseGradeB
             eduitem2["成績作業"]["批次計算科目成績"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear().ShowDialog();
+            };
+
+            //產生學期歷程
+            eduitem2["成績作業"]["產生學期歷程"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SemsHistoryMaker"].Executable;
+
+            eduitem2["成績作業"]["產生學期歷程"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.SemsHistoryMaker().ShowDialog();
             };
 
             RibbonBarItem eduitem3 = EduAdmin.Instance.RibbonBarItems["基本設定"];

@@ -148,5 +148,146 @@ namespace CourseGradeB
             return str;
         }
 
+        public void SetCumulateGPA(List<string> ids,int schoolYear, int semester)
+        {
+            //學期歷程
+            Dictionary<string, string> sems_history = new Dictionary<string, string>();
+            foreach (SemesterHistoryRecord shr in K12.Data.SemesterHistory.SelectByStudentIDs(ids))
+            {
+                foreach (SemesterHistoryItem item in shr.SemesterHistoryItems)
+                {
+                    //學生年級對照
+                    string key = item.RefStudentID + "_" + item.SchoolYear + "_" + item.Semester;
+                    if (!sems_history.ContainsKey(key))
+                    {
+                        if (item.Semester == 1)
+                            sems_history.Add(key, item.GradeYear + "上");
+                        else
+                            sems_history.Add(key, item.GradeYear + "下");
+                    }
+
+                }
+            }
+
+            //取得學期成績紀錄
+            Dictionary<string, K12.Data.SemesterScoreRecord> update = new Dictionary<string, SemesterScoreRecord>();
+            foreach (var record in K12.Data.SemesterScore.SelectBySchoolYearAndSemester(ids, schoolYear, semester))
+            {
+                if (!update.ContainsKey(record.RefStudentID))
+                    update.Add(record.RefStudentID, record);
+            }
+
+            //結算累計GPA
+            Dictionary<string, Dictionary<string, SemesterScoreRecord>> student_gpa_dic = new Dictionary<string, Dictionary<string, SemesterScoreRecord>>();
+            foreach (SemesterScoreRecord r in K12.Data.SemesterScore.SelectByStudentIDs(ids))
+            {
+                //學年度學期判斷排除
+                if (r.SchoolYear > schoolYear)
+                    continue;
+                else if (r.SchoolYear == schoolYear)
+                {
+                    if (r.Semester > semester)
+                        continue;
+                }
+
+                string key = r.RefStudentID + "_" + r.SchoolYear + "_" + r.Semester;
+
+                if (!student_gpa_dic.ContainsKey(r.RefStudentID))
+                    student_gpa_dic.Add(r.RefStudentID, new Dictionary<string, SemesterScoreRecord>());
+
+                if (sems_history.ContainsKey(key))
+                {
+                    string grade = sems_history[key];
+                    if (grade == "9上" || grade == "9下" || grade == "10上" || grade == "10下" || grade == "11上" || grade == "11下" || grade == "12上" || grade == "12下")
+                    {
+                        if (!student_gpa_dic[r.RefStudentID].ContainsKey(grade))
+                            student_gpa_dic[r.RefStudentID].Add(grade, r);
+
+                        SemesterScoreRecord ssr = student_gpa_dic[r.RefStudentID][grade];
+
+                        //如果有相同grade的record,以較新的為主
+                        if (r.SchoolYear > ssr.SchoolYear)
+                            student_gpa_dic[r.RefStudentID][grade] = r;
+                        else if (r.SchoolYear == ssr.SchoolYear)
+                        {
+                            if (r.Semester > ssr.Semester)
+                                student_gpa_dic[r.RefStudentID][grade] = r;
+                        }
+                    }
+                }
+            }
+
+            foreach (string id in update.Keys)
+            {
+                if (!student_gpa_dic.ContainsKey(id))
+                    continue;
+
+                SemesterScoreRecord ssr = update[id];
+
+                decimal total = 0;
+                int count = 0;
+
+                foreach (SemesterScoreRecord r in student_gpa_dic[id].Values)
+                {
+                    if (r.AvgGPA.HasValue)
+                    {
+                        total += r.AvgGPA.Value;
+                        count++;
+                    }
+                }
+
+                if (count > 0)
+                    ssr.CumulateGPA = Math.Round(total / count, 2, MidpointRounding.AwayFromZero);
+            }
+
+            K12.Data.SemesterScore.Update(update.Values);
+        }
+
+        public struct Domain
+        {
+            public string Name;
+            public decimal Hours;
+            public int DisplayOrder;
+        }
+
+        public static Dictionary<int, List<Domain>> DomainDic = new Dictionary<int, List<Domain>>()
+        {
+            {6,new List<Domain>()
+            {
+                {new Domain{Name="Chinese",Hours=6,DisplayOrder=1}},
+                {new Domain{Name="Humanities",Hours=8,DisplayOrder=2}},
+                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3}},
+                {new Domain{Name="Science",Hours=4,DisplayOrder=4}},
+                {new Domain{Name="Chinese Social Studies",Hours=3,DisplayOrder=5}},
+                {new Domain{Name="Physical Education",Hours=0,DisplayOrder=6}},
+                {new Domain{Name="Humanity",Hours=8,DisplayOrder=7}},
+                {new Domain{Name="Art",Hours=2,DisplayOrder=8}},
+                {new Domain{Name="Music",Hours=2,DisplayOrder=9}},
+                {new Domain{Name="Computer",Hours=1,DisplayOrder=10}},
+                {new Domain{Name="Chinese Culture",Hours=1,DisplayOrder=11}}
+            }},
+            {8,new List<Domain>(){
+                {new Domain{Name="Chinese",Hours=5,DisplayOrder=1}},
+                {new Domain{Name="English",Hours=6,DisplayOrder=2}},
+                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3}},
+                {new Domain{Name="Science",Hours=5,DisplayOrder=4}},
+                {new Domain{Name="Chinese Social Studies",Hours=2,DisplayOrder=5}},
+                {new Domain{Name="Western Social Studies",Hours=2,DisplayOrder=6}},
+                {new Domain{Name="Computer",Hours=1,DisplayOrder=7}},
+                {new Domain{Name="Music",Hours=1,DisplayOrder=8}},
+                {new Domain{Name="Physical Education",Hours=0,DisplayOrder=9}},
+                {new Domain{Name="Scouting",Hours=1,DisplayOrder=10}},
+                {new Domain{Name="Art",Hours=1,DisplayOrder=11}}
+            }},
+            {12,new List<Domain>(){
+                {new Domain{Name="Chinese",Hours=5,DisplayOrder=1}},
+                {new Domain{Name="English",Hours=6,DisplayOrder=2}},
+                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3}},
+                {new Domain{Name="Science",Hours=5,DisplayOrder=4}},
+                {new Domain{Name="Social Studies",Hours=4,DisplayOrder=5}},
+                {new Domain{Name="Physical Education",Hours=2,DisplayOrder=6}},
+                {new Domain{Name="Elective",Hours=4,DisplayOrder=7}}
+            }}
+        };
     }
 }
