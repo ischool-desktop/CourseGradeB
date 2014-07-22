@@ -2,6 +2,7 @@
 using FISCA.UDT;
 using K12.Data;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,10 +32,23 @@ namespace CourseGradeB
                 if (_instance == null)
                     _instance = new Tool();
 
+                _instance.Refresh();
                 return _instance;
             }
         }
 
+        /// <summary>
+        /// 取得科目排序(每次呼叫都會更新資料)
+        /// </summary>
+        /// <returns></returns>
+        public static SubjectCompare GetSubjectCompare()
+        {
+            return new SubjectCompare();
+        }
+
+        /// <summary>
+        /// 重新取得科目清單
+        /// </summary>
         public void Refresh()
         {
             _SubjectDic.Clear();
@@ -74,72 +88,7 @@ namespace CourseGradeB
             Regular = 1
         }
 
-        public decimal GetScoreGrade(decimal score, SubjectType type)
-        {
-            decimal retVal = 0;
-            switch (type)
-            {
-                case SubjectType.Honor:
-                    if (score >= 97 && score <= 100)
-                        retVal = 4.8M;
-                    else if (score >= 93 && score < 97)
-                        retVal = 4.5M;
-                    else if (score >= 90 && score < 93)
-                        retVal = 4.2M;
-                    else if (score >= 87 && score < 90)
-                        retVal = 3.8M;
-                    else if (score >= 83 && score < 87)
-                        retVal = 3.5M;
-                    else if (score >= 80 && score < 83)
-                        retVal = 3.2M;
-                    else if (score >= 77 && score < 80)
-                        retVal = 2.8M;
-                    else if (score >= 73 && score < 77)
-                        retVal = 2.5M;
-                    else if (score >= 70 && score < 73)
-                        retVal = 2.2M;
-                    else if (score >= 67 && score < 70)
-                        retVal = 1.8M;
-                    else if (score >= 63 && score < 67)
-                        retVal = 1.5M;
-                    else if (score >= 60 && score < 63)
-                        retVal = 1.2M;
-                    else if (score >= 0 && score < 60)
-                        retVal = 0;
-                    break;
-                default:
-                    if (score >= 97 && score <= 100)
-                        retVal = 4.3M;
-                    else if (score >= 93 && score < 97)
-                        retVal = 4.0M;
-                    else if (score >= 90 && score < 93)
-                        retVal = 3.7M;
-                    else if (score >= 87 && score < 90)
-                        retVal = 3.3M;
-                    else if (score >= 83 && score < 87)
-                        retVal = 3.0M;
-                    else if (score >= 80 && score < 83)
-                        retVal = 2.7M;
-                    else if (score >= 77 && score < 80)
-                        retVal = 2.3M;
-                    else if (score >= 73 && score < 77)
-                        retVal = 2.0M;
-                    else if (score >= 70 && score < 73)
-                        retVal = 1.7M;
-                    else if (score >= 67 && score < 70)
-                        retVal = 1.3M;
-                    else if (score >= 63 && score < 67)
-                        retVal = 1.0M;
-                    else if (score >= 60 && score < 63)
-                        retVal = 0.7M;
-                    else if (score >= 0 && score < 60)
-                        retVal = 0;
-                    break;
-            }
-            return retVal;
-        }
-
-        public string GetStudentInfo(StudentRecord student)
+        public static string GetStudentInfo(StudentRecord student)
         {
             ClassRecord cr = student.Class;
             string className = cr == null ? "" : cr.Name;
@@ -148,7 +97,13 @@ namespace CourseGradeB
             return str;
         }
 
-        public void SetCumulateGPA(List<string> ids,int schoolYear, int semester)
+        /// <summary>
+        /// 計算指定學生在該學年度學期的累計GPA
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="schoolYear"></param>
+        /// <param name="semester"></param>
+        public static void SetCumulateGPA(List<string> ids,int schoolYear, int semester)
         {
             //學期歷程
             Dictionary<string, string> sems_history = new Dictionary<string, string>();
@@ -289,5 +244,58 @@ namespace CourseGradeB
                 {new Domain{Name="Elective",Hours=4,DisplayOrder=7}}
             }}
         };
+
+        public class GPA
+        {
+            private static List<GPA> gpalist = new List<GPA>();
+
+            static GPA()
+            {
+                gpalist.Add(new GPA(97, 4.3m, 4.8m, "A+"));
+                gpalist.Add(new GPA(93, 4.0m, 4.5m, "A"));
+                gpalist.Add(new GPA(90, 3.7m, 4.2m, "A-"));
+                gpalist.Add(new GPA(87, 3.3m, 3.8m, "B+"));
+                gpalist.Add(new GPA(83, 3.0m, 3.5m, "B"));
+                gpalist.Add(new GPA(80, 2.7m, 3.2m, "B-"));
+                gpalist.Add(new GPA(77, 2.3m, 2.8m, "C+"));
+                gpalist.Add(new GPA(73, 2.0m, 2.5m, "C"));
+                gpalist.Add(new GPA(70, 1.7m, 2.2m, "C-"));
+                gpalist.Add(new GPA(67, 1.3m, 1.8m, "D+"));
+                gpalist.Add(new GPA(63, 1.0m, 1.5m, "D"));
+                gpalist.Add(new GPA(60, 0.7m, 1.2m, "D-"));
+                gpalist.Add(new GPA(59, 0m, 0m, "F"));
+            }
+
+            public static GPA Eval(decimal score)
+            {
+                foreach (GPA gpa in gpalist)
+                {
+                    if (score >= gpa.Limit)
+                        return gpa;
+                }
+
+                return gpalist[gpalist.Count - 1]; //最低那個。
+            }
+
+            public GPA(decimal limit, decimal regular, decimal honors, string letter)
+            {
+                Limit = limit;
+                Regular = regular;
+                Honors = honors;
+                Letter = letter;
+            }
+
+            public decimal Limit { get; private set; }
+            public decimal Regular { get; private set; }
+
+            public decimal Honors { get; private set; }
+
+            public string Letter { get; private set; }
+
+            public override string ToString()
+            {
+                return string.Format("Regular:{0}, Honors:{1}, Letter:{2}, Limit:{3}", Regular, Honors, Letter, Limit);
+            }
+        }
     }
 }

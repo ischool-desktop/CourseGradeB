@@ -305,12 +305,6 @@
     <Compile Include="ClassExtendControls\Ribbon\HrtConductInputForm.Designer.cs">
       <DependentUpon>HrtConductInputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StuAdminExtendControls\Ribbon\SubjectConductAddForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StuAdminExtendControls\Ribbon\SubjectConductAddForm.Designer.cs">
-      <DependentUpon>SubjectConductAddForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="StuAdminExtendControls\Ribbon\SubjectConductSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,6 +368,7 @@
     <Compile Include="StudentExtendControls\Ribbon\SubjectScoreCalculate.Designer.cs">
       <DependentUpon>SubjectScoreCalculate.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubjectCompare.cs" />
     <Compile Include="TCInstruct.cs" />
     <Compile Include="TCInstructRecord.cs" />
     <Compile Include="Tool.cs" />
@@ -512,9 +507,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClassExtendControls\Ribbon\HrtConductInputForm.resx">
       <DependentUpon>HrtConductInputForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StuAdminExtendControls\Ribbon\SubjectConductAddForm.resx">
-      <DependentUpon>SubjectConductAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StuAdminExtendControls\Ribbon\SubjectConductSettingForm.resx">
       <DependentUpon>SubjectConductSettingForm.cs</DependentUpon>

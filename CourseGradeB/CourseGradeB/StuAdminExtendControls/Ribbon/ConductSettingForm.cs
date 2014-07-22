@@ -164,20 +164,29 @@ namespace CourseGradeB.StuAdminExtendControls
 
         private void dgv1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgv1.BeginEdit(true);
+            if (e.ColumnIndex == -1)
+                dgv1.EndEdit();
+            else
+                dgv1.BeginEdit(true);
         }
 
         private void dgv2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgv2.BeginEdit(true);
+            if (e.ColumnIndex == -1)
+                dgv2.EndEdit();
+            else
+                dgv2.BeginEdit(true);
         }
 
         private void dgv3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgv3.BeginEdit(true);
+            if (e.ColumnIndex == -1)
+                dgv3.EndEdit();
+            else
+                dgv3.BeginEdit(true);
         }
 
-        private void SelectTogether(DataGridView dgv,DataGridViewCellEventArgs e)
+        private void SelectTogether(DataGridView dgv, DataGridViewCellEventArgs e)
         {
             dgv.EndEdit();
             DataGridViewCell cell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];

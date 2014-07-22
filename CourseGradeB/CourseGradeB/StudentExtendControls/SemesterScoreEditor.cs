@@ -81,7 +81,7 @@ namespace CourseGradeB.StudentExtendControls
                 Save();
 
                 List<string> _ids = new List<string>() { _sid };
-                Tool.Instance.SetCumulateGPA(_ids, _ssr.SchoolYear, _ssr.Semester);
+                Tool.SetCumulateGPA(_ids, _ssr.SchoolYear, _ssr.Semester);
 
                 //record新資料for log
                 foreach (SubjectScore ss in _ssr.Subjects.Values)
@@ -94,7 +94,7 @@ namespace CourseGradeB.StudentExtendControls
                 StringBuilder sb = new StringBuilder();
                 StudentRecord student = K12.Data.Student.SelectByID(_sid);
                 sb.AppendLine("學年度:" + _ssr.SchoolYear + " 學期:" + _ssr.Semester);
-                sb.AppendLine(Tool.Instance.GetStudentInfo(student));
+                sb.AppendLine(Tool.GetStudentInfo(student));
 
                 foreach (string key in _new.Keys)
                 {
@@ -159,7 +159,12 @@ namespace CourseGradeB.StudentExtendControls
                     ss.Credit = decimal.Parse(credit);
                     ss.Domain = group;
                     ss.Score = decimal.Parse(score);
-                    ss.GPA = Tool.Instance.GetScoreGrade(ss.Score.Value, stype);
+                    //ss.GPA = Tool.Instance.GetScoreGrade(ss.Score.Value, stype);
+
+                    if (stype == Tool.SubjectType.Honor)
+                        ss.GPA = Tool.GPA.Eval(ss.Score.Value).Honors;
+                    else
+                        ss.GPA = Tool.GPA.Eval(ss.Score.Value).Regular;
                 }
             }
 
@@ -219,16 +224,27 @@ namespace CourseGradeB.StudentExtendControls
 
                 //檢查科目名稱
                 string subj_name = row.Cells[colSubjectName.Index].Value + "";
-                if (!subj_list.Contains(subj_name))
+
+                if (string.IsNullOrWhiteSpace(subj_name))
                 {
-                    subj_list.Add(subj_name);
-                    row.Cells[colSubjectName.Index].ErrorText = "";
+                    row.Cells[colSubjectName.Index].ErrorText = "科目名稱不可為空白";
+                    retVal = false;
                 }
                 else
                 {
-                    row.Cells[colSubjectName.Index].ErrorText = "科目名稱重複";
-                    retVal = false;
+                    if (!subj_list.Contains(subj_name))
+                    {
+                        subj_list.Add(subj_name);
+                        row.Cells[colSubjectName.Index].ErrorText = "";
+                    }
+                    else
+                    {
+                        row.Cells[colSubjectName.Index].ErrorText = "科目名稱重複";
+                        retVal = false;
+                    }
                 }
+
+                
 
                 //檢查科目type
                 string type = row.Cells[colSubjectType.Index].Value + "";

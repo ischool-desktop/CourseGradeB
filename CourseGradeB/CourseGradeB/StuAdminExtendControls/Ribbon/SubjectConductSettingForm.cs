@@ -20,6 +20,7 @@ namespace CourseGradeB.StuAdminExtendControls
         AccessHelper _A;
         ButtonItem _RunningItem;
         XmlDocument _doc;
+        List<string> _subjects;
 
         public SubjectConductSettingForm(ConductSetting setting)
         {
@@ -27,8 +28,10 @@ namespace CourseGradeB.StuAdminExtendControls
             _setting = setting;
             _doc = new XmlDocument();
             _doc.LoadXml(_setting.Conduct);
+            _subjects = new List<string>();
 
             _A = new AccessHelper();
+
             foreach (SubjectRecord s in _A.Select<SubjectRecord>())
             {
                 ButtonItem item = new ButtonItem();
@@ -36,6 +39,9 @@ namespace CourseGradeB.StuAdminExtendControls
                 item.Text = s.Name;
                 item.Click += new EventHandler(item_click);
                 itemPanle1.Items.Add(item);
+
+                if (!_subjects.Contains(s.Name))
+                    _subjects.Add(s.Name);
             }
         }
 
@@ -88,6 +94,16 @@ namespace CourseGradeB.StuAdminExtendControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            //刪除科目不存在的ConductTemplate
+            foreach (XmlNode node in _doc.SelectNodes("//Conduct[@Subject]"))
+            {
+                XmlElement elem = node as XmlElement;
+                string subject = elem.GetAttribute("Subject");
+
+                if(!_subjects.Contains(subject))
+                    _doc.DocumentElement.RemoveChild(node);
+            }
+
             //最後被編輯的item先將資料存到tag
             if (itemPanle1.SelectedItems.Count == 1)
                 itemPanle1.SelectedItems[0].Tag = new ButtonTag(dgv);
@@ -137,17 +153,20 @@ namespace CourseGradeB.StuAdminExtendControls
                             check_list.Add(key);
                         }
                     }
-                    _setting.Conduct = _doc.OuterXml;
-                    _setting.Save();
                 }
             }
 
+            _setting.Conduct = _doc.OuterXml;
+            _setting.Save();
             this.Close();
         }
 
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgv.BeginEdit(true);
+            if (e.ColumnIndex == -1)
+                dgv.EndEdit();
+            else
+                dgv.BeginEdit(true);
         }
     }
 

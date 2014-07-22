@@ -20,6 +20,16 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             InitializeComponent();
             _A = new AccessHelper();
 
+            Dictionary<int, List<Tool.Domain>> dic = Tool.DomainDic;
+            foreach (List<Tool.Domain> domains in dic.Values)
+            {
+                foreach (Tool.Domain domain in domains)
+                {
+                    if (!colGroup.Items.Contains(domain.Name))
+                        colGroup.Items.Add(domain.Name);
+                }
+            }
+
             ReLoad();
         }
 
@@ -27,11 +37,9 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         {
             List<SubjectRecord> list = _A.Select<SubjectRecord>();
 
-            list.Sort(delegate(SubjectRecord x, SubjectRecord y)
+            list.Sort(delegate(SubjectRecord x, SubjectRecord y) 
             {
-                string xx = x.Name.PadLeft(20, '0');
-                string yy = y.Name.PadLeft(20, '0');
-                return xx.CompareTo(yy);
+                return x.UID.CompareTo(y.UID);
             });
 
             foreach (SubjectRecord s in list)
@@ -63,6 +71,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 string name = row.Cells[colName.Index].Value + "";
                 string type = row.Cells[colType.Index].Value + "";
+                string group = row.Cells[colGroup.Index].Value + "";
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
@@ -80,6 +89,12 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                     {
                         existName.Add(name);
                     }
+                }
+
+                if (string.IsNullOrWhiteSpace(group))
+                {
+                    row.Cells[colGroup.Index].ErrorText = "群組不可為空白";
+                    pass = false;
                 }
 
                 if (string.IsNullOrWhiteSpace(type))
@@ -117,7 +132,10 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgv.BeginEdit(true);
+            if (e.ColumnIndex == -1)
+                dgv.EndEdit();
+            else
+                dgv.BeginEdit(true);
         }
     }
 }

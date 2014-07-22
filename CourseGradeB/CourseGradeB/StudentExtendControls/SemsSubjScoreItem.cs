@@ -121,7 +121,7 @@ namespace CourseGradeB.StudentExtendControls
             if (form.ShowDialog() == DialogResult.OK)
             {
                 StudentRecord student = K12.Data.Student.SelectByID(RunningID);
-                FISCA.LogAgent.ApplicationLog.Log("成績系統.學期成績", "新增學期成績", Tool.Instance.GetStudentInfo(student));
+                FISCA.LogAgent.ApplicationLog.Log("成績系統.學期成績", "新增學期成績", Tool.GetStudentInfo(student));
                 _bgWorker.RunWorkerAsync();
             }
         }
@@ -163,7 +163,7 @@ namespace CourseGradeB.StudentExtendControls
                 {
                     StudentRecord student = record.Student;
                     string str = "學年度:" + record.SchoolYear + " 學期:" + record.Semester;
-                    str += Tool.Instance.GetStudentInfo(record.Student);
+                    str += Tool.GetStudentInfo(record.Student);
                     str += GetSemesterScoreInfo(record);
                     FISCA.LogAgent.ApplicationLog.Log("成績系統.學期成績", "刪除學期成績", str);
 

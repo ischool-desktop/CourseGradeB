@@ -214,7 +214,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             }
 
             //更新累計GPA平均
-            Tool.Instance.SetCumulateGPA(_ids, _schoolYear, _semester);
+            Tool.SetCumulateGPA(_ids, _schoolYear, _semester);
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -238,7 +238,13 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             ss.Period = obj.Period;
             ss.Credit = obj.Credit;
             ss.Domain = obj.SubjectGroup;
-            ss.GPA = Tool.Instance.GetScoreGrade(score, obj.SubjectTypeEnum);
+            //ss.GPA = Tool.Instance.GetScoreGrade(score, obj.SubjectTypeEnum);
+
+            if (obj.SubjectTypeEnum == Tool.SubjectType.Honor)
+                ss.GPA = Tool.GPA.Eval(score).Honors;
+            else
+                ss.GPA = Tool.GPA.Eval(score).Regular;
+
             ss.Level = obj.CourseGradeYear;
         }
 
