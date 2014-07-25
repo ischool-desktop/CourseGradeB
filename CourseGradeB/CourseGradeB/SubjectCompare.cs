@@ -13,6 +13,7 @@ namespace CourseGradeB
 
         public SubjectCompare()
         {
+            //aaa
             AccessHelper a = new AccessHelper();
             List<SubjectRecord> list = a.Select<SubjectRecord>();
             list.Sort(delegate(SubjectRecord x, SubjectRecord y)
