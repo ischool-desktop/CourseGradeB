@@ -48,6 +48,7 @@ namespace CourseGradeB.StudentExtendControls
             }
 
             //新增科目下拉清單
+            colSubjectName.Items.Add(""); //空白預設項
             foreach (string name in _SubjectToTypeDic.Keys)
                 colSubjectName.Items.Add(name);
         }
@@ -69,7 +70,9 @@ namespace CourseGradeB.StudentExtendControls
 
                 string period = ss.Period == ss.Credit ? ss.Period + "" : ss.Period + "/" + ss.Credit;
 
-                row.CreateCells(dgv, subj, type, period, ss.Score);
+                string subj_name = colSubjectName.Items.Contains(subj) ? subj : "";
+
+                row.CreateCells(dgv, subj_name, type, period, ss.Score);
                 dgv.Rows.Add(row);
             }
         }

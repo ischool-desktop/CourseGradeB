@@ -7,7 +7,7 @@ using System.Text;
 namespace CourseGradeB.EduAdminExtendControls
 {
     [FISCA.UDT.TableName("ischool.subject.list")]
-    class SubjectRecord : ActiveRecord
+    public class SubjectRecord : ActiveRecord
     {
         [FISCA.UDT.Field(Field = "name")]
         public string Name { get; set; }

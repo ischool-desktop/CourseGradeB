@@ -103,7 +103,7 @@ namespace CourseGradeB
         /// <param name="ids"></param>
         /// <param name="schoolYear"></param>
         /// <param name="semester"></param>
-        public static void SetCumulateGPA(List<string> ids,int schoolYear, int semester)
+        public static void SetCumulateGPA(List<string> ids, int schoolYear, int semester)
         {
             //學期歷程
             Dictionary<string, string> sems_history = new Dictionary<string, string>();
@@ -203,47 +203,61 @@ namespace CourseGradeB
             public string Name;
             public decimal Hours;
             public int DisplayOrder;
+            public string ShortName;
         }
 
-        public static Dictionary<int, List<Domain>> DomainDic = new Dictionary<int, List<Domain>>()
+        public static Dictionary<int, List<Domain>> DomainDic
         {
+            get
+            {
+                return Tool.Instance.GetDoaminDic();
+            }
+        }
+
+        private Dictionary<int, List<Domain>> GetDoaminDic()
+        {
+            Dictionary<int, List<Domain>> dic = new Dictionary<int, List<Domain>>()
+            {
             {6,new List<Domain>()
             {
-                {new Domain{Name="Chinese",Hours=6,DisplayOrder=1}},
-                {new Domain{Name="Humanities",Hours=8,DisplayOrder=2}},
-                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3}},
-                {new Domain{Name="Science",Hours=4,DisplayOrder=4}},
-                {new Domain{Name="Chinese Social Studies",Hours=3,DisplayOrder=5}},
-                {new Domain{Name="Physical Education",Hours=0,DisplayOrder=6}},
-                {new Domain{Name="Humanity",Hours=8,DisplayOrder=7}},
-                {new Domain{Name="Art",Hours=2,DisplayOrder=8}},
-                {new Domain{Name="Music",Hours=2,DisplayOrder=9}},
-                {new Domain{Name="Computer",Hours=1,DisplayOrder=10}},
-                {new Domain{Name="Chinese Culture",Hours=1,DisplayOrder=11}}
+                {new Domain{Name="Chinese",Hours=6,DisplayOrder=1,ShortName="Chinese"}},
+                {new Domain{Name="Humanities",Hours=8,DisplayOrder=2,ShortName="Humanities"}},
+                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3,ShortName="Math"}},
+                {new Domain{Name="Science",Hours=4,DisplayOrder=4,ShortName="Science"}},
+                {new Domain{Name="Chinese Social Studies",Hours=3,DisplayOrder=5,ShortName="C.S.S"}},
+                {new Domain{Name="Physical Education",Hours=0,DisplayOrder=6,ShortName="P.E."}},
+                {new Domain{Name="Humanity",Hours=8,DisplayOrder=7,ShortName="Humanity"}},
+                {new Domain{Name="Art",Hours=2,DisplayOrder=8,ShortName="Art"}},
+                {new Domain{Name="Music",Hours=2,DisplayOrder=9,ShortName="Music"}},
+                {new Domain{Name="Computer",Hours=1,DisplayOrder=10,ShortName="Computer"}},
+                {new Domain{Name="Chinese Culture",Hours=1,DisplayOrder=11,ShortName="C.C."}}
             }},
             {8,new List<Domain>(){
-                {new Domain{Name="Chinese",Hours=5,DisplayOrder=1}},
-                {new Domain{Name="English",Hours=6,DisplayOrder=2}},
-                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3}},
-                {new Domain{Name="Science",Hours=5,DisplayOrder=4}},
-                {new Domain{Name="Chinese Social Studies",Hours=2,DisplayOrder=5}},
-                {new Domain{Name="Western Social Studies",Hours=2,DisplayOrder=6}},
-                {new Domain{Name="Computer",Hours=1,DisplayOrder=7}},
-                {new Domain{Name="Music",Hours=1,DisplayOrder=8}},
-                {new Domain{Name="Physical Education",Hours=0,DisplayOrder=9}},
-                {new Domain{Name="Scouting",Hours=1,DisplayOrder=10}},
-                {new Domain{Name="Art",Hours=1,DisplayOrder=11}}
+                {new Domain{Name="Chinese",Hours=5,DisplayOrder=1,ShortName="Chinese"}},
+                {new Domain{Name="English",Hours=6,DisplayOrder=2,ShortName="English"}},
+                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3,ShortName="Math"}},
+                {new Domain{Name="Science",Hours=5,DisplayOrder=4,ShortName="Science"}},
+                {new Domain{Name="Chinese Social Studies",Hours=2,DisplayOrder=5,ShortName="C.S.S"}},
+                {new Domain{Name="Western Social Studies",Hours=2,DisplayOrder=6,ShortName="WSS"}},
+                {new Domain{Name="Computer",Hours=1,DisplayOrder=7,ShortName="Computer"}},
+                {new Domain{Name="Music",Hours=1,DisplayOrder=8,ShortName="Music"}},
+                {new Domain{Name="Physical Education",Hours=0,DisplayOrder=9,ShortName="P.E."}},
+                {new Domain{Name="Scouting",Hours=1,DisplayOrder=10,ShortName="Scouting"}},
+                {new Domain{Name="Art",Hours=1,DisplayOrder=11,ShortName="Art"}}
             }},
             {12,new List<Domain>(){
-                {new Domain{Name="Chinese",Hours=5,DisplayOrder=1}},
-                {new Domain{Name="English",Hours=6,DisplayOrder=2}},
-                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3}},
-                {new Domain{Name="Science",Hours=5,DisplayOrder=4}},
-                {new Domain{Name="Social Studies",Hours=4,DisplayOrder=5}},
-                {new Domain{Name="Physical Education",Hours=2,DisplayOrder=6}},
-                {new Domain{Name="Elective",Hours=4,DisplayOrder=7}}
+                {new Domain{Name="Chinese",Hours=5,DisplayOrder=1,ShortName="Chinese"}},
+                {new Domain{Name="English",Hours=6,DisplayOrder=2,ShortName="English"}},
+                {new Domain{Name="Mathematics",Hours=5,DisplayOrder=3,ShortName="Math"}},
+                {new Domain{Name="Science",Hours=5,DisplayOrder=4,ShortName="Science"}},
+                {new Domain{Name="Social Studies",Hours=4,DisplayOrder=5,ShortName="S.S."}},
+                {new Domain{Name="Physical Education",Hours=2,DisplayOrder=6,ShortName="P.E."}},
+                {new Domain{Name="Elective",Hours=4,DisplayOrder=7,ShortName="Elective"}}
             }}
         };
+
+            return dic;
+        }
 
         public class GPA
         {
