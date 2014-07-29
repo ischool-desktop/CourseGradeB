@@ -112,8 +112,8 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                 FillStudentsToDataGridView();
 
                 cboExamList.Items.Clear();
-                cboExamList.Items.Add(new ExamComboBoxItem("Middle Term", 1));
-                cboExamList.Items.Add(new ExamComboBoxItem("Final Term", 2));
+                cboExamList.Items.Add(new ExamComboBoxItem("Midterm", 1));
+                cboExamList.Items.Add(new ExamComboBoxItem("Final", 2));
 
                 cboExamList.SelectedIndex = 0;
             }
@@ -131,7 +131,7 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                 }
 
                 if (!exam_ids.Contains(1))
-                    _U.Execute("insert into exam (id,exam_name,display_order) values (1,'Middle',0)");
+                    _U.Execute("insert into exam (id,exam_name,display_order) values (1,'Midterm',0)");
                 if (!exam_ids.Contains(2))
                     _U.Execute("insert into exam (id,exam_name,display_order) values (2,'Final',1)");
             }

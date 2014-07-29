@@ -38,7 +38,7 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
             _studentList = new List<K12.Data.StudentRecord>();
             _dirtyCellList = new List<DataGridViewCell>();
             _gradeYear = -1;
-            _middle = new ComboBoxItem("Middle", 1);
+            _middle = new ComboBoxItem("Midterm", 1);
             _final = new ComboBoxItem("Final", 2);
             _RunningComboBoxItem = new ComboBoxItem("", -1);
             _RunningItem = new ButtonItem();

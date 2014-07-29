@@ -14,6 +14,8 @@ using System.Data;
 using CourseGradeB.CourseExtendControls;
 using CourseGradeB.EduAdminExtendControls;
 using CourseGradeB.StudentExtendControls;
+using FISCA.UDT;
+using CourseGradeB.StuAdminExtendControls;
 
 
 namespace CourseGradeB
@@ -25,6 +27,13 @@ namespace CourseGradeB
         {
             // 課程加入教師檢視
             Course.Instance.AddView(new TeacherCategoryView());
+
+            //Sync UDT Table
+            AccessHelper a = new AccessHelper();
+            a.Select<ConductRecord>("uid is null");
+            a.Select<CourseExtendRecord>("uid is null");
+            a.Select<ConductSetting>("uid is null");
+            a.Select<SubjectRecord>("uid is null");
 
             #region 權限註冊
             // 學生
