@@ -39,6 +39,7 @@
             // 
             // itemPanle1
             // 
+            this.itemPanle1.AutoScroll = true;
             this.itemPanle1.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
@@ -50,7 +51,7 @@
             this.itemPanle1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.itemPanle1.Location = new System.Drawing.Point(13, 13);
             this.itemPanle1.Name = "itemPanle1";
-            this.itemPanle1.Size = new System.Drawing.Size(173, 359);
+            this.itemPanle1.Size = new System.Drawing.Size(253, 377);
             this.itemPanle1.TabIndex = 0;
             this.itemPanle1.Text = "itemPanel1";
             // 
@@ -59,7 +60,7 @@
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.BackColor = System.Drawing.Color.Transparent;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(750, 349);
+            this.btnSave.Location = new System.Drawing.Point(896, 367);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -82,10 +83,10 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgv.Location = new System.Drawing.Point(193, 13);
+            this.dgv.Location = new System.Drawing.Point(272, 13);
             this.dgv.Name = "dgv";
             this.dgv.RowTemplate.Height = 24;
-            this.dgv.Size = new System.Drawing.Size(632, 330);
+            this.dgv.Size = new System.Drawing.Size(699, 348);
             this.dgv.TabIndex = 4;
             this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
             // 
@@ -104,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 377);
+            this.ClientSize = new System.Drawing.Size(983, 402);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.itemPanle1);
