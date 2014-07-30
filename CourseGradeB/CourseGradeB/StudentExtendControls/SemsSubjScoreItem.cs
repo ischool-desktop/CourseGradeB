@@ -117,6 +117,7 @@ namespace CourseGradeB.StudentExtendControls
 
         private void buttonX1_Click(object sender, EventArgs e)
         {
+            _records = K12.Data.SemesterScore.SelectByStudentID(RunningID);
             SemesterScoreAddForm form = new SemesterScoreAddForm(_records, RunningID);
             if (form.ShowDialog() == DialogResult.OK)
             {

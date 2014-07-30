@@ -69,7 +69,7 @@ namespace CourseGradeB.StuAdminExtendControls
                 //item.Tag == ""代表此item未被編輯過,做初始設定
                 if (item.Tag + "" == "")
                 {
-                    foreach (XmlElement conduct in _doc.SelectNodes("//Conduct[@Subject='" + subject + "']"))
+                    foreach (XmlElement conduct in _doc.SelectNodes("//Conduct[@Subject=\"" + subject + "\"]"))
                     {
                         string group = conduct.GetAttribute("Group");
 
@@ -116,7 +116,7 @@ namespace CourseGradeB.StuAdminExtendControls
                     string subject = buttonItem.Text;
 
                     //刪除該subject的節點
-                    foreach (XmlNode node in _doc.SelectNodes("//Conduct[@Subject='" + subject + "']"))
+                    foreach (XmlNode node in _doc.SelectNodes("//Conduct[@Subject=\"" + subject + "\"]"))
                         _doc.DocumentElement.RemoveChild(node);
 
                     ButtonTag tag = buttonItem.Tag as ButtonTag;
@@ -131,7 +131,7 @@ namespace CourseGradeB.StuAdminExtendControls
                         string title = row.Cells[colTitle.Index].Value + "";
                         string key = group + "_" + title;
 
-                        XmlElement newElem = _doc.SelectSingleNode("//Conduct[@Group='" + group + "'][@Subject='" + subject + "']") as XmlElement;
+                        XmlElement newElem = _doc.SelectSingleNode("//Conduct[@Group=\"" + group + "\"][@Subject=\"" + subject + "\"]") as XmlElement;
                         if (newElem == null)
                         {
                             newElem = _doc.CreateElement("Conduct");
