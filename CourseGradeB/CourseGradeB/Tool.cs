@@ -32,7 +32,7 @@ namespace CourseGradeB
                 if (_instance == null)
                     _instance = new Tool();
 
-                _instance.Refresh();
+                //_instance.Refresh();
                 return _instance;
             }
         }
@@ -88,6 +88,11 @@ namespace CourseGradeB
             Regular = 1
         }
 
+        //public static string GetKey(params string[] keys)
+        //{
+        //    return null;
+        //}
+
         public static string GetStudentInfo(StudentRecord student)
         {
             ClassRecord cr = student.Class;
@@ -120,7 +125,6 @@ namespace CourseGradeB
                         else
                             sems_history.Add(key, item.GradeYear + "下");
                     }
-
                 }
             }
 
