@@ -120,7 +120,7 @@ namespace CourseGradeB.StuAdminExtendControls
                 string key = group + "_" + title;
 
                 //搜尋具有common屬性,且group名稱符合的node
-                XmlElement elem = doc.SelectSingleNode("//Conduct[@Group=\"" + group + "\"][@Common]") as XmlElement;
+                XmlElement elem = doc.SelectSingleNode("//Conduct[@Group=" + Tool.XPathLiteral(group) + "][@Common]") as XmlElement;
 
                 //node不存在代表需新增並append
                 if (elem == null)

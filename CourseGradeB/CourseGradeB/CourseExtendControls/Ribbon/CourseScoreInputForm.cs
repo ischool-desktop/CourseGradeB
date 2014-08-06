@@ -101,11 +101,6 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                 MessageBox.Show("開課年級不正確,無法輸入成績...");
                 this.Close();
             }
-            else if (course_grade_year == 1 || course_grade_year == 2)
-            {
-                MessageBox.Show("1或2年級的課程無法輸入成績...");
-                this.Close();
-            }
             else
             {
                 //取得修課學生
@@ -117,6 +112,13 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
 
                 cboExamList.SelectedIndex = 0;
             }
+
+            //else if (course_grade_year == 1 || course_grade_year == 2)
+            //{
+            //    MessageBox.Show("1或2年級的課程無法輸入成績...");
+            //    this.Close();
+            //}
+            
         }
 
         private void CheckExamIDExist()

@@ -272,7 +272,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                     string title = str.Split('_')[1];
                     string grade = "";
 
-                    XmlElement elem = doc.SelectSingleNode("//Conduct[@Group=\"" + group + "\"]/Item[@Title=\"" + title + "\"]") as XmlElement;
+                    XmlElement elem = doc.SelectSingleNode("//Conduct[@Group=" + Tool.XPathLiteral(group) + "]/Item[@Title=" + Tool.XPathLiteral(title) + "]") as XmlElement;
 
                     if (elem != null)
                         grade = elem.GetAttribute("Grade");
@@ -314,7 +314,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                         logStr.Add("項目(" + group + ")" + title + " Grade從『" + row.Cells[colGrade.Index].Tag + "』改為『" + grade + "』");
                     }
 
-                    XmlElement elem = root.SelectSingleNode("//Conduct[@Group=\"" + group + "\"]") as XmlElement;
+                    XmlElement elem = root.SelectSingleNode("//Conduct[@Group=" + Tool.XPathLiteral(group) + "]") as XmlElement;
                     if (elem == null)
                     {
                         elem = root.OwnerDocument.CreateElement("Conduct");

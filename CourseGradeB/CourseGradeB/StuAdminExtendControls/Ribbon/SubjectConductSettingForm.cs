@@ -69,7 +69,7 @@ namespace CourseGradeB.StuAdminExtendControls
                 //item.Tag == ""代表此item未被編輯過,做初始設定
                 if (item.Tag + "" == "")
                 {
-                    foreach (XmlElement conduct in _doc.SelectNodes("//Conduct[@Subject=\"" + subject + "\"]"))
+                    foreach (XmlElement conduct in _doc.SelectNodes("//Conduct[@Subject=" + Tool.XPathLiteral(subject) + "]"))
                     {
                         string group = conduct.GetAttribute("Group");
 
@@ -100,7 +100,7 @@ namespace CourseGradeB.StuAdminExtendControls
                 XmlElement elem = node as XmlElement;
                 string subject = elem.GetAttribute("Subject");
 
-                if(!_subjects.Contains(subject))
+                if (!_subjects.Contains(subject))
                     _doc.DocumentElement.RemoveChild(node);
             }
 
@@ -116,7 +116,7 @@ namespace CourseGradeB.StuAdminExtendControls
                     string subject = buttonItem.Text;
 
                     //刪除該subject的節點
-                    foreach (XmlNode node in _doc.SelectNodes("//Conduct[@Subject=\"" + subject + "\"]"))
+                    foreach (XmlNode node in _doc.SelectNodes("//Conduct[@Subject=" + Tool.XPathLiteral(subject) + "]"))
                         _doc.DocumentElement.RemoveChild(node);
 
                     ButtonTag tag = buttonItem.Tag as ButtonTag;
@@ -131,7 +131,7 @@ namespace CourseGradeB.StuAdminExtendControls
                         string title = row.Cells[colTitle.Index].Value + "";
                         string key = group + "_" + title;
 
-                        XmlElement newElem = _doc.SelectSingleNode("//Conduct[@Group=\"" + group + "\"][@Subject=\"" + subject + "\"]") as XmlElement;
+                        XmlElement newElem = _doc.SelectSingleNode("//Conduct[@Group=" + Tool.XPathLiteral(group) + "][@Subject=" + Tool.XPathLiteral(subject) + "]") as XmlElement;
                         if (newElem == null)
                         {
                             newElem = _doc.CreateElement("Conduct");
@@ -183,7 +183,7 @@ namespace CourseGradeB.StuAdminExtendControls
         public ButtonTag(DataGridView dgv)
         {
             rowList = new List<DataGridViewRow>();
-            foreach(DataGridViewRow row in dgv.Rows)
+            foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (row.IsNewRow) continue;
 

@@ -103,6 +103,44 @@ namespace CourseGradeB
         }
 
         /// <summary>
+        /// 計算指定學生在該學年度學期的平均分數
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="schoolYear"></param>
+        /// <param name="semester"></param>
+        public static void SetAverage(List<string> ids, int schoolYear, int semester)
+        {
+            List<SemesterScoreRecord> list = K12.Data.SemesterScore.SelectBySchoolYearAndSemester(ids, schoolYear, semester);
+
+            foreach (SemesterScoreRecord ssr in list)
+            {
+                decimal totalScore = 0;
+                decimal totalGPA = 0;
+                decimal count = 0;
+                foreach (SubjectScore ss in ssr.Subjects.Values)
+                {
+                    totalScore += ss.Score.Value * ss.Credit.Value;
+                    totalGPA += ss.GPA.Value * ss.Credit.Value;
+                    count += ss.Credit.Value;
+                }
+
+                if (count > 0)
+                {
+                    ssr.AvgScore = Math.Round(totalScore / count, 2, MidpointRounding.AwayFromZero);
+                    ssr.AvgGPA = Math.Round(totalGPA / count, 2, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    ssr.AvgScore = null;
+                    ssr.AvgGPA = null;
+                }
+            }
+
+            if (list.Count > 0)
+                K12.Data.SemesterScore.Update(list);
+        }
+
+        /// <summary>
         /// 計算指定學生在該學年度學期的累計GPA
         /// </summary>
         /// <param name="ids"></param>
@@ -314,6 +352,55 @@ namespace CourseGradeB
             {
                 return string.Format("Regular:{0}, Honors:{1}, Letter:{2}, Limit:{3}", Regular, Honors, Letter, Limit);
             }
+        }
+
+        public static string XPathLiteral(string value)
+        {
+            // if the value contains only single or double quotes, construct
+            // an XPath literal
+            if (!value.Contains("\""))
+            {
+                return "\"" + value + "\"";
+            }
+            if (!value.Contains("'"))
+            {
+                return "'" + value + "'";
+            }
+
+            // if the value contains both single and double quotes, construct an
+            // expression that concatenates all non-double-quote substrings with
+            // the quotes, e.g.:
+            //
+            //    concat("foo", '"', "bar")
+            StringBuilder sb = new StringBuilder();
+            sb.Append("concat(");
+            string[] substrings = value.Split('\"');
+            for (int i = 0; i < substrings.Length; i++)
+            {
+                bool needComma = (i > 0);
+                if (substrings[i] != "")
+                {
+                    if (i > 0)
+                    {
+                        sb.Append(", ");
+                    }
+                    sb.Append("\"");
+                    sb.Append(substrings[i]);
+                    sb.Append("\"");
+                    needComma = true;
+                }
+                if (i < substrings.Length - 1)
+                {
+                    if (needComma)
+                    {
+                        sb.Append(", ");
+                    }
+                    sb.Append("'\"'");
+                }
+
+            }
+            sb.Append(")");
+            return sb.ToString();
         }
     }
 }
