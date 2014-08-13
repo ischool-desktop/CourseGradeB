@@ -66,6 +66,7 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SetHoursOpeningForm", "開放時間管理"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear", "批次計算科目成績"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SemsHistoryMaker", "產生學期歷程"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm", "評量輸入狀況檢視"));
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.ExamTemplateManager", "評分樣板設定"));
 
             //學務作業
@@ -142,6 +143,11 @@ namespace CourseGradeB
                             #endregion
 
                             JHSchool.Data.JHCourse.Delete(record);
+
+                            //刪除CourseExtendRecord
+                            List<CourseExtendRecord> list = a.Select<CourseExtendRecord>("ref_course_id=" + record.ID);
+                            if (list.Count > 0)
+                                a.DeletedValues(list);
 
                             // 加這主要是重新整理
                             Course.Instance.SyncDataBackground(record.ID);
@@ -286,6 +292,14 @@ namespace CourseGradeB
             eduitem2["成績作業"]["產生學期歷程"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.SemsHistoryMaker().ShowDialog();
+            };
+
+            //評量輸入狀況檢視
+            eduitem2["成績作業"]["評量輸入狀況檢視"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm"].Executable;
+
+            eduitem2["成績作業"]["評量輸入狀況檢視"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm().ShowDialog();
             };
 
             RibbonBarItem eduitem3 = EduAdmin.Instance.RibbonBarItems["基本設定"];

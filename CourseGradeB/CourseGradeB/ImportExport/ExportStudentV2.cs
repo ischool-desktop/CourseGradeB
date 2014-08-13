@@ -614,7 +614,7 @@ namespace CourseGradeB.ImportExport
                         }
                     }
                 }
-                report.Save(path, FileFormatType.Excel2003);
+                report.Save(path, SaveFormat.Excel97To2003);
                 #endregion
                 SmartSchool.Customization.PlugIn.Global.SetStatusBarMessage(_Title + "完成。");
                 if (overLimit)

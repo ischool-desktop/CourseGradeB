@@ -211,6 +211,9 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
             }
             #endregion
 
+            // 加這主要是重新整理
+            Course.Instance.SyncDataBackground(classNewCourse.Values);
+
             e.Result = string.Empty;
 
             #endregion
@@ -354,6 +357,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
                     txtPeriodCredit.Text.Trim(),
                     cboRequired.Text });
             }
+
             this.DialogResult = DialogResult.OK;
         }
 

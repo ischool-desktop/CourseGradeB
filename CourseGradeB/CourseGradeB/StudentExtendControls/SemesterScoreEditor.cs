@@ -17,8 +17,7 @@ namespace CourseGradeB.StudentExtendControls
     {
         AccessHelper _A = new AccessHelper();
         SemesterScoreRecord _ssr;
-        Dictionary<string, string> _SubjectToTypeDic = new Dictionary<string, string>();
-        Dictionary<string, string> _SubjectToGroupDic = new Dictionary<string, string>();
+        Dictionary<string, SubjectRecord> _SubjectDic = new Dictionary<string, SubjectRecord>();
         Dictionary<string, string> _old = new Dictionary<string, string>();
         Dictionary<string, string> _new = new Dictionary<string, string>();
         string _sid;
@@ -35,22 +34,37 @@ namespace CourseGradeB.StudentExtendControls
                 _old.Add(ss.Subject + "_節數", ss.Period + "");
                 _old.Add(ss.Subject + "_權數", ss.Credit + "");
                 _old.Add(ss.Subject + "_成績", ss.Score + "");
+                _old.Add(ss.Subject + "_類別", ss.Type + "");
+                _old.Add(ss.Subject + "_群組", ss.Domain + "");
+                _old.Add(ss.Subject + "_Level", ss.Level + "");
             }
 
             //科目對照
             foreach (SubjectRecord r in _A.Select<SubjectRecord>())
             {
-                if (!_SubjectToTypeDic.ContainsKey(r.Name))
-                    _SubjectToTypeDic.Add(r.Name, r.Type);
-
-                if (!_SubjectToGroupDic.ContainsKey(r.Name))
-                    _SubjectToGroupDic.Add(r.Name, r.Group);
+                if (!_SubjectDic.ContainsKey(r.Name))
+                    _SubjectDic.Add(r.Name, r);
             }
 
             //新增科目下拉清單
-            colSubjectName.Items.Add(""); //空白預設項
-            foreach (string name in _SubjectToTypeDic.Keys)
+            //colSubjectName.Items.Add(""); //空白預設項
+            foreach (string name in _SubjectDic.Keys)
                 colSubjectName.Items.Add(name);
+
+            //Type
+            colSubjectType.Items.Add("Regular");
+            colSubjectType.Items.Add("Honor");
+
+            //Domain
+            Dictionary<int, List<Tool.Domain>> domains = Tool.DomainDic;
+            foreach (int grade in domains.Keys)
+            {
+                foreach (Tool.Domain domain in domains[grade])
+                {
+                    if (!colDomain.Items.Contains(domain.Name))
+                        colDomain.Items.Add(domain.Name);
+                }
+            }
         }
 
         private void SemesterScoreEditor_Load(object sender, EventArgs e)
@@ -66,13 +80,19 @@ namespace CourseGradeB.StudentExtendControls
                 SubjectScore ss = _ssr.Subjects[subj];
                 DataGridViewRow row = new DataGridViewRow();
 
-                string type = _SubjectToTypeDic.ContainsKey(subj) ? _SubjectToTypeDic[subj] : "";
+                string type = ss.Type;
 
                 string period = ss.Period == ss.Credit ? ss.Period + "" : ss.Period + "/" + ss.Credit;
 
-                string subj_name = colSubjectName.Items.Contains(subj) ? subj : "";
+                string subj_name = subj;
 
-                row.CreateCells(dgv, subj_name, type, period, ss.Score);
+                if (!colSubjectName.Items.Contains(subj_name))
+                    colSubjectName.Items.Add(subj_name);
+
+                if (!colDomain.Items.Contains(ss.Domain))
+                    colDomain.Items.Add(ss.Domain);
+
+                row.CreateCells(dgv, subj_name, type, ss.Domain, period, ss.Score, ss.Level);
                 dgv.Rows.Add(row);
             }
         }
@@ -92,6 +112,9 @@ namespace CourseGradeB.StudentExtendControls
                     _new.Add(ss.Subject + "_節數", ss.Period + "");
                     _new.Add(ss.Subject + "_權數", ss.Credit + "");
                     _new.Add(ss.Subject + "_成績", ss.Score + "");
+                    _new.Add(ss.Subject + "_類別", ss.Type + "");
+                    _new.Add(ss.Subject + "_群組", ss.Domain + "");
+                    _new.Add(ss.Subject + "_Level", ss.Level + "");
                 }
 
                 StringBuilder sb = new StringBuilder();
@@ -151,7 +174,14 @@ namespace CourseGradeB.StudentExtendControls
 
                 string score = row.Cells[colScore.Index].Value + "";
 
-                string group = _SubjectToGroupDic.ContainsKey(name) ? _SubjectToGroupDic[name] : "";
+                //string group = _SubjectDic.ContainsKey(name) ? _SubjectDic[name].Group : row.Cells[colDomain.Index].Value + "";
+                string domain = row.Cells[colDomain.Index].Value + "";
+
+                int? level = null;
+                int i = 0;
+                int.TryParse(row.Cells[colLevel.Index].Value + "", out i);
+                if (i > 0)
+                    level = i;
 
                 if (!_ssr.Subjects.ContainsKey(name))
                 {
@@ -160,9 +190,11 @@ namespace CourseGradeB.StudentExtendControls
                     ss.Subject = name;
                     ss.Period = decimal.Parse(period);
                     ss.Credit = decimal.Parse(credit);
-                    ss.Domain = group;
+                    ss.Domain = domain;
+                    ss.Level = level;
+
                     ss.Score = decimal.Parse(score);
-                    //ss.GPA = Tool.Instance.GetScoreGrade(ss.Score.Value, stype);
+                    ss.Type = type;
 
                     if (stype == Tool.SubjectType.Honor)
                         ss.GPA = Tool.GPA.Eval(ss.Score.Value).Honors;
@@ -212,7 +244,12 @@ namespace CourseGradeB.StudentExtendControls
             if (e.ColumnIndex == colSubjectName.Index)
             {
                 string subj_name = row.Cells[colSubjectName.Index].Value + "";
-                row.Cells[colSubjectType.Index].Value = _SubjectToTypeDic.ContainsKey(subj_name) ? _SubjectToTypeDic[subj_name] : "";
+
+                if (string.IsNullOrWhiteSpace(row.Cells[colSubjectType.Index].Value + ""))
+                    row.Cells[colSubjectType.Index].Value = _SubjectDic.ContainsKey(subj_name) ? _SubjectDic[subj_name].Type : string.Empty;
+
+                if (string.IsNullOrWhiteSpace(row.Cells[colDomain.Index].Value + ""))
+                    row.Cells[colDomain.Index].Value = _SubjectDic.ContainsKey(subj_name) ? _SubjectDic[subj_name].Group : string.Empty;
             }
         }
 
@@ -247,19 +284,26 @@ namespace CourseGradeB.StudentExtendControls
                     }
                 }
 
-                
-
                 //檢查科目type
                 string type = row.Cells[colSubjectType.Index].Value + "";
-                if (type == "Honor" || type == "Regular")
-                {
-                    row.Cells[colSubjectType.Index].ErrorText = "";
-                }
-                else
+                if (string.IsNullOrWhiteSpace(type))
                 {
                     row.Cells[colSubjectType.Index].ErrorText = "科目類別不可為空白";
                     retVal = false;
                 }
+                else
+                {
+                    if (type == "Honor" || type == "Regular")
+                    {
+                        row.Cells[colSubjectType.Index].ErrorText = "";
+                    }
+                    else
+                    {
+                        row.Cells[colSubjectType.Index].ErrorText = "科目類別只能是Reuglar或Honor";
+                        retVal = false;
+                    }
+                }
+                
 
                 //檢查權數
                 string pc = row.Cells[colCredit.Index].Value + "";
@@ -294,7 +338,7 @@ namespace CourseGradeB.StudentExtendControls
                 if (decimal.TryParse(score, out d))
                 {
                     row.Cells[colScore.Index].ErrorText = "";
-                    if(d < 0 || d > 100)
+                    if (d < 0 || d > 100)
                     {
                         row.Cells[colScore.Index].ErrorText = "成績範圍需在0~100之間";
                         retVal = false;
@@ -302,9 +346,58 @@ namespace CourseGradeB.StudentExtendControls
                 }
                 else
                 {
-                    row.Cells[colScore.Index].ErrorText = "成績應該為數字";
+                    row.Cells[colScore.Index].ErrorText = "成績必須是數字";
                     retVal = false;
                 }
+
+                //檢查Level
+                string level = row.Cells[colLevel.Index].Value + "";
+                if (!string.IsNullOrWhiteSpace(level))
+                {
+                    int i = 0;
+                    if (int.TryParse(level, out i))
+                    {
+                        if (i >= 1 && i <= 12)
+                        {
+                            row.Cells[colLevel.Index].ErrorText = "";
+                        }
+                        else
+                        {
+                            row.Cells[colLevel.Index].ErrorText = "Level只能為1~12間的整數";
+                            retVal = false;
+                        }
+                    }
+                    else
+                    {
+                        row.Cells[colLevel.Index].ErrorText = "Level必須是數字";
+                        retVal = false;
+                    }
+                }
+
+                //檢查domain
+                string domain = row.Cells[colDomain.Index].Value + "";
+                if (string.IsNullOrWhiteSpace(domain))
+                {
+                    row.Cells[colDomain.Index].ErrorText = "群組不可為空白";
+                    retVal = false;
+                }
+                else
+                {
+                    row.Cells[colDomain.Index].ErrorText = "";
+                }
+
+                row.ErrorText = "";
+                List<string> errors = new List<string>();
+                if (!string.IsNullOrWhiteSpace(row.Cells[colSubjectName.Index].ErrorText))
+                    errors.Add(row.Cells[colSubjectName.Index].ErrorText);
+
+                if (!string.IsNullOrWhiteSpace(row.Cells[colSubjectType.Index].ErrorText))
+                    errors.Add(row.Cells[colSubjectType.Index].ErrorText);
+
+                if (!string.IsNullOrWhiteSpace(row.Cells[colDomain.Index].ErrorText))
+                    errors.Add(row.Cells[colDomain.Index].ErrorText);
+
+                row.ErrorText = string.Join(",", errors);
             }
             return retVal;
         }

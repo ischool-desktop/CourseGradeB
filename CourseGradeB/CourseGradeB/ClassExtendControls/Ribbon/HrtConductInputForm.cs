@@ -104,6 +104,11 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
             lblSave.Visible = false;
             txtComment.Text = "";
 
+            if (_gradeYear <= 6 && cboTerm.Text == "Final")
+                intInput.Enabled = true;
+            else
+                intInput.Enabled = false;
+
             GetConductRecord();
             FillItemPanel();
         }
@@ -263,7 +268,21 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                 if (!string.IsNullOrWhiteSpace(record.Conduct))
                     doc.LoadXml(record.Conduct);
 
-                Console.Write(doc.OuterXml);
+                //Console.Write(doc.OuterXml);
+
+                //讀取缺席天數
+                intInput.Value = 0;
+                if (intInput.Enabled)
+                {
+                    XmlElement absence = doc.SelectSingleNode("//Conducts/Absence") as XmlElement;
+                    if(absence != null)
+                    {
+                        int i = 0;
+                        int.TryParse(absence.InnerText, out i);
+                        intInput.Value = i;
+                    }
+                }
+                intInput.Tag = intInput.Value;
 
                 //巡迴所有需要呈現的conductItem
                 foreach (string str in _conductTemplate)
@@ -329,6 +348,18 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                     elem.AppendChild(item);
                 }
 
+                //出缺席節點
+                if(intInput.Enabled)
+                {
+                    XmlElement absence = root.OwnerDocument.CreateElement("Absence");
+                    absence.InnerText = intInput.Value + "";
+
+                    root.AppendChild(absence);
+
+                    if(intInput.Tag + "" != intInput.Value + "")
+                        logStr.Add("缺席天數由『" + intInput.Tag + "』" + "改為『" + intInput.Value + "』");
+                }
+                
                 record.Conduct = root.OuterXml;
                 if (txtComment.Tag + "" != txtComment.Text)
                     logStr.Add("班導師評語由『" + txtComment.Tag + "』" + "改為『" + txtComment.Text + "』");
@@ -396,7 +427,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                 if (_dirtyCellList.Contains(cell)) _dirtyCellList.Remove(cell);
             }
 
-            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text);
+            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
         }
 
         private class ComboBoxItem
@@ -428,13 +459,18 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
 
         private void txtComment_Leave(object sender, EventArgs e)
         {
-            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text);
+            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
         }
 
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == colGrade.Index)
                 dgv.BeginEdit(true);
+        }
+
+        private void intInput_Leave(object sender, EventArgs e)
+        {
+            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
         }
     }
 }

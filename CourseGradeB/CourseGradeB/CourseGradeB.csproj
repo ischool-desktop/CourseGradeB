@@ -35,9 +35,8 @@
       <HintPath>Library\Aspose.BarCode.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Aspose.Cells, Version=4.3.0.0, Culture=neutral, PublicKeyToken=9a40d5a4b59e5256, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Library\Aspose.Cells.dll</HintPath>
+    <Reference Include="Aspose.Cells_201402">
+      <HintPath>Library\Aspose.Cells_201402.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Aspose.Words, Version=4.4.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
@@ -237,6 +236,12 @@
     <Compile Include="Domain.cs" />
     <Compile Include="EduAdminExtendControls\ExamTemplateRecord.cs" />
     <Compile Include="EduAdminExtendControls\ExamTemplateRecordItem.cs" />
+    <Compile Include="EduAdminExtendControls\Ribbon\CourseScoreStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\CourseScoreStatusForm.Designer.cs">
+      <DependentUpon>CourseScoreStatusForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EduAdminExtendControls\Ribbon\ExamTemplateAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,7 +382,9 @@
     <Content Include="Library\Aspose.BarCode.dll" />
     <Content Include="Library\Aspose.BarCode.xml" />
     <Content Include="Library\Aspose.Cells.dll" />
-    <Content Include="Library\Aspose.Cells.xml" />
+    <Content Include="Library\Aspose.Cells.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Library\Aspose.Words.dll" />
     <Content Include="Library\Aspose.Words.xml" />
     <Content Include="Library\Campus.Configuration.dll" />
@@ -475,6 +482,9 @@
     <EmbeddedResource Include="CourseExtendControls\TeacherCategoryView.resx" />
     <EmbeddedResource Include="ClassExtendControls\Ribbon\CreateCoursesRelated\CreateClassCourseForm.resx">
       <DependentUpon>CreateClassCourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\CourseScoreStatusForm.resx">
+      <DependentUpon>CourseScoreStatusForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\ExamTemplateAddForm.resx">
       <DependentUpon>ExamTemplateAddForm.cs</DependentUpon>

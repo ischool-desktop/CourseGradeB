@@ -109,7 +109,7 @@ namespace CourseGradeB.Calculation
 
             try
             {
-                book.Save(sd.FileName, FileFormatType.Excel2003);
+                book.Save(sd.FileName, SaveFormat.Excel97To2003);
 
                 if (MsgBox.Show("匯出完成，是否立刻開啟？", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {

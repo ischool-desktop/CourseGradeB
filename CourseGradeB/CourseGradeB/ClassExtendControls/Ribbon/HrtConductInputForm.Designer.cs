@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.itemPanel1 = new DevComponents.DotNetBar.ItemPanel();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.intInput = new DevComponents.Editors.IntegerInput();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.colGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +44,7 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.cboTerm = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.groupPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.intInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +71,8 @@
             this.groupPanel1.BackColor = System.Drawing.Color.Transparent;
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel1.Controls.Add(this.intInput);
+            this.groupPanel1.Controls.Add(this.labelX3);
             this.groupPanel1.Controls.Add(this.txtComment);
             this.groupPanel1.Controls.Add(this.dgv);
             this.groupPanel1.Controls.Add(this.lblSave);
@@ -109,12 +114,43 @@
             this.groupPanel1.TabIndex = 1;
             this.groupPanel1.Text = "目前無選擇任何學生";
             // 
+            // intInput
+            // 
+            // 
+            // 
+            // 
+            this.intInput.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.intInput.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.intInput.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.intInput.Enabled = false;
+            this.intInput.Location = new System.Drawing.Point(563, 3);
+            this.intInput.MaxValue = 180;
+            this.intInput.MinValue = 0;
+            this.intInput.Name = "intInput";
+            this.intInput.ShowUpDown = true;
+            this.intInput.Size = new System.Drawing.Size(149, 25);
+            this.intInput.TabIndex = 18;
+            this.intInput.Leave += new System.EventHandler(this.intInput_Leave);
+            // 
+            // labelX3
+            // 
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(499, 5);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(72, 23);
+            this.labelX3.TabIndex = 17;
+            this.labelX3.Text = "缺席天數";
+            // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(500, 34);
+            this.txtComment.Location = new System.Drawing.Point(499, 63);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(213, 337);
+            this.txtComment.Size = new System.Drawing.Size(213, 308);
             this.txtComment.TabIndex = 16;
             this.txtComment.Leave += new System.EventHandler(this.txtComment_Leave);
             // 
@@ -127,14 +163,14 @@
             this.colGroup,
             this.colTitle,
             this.colGrade});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgv.Location = new System.Drawing.Point(4, 4);
             this.dgv.Name = "dgv";
@@ -209,7 +245,7 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(500, 4);
+            this.labelX2.Location = new System.Drawing.Point(499, 34);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(87, 23);
             this.labelX2.TabIndex = 15;
@@ -259,6 +295,7 @@
             this.Load += new System.EventHandler(this.HrtConductInputForm_Load);
             this.groupPanel1.ResumeLayout(false);
             this.groupPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.intInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
 
@@ -278,5 +315,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colGroup;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;
         private DevComponents.DotNetBar.Controls.DataGridViewComboBoxExColumn colGrade;
+        private DevComponents.DotNetBar.LabelX labelX3;
+        private DevComponents.Editors.IntegerInput intInput;
     }
 }

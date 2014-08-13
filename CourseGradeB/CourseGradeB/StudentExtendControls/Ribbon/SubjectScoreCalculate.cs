@@ -228,7 +228,6 @@ namespace CourseGradeB.StudentExtendControls.Ribbon
             ss.Period = obj.Period;
             ss.Credit = obj.Credit;
             ss.Domain = obj.SubjectGroup;
-            //ss.GPA = Tool.Instance.GetScoreGrade(score, obj.SubjectTypeEnum);
 
             if (obj.SubjectTypeEnum == Tool.SubjectType.Honor)
                 ss.GPA = Tool.GPA.Eval(score).Honors;
@@ -236,6 +235,7 @@ namespace CourseGradeB.StudentExtendControls.Ribbon
                 ss.GPA = Tool.GPA.Eval(score).Regular;
 
             ss.Level = obj.CourseGradeYear;
+            ss.Type = obj.SubjectType;
         }
 
         private void SetAvg(Dictionary<string, K12.Data.SemesterScoreRecord> dic)
