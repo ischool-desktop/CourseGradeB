@@ -46,10 +46,10 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
             _course = course;
 
             colGrade.Items.Add("");
-            colGrade.Items.Add("O");
             colGrade.Items.Add("M");
             colGrade.Items.Add("S");
-            colGrade.Items.Add("X");
+            colGrade.Items.Add("N");
+            colGrade.Items.Add("N/A");
             cboTerm.Items.Add(_middle);
             cboTerm.Items.Add(_final);
             GetGradeYear();

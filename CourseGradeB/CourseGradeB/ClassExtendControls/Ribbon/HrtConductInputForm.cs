@@ -47,10 +47,10 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
             _conductRecordDic = new Dictionary<string, ConductRecord>();
 
             colGrade.Items.Add("");
-            colGrade.Items.Add("O");
             colGrade.Items.Add("M");
             colGrade.Items.Add("S");
-            colGrade.Items.Add("X");
+            colGrade.Items.Add("N");
+            colGrade.Items.Add("N/A");
             cboTerm.Items.Add(_middle);
             cboTerm.Items.Add(_final);
 
