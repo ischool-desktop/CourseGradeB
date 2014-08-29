@@ -571,16 +571,18 @@ namespace CourseGradeB.CourseExtendControls
                 if (items.ContainsKey("CourseGradeYear"))
                 {
                     List<CourseExtendRecord> list = _A.Select<CourseExtendRecord>("ref_course_id=" + RunningID.ToString());
+                    int i;
+                    int grade = int.TryParse(cboGradeYear.Text, out i) ? i : 1;
                     if (list.Count > 0)
                     {
-                        list[0].GradeYear = int.Parse(cboGradeYear.Text);
+                        list[0].GradeYear = grade;
                         list[0].Save();
                     }
                     else
                     {
                         CourseExtendRecord newRecord = new CourseExtendRecord();
                         newRecord.Ref_course_id = int.Parse(RunningID);
-                        newRecord.GradeYear = int.Parse(cboGradeYear.Text);
+                        newRecord.GradeYear = grade;
                         newRecord.Save();
                     }
                 }

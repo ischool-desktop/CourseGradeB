@@ -57,6 +57,12 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
 
         private void SubjectConductInputForm_Load(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(_course.Subject))
+            {
+                MessageBox.Show("課程未設科目名稱,無法輸入Conduct...");
+                this.Close();
+            }
+
             //未取得正確年級就提示並離開
             if (_gradeYear == -1)
             {

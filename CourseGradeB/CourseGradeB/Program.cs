@@ -16,6 +16,7 @@ using CourseGradeB.EduAdminExtendControls;
 using CourseGradeB.StudentExtendControls;
 using FISCA.UDT;
 using CourseGradeB.StuAdminExtendControls;
+using CourseGradeB.EduAdminExtendControls.Ribbon;
 
 
 namespace CourseGradeB
@@ -34,6 +35,7 @@ namespace CourseGradeB
             a.Select<CourseExtendRecord>("uid is null");
             a.Select<ConductSetting>("uid is null");
             a.Select<SubjectRecord>("uid is null");
+            a.Select<GpaRef>("uid is null");
 
             #region 權限註冊
             // 學生
@@ -65,8 +67,11 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.SubjectManager", "科目資料管理"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SetHoursOpeningForm", "開放時間管理"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear", "批次計算科目成績"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.GpaRefForm", "歷屆GPA統計"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SemsHistoryMaker", "產生學期歷程"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm", "評量輸入狀況檢視"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm", "Conduct輸入狀況檢視(授課老師)"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm", "Conduct輸入狀況檢視(班導師)"));
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.ExamTemplateManager", "評分樣板設定"));
 
             //學務作業
@@ -279,11 +284,17 @@ namespace CourseGradeB
             FISCA.Presentation.RibbonBarItem eduitem2 = FISCA.Presentation.MotherForm.RibbonBarItems["教務作業", "批次作業/檢視"];
             eduitem2["成績作業"].Image = Properties.Resources.calc_save_64;
             eduitem2["成績作業"].Size = FISCA.Presentation.RibbonBarButton.MenuButtonSize.Large;
-            eduitem2["成績作業"]["批次計算科目成績"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear"].Executable;
 
+            eduitem2["成績作業"]["批次計算科目成績"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear"].Executable;
             eduitem2["成績作業"]["批次計算科目成績"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear().ShowDialog();
+            };
+
+            eduitem2["成績作業"]["歷屆GPA統計"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.GpaRefForm"].Executable;
+            eduitem2["成績作業"]["歷屆GPA統計"].Click += delegate
+            {
+                new GpaRefForm().ShowDialog();
             };
 
             //產生學期歷程
@@ -300,6 +311,22 @@ namespace CourseGradeB
             eduitem2["成績作業"]["評量輸入狀況檢視"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm().ShowDialog();
+            };
+
+            //Conduct輸入狀況檢視(授課老師)
+            eduitem2["成績作業"]["Conduct輸入狀況檢視(授課老師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm"].Executable;
+
+            eduitem2["成績作業"]["Conduct輸入狀況檢視(授課老師)"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm().ShowDialog();
+            };
+
+            //Conduct輸入狀況檢視(班導師)
+            eduitem2["成績作業"]["Conduct輸入狀況檢視(班導師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm"].Executable;
+
+            eduitem2["成績作業"]["Conduct輸入狀況檢視(班導師)"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm().ShowDialog();
             };
 
             RibbonBarItem eduitem3 = EduAdmin.Instance.RibbonBarItems["基本設定"];
@@ -361,6 +388,9 @@ namespace CourseGradeB
                 new CourseGradeB.StudentExtendControls.Ribbon.SubjectScoreCalculate(K12.Presentation.NLDPanels.Student.SelectedSource).ShowDialog(); 
             };
             #endregion
+
+            //教師系統類別
+            Tagging.Main();
             ResCourseData();
         }
 

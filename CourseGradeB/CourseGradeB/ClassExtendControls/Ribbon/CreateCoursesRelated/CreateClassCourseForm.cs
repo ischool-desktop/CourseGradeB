@@ -169,7 +169,7 @@ namespace CourseGradeB.ClassExtendControls.Ribbon.CreateCoursesRelated
                 string course_id = JHCourse.Insert(newCourse);
                 CourseExtendRecord courseEx = new CourseExtendRecord();
                 courseEx.Ref_course_id = int.Parse(course_id);
-                courseEx.GradeYear = cla.GradeYear == null ? 1 : int.Parse(cla.GradeYear + "");
+                courseEx.GradeYear = cla.GradeYear == null ? -1 : int.Parse(cla.GradeYear + "");
                 courseEx.Save();
 
                 classNewCourse.Add(cla.ID, course_id);

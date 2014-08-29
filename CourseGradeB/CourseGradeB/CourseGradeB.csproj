@@ -39,11 +39,6 @@
       <HintPath>Library\Aspose.Cells_201402.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Aspose.Words, Version=4.4.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Library\Aspose.Words.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Campus.Configuration, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\Campus.Configuration.dll</HintPath>
@@ -52,6 +47,10 @@
     <Reference Include="Campus.Report, Version=1.0.0.11, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\Campus.Report.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Customization.Tagging">
+      <HintPath>Library\Customization.Tagging.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DataRationality, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
@@ -236,6 +235,19 @@
     <Compile Include="Domain.cs" />
     <Compile Include="EduAdminExtendControls\ExamTemplateRecord.cs" />
     <Compile Include="EduAdminExtendControls\ExamTemplateRecordItem.cs" />
+    <Compile Include="EduAdminExtendControls\GpaRef.cs" />
+    <Compile Include="EduAdminExtendControls\Ribbon\HRTConductStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\HRTConductStatusForm.Designer.cs">
+      <DependentUpon>HRTConductStatusForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SubjectConductStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\SubjectConductStatusForm.Designer.cs">
+      <DependentUpon>SubjectConductStatusForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EduAdminExtendControls\Ribbon\CourseScoreStatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +265,12 @@
     </Compile>
     <Compile Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.Designer.cs">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\GpaRefForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EduAdminExtendControls\Ribbon\GpaRefForm.Designer.cs">
+      <DependentUpon>GpaRefForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EduAdminExtendControls\Ribbon\SemsHistoryMaker.cs">
       <SubType>Form</SubType>
@@ -374,6 +392,7 @@
       <DependentUpon>SubjectScoreCalculate.cs</DependentUpon>
     </Compile>
     <Compile Include="SubjectCompare.cs" />
+    <Compile Include="Tagging.cs" />
     <Compile Include="TCInstruct.cs" />
     <Compile Include="TCInstructRecord.cs" />
     <Compile Include="Tool.cs" />
@@ -483,6 +502,12 @@
     <EmbeddedResource Include="ClassExtendControls\Ribbon\CreateCoursesRelated\CreateClassCourseForm.resx">
       <DependentUpon>CreateClassCourseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\HRTConductStatusForm.resx">
+      <DependentUpon>HRTConductStatusForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SubjectConductStatusForm.resx">
+      <DependentUpon>SubjectConductStatusForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\CourseScoreStatusForm.resx">
       <DependentUpon>CourseScoreStatusForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -491,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\ExamTemplateManager.resx">
       <DependentUpon>ExamTemplateManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EduAdminExtendControls\Ribbon\GpaRefForm.resx">
+      <DependentUpon>GpaRefForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EduAdminExtendControls\Ribbon\SemsHistoryMaker.resx">
       <DependentUpon>SemsHistoryMaker.cs</DependentUpon>

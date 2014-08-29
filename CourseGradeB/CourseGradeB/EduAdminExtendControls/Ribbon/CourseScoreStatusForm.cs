@@ -116,6 +116,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 else
                     dgv.Rows.Add(row);
             }
+            dgv.Refresh();
         }
 
         private void QueryData()

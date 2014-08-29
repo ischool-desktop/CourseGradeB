@@ -1,9 +1,11 @@
 ﻿using CourseGradeB.EduAdminExtendControls;
+using FISCA.Data;
 using FISCA.UDT;
 using K12.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -12,6 +14,7 @@ namespace CourseGradeB
     public class Tool
     {
         private AccessHelper _A;
+        private QueryHelper _Q;
         private static Tool _instance;
         private Dictionary<string, string> _SubjectDic;
         private Dictionary<string, string> _CourseIdToSubjectType;
@@ -20,6 +23,7 @@ namespace CourseGradeB
         private Tool()
         {
             _A = new AccessHelper();
+            _Q = new QueryHelper();
             _SubjectDic = new Dictionary<string, string>();
             _CourseIdToSubjectType = new Dictionary<string, string>();
             Courses = new List<CourseRecord>();
@@ -238,6 +242,130 @@ namespace CourseGradeB
             }
 
             K12.Data.SemesterScore.Update(update.Values);
+        }
+
+        /// <summary>
+        /// 自動更新GPA統計資料
+        /// </summary>
+        /// <param name="schoolYear"></param>
+        /// <param name="semester"></param>
+        /// <returns></returns>
+        public static bool UpdateGPAref(int schoolYear, int semester)
+        {
+            DataTable dt;
+            bool approve = false;
+
+            List<string> update_log = new List<string>();
+            List<string> insert_log = new List<string>();
+
+            //更新的學年度學期必須大於已存在record的最大值
+            try
+            {
+                string prepare_sql = "select max(school_year) as school_year,max(semester) as semester from $ischool.gparef where school_year = (select max(school_year) from $ischool.gparef)";
+                dt = Instance._Q.Select(prepare_sql);
+
+                if (dt.Rows.Count == 0)
+                    approve = true;
+
+                if (dt.Rows.Count > 0)
+                {
+                    int i;
+                    int sy = int.TryParse(dt.Rows[0]["school_year"] + "", out i) ? i : 0;
+                    int sm = int.TryParse(dt.Rows[0]["semester"] + "", out i) ? i : 0;
+                    if (schoolYear > sy)
+                    {
+                        approve = true;
+                    }
+                    else if (schoolYear == sy)
+                    {
+                        if (semester >= sm)
+                            approve = true;
+                    }
+                }
+            }
+            catch
+            {
+                approve = false;
+            }
+
+            if (approve)
+            {
+                FISCA.Presentation.MotherForm.SetStatusBarMessage("GPA統計更新中...");
+                for (int grade = 9; grade <= 12; grade++)
+                {
+                    //Get old record
+                    List<GpaRef> list = Instance._A.Select<GpaRef>("grade=" + grade + " and school_year=" + schoolYear + " and semester=" + semester);
+                    GpaRef gparef;
+
+                    //if old record didn't exist ,insert new record
+                    decimal old_max = 0;
+                    decimal old_avg = 0;
+                    if (list.Count > 0)
+                    {
+                        gparef = list[0];
+                        old_max = gparef.Max;
+                        old_avg = gparef.Avg;
+                    }
+                    else
+                    {
+                        gparef = new GpaRef();
+                        gparef.Grade = grade;
+                        gparef.SchoolYear = schoolYear;
+                        gparef.Semester = semester;
+                    }
+
+                    //get each student CumulateGPA
+                    string sql = "select sems_subj_score.ref_student_id,sems_subj_score.school_year,sems_subj_score.semester,xpath_string('<root>'||sems_subj_score.score_info||'</root>','//CumulateGPA') as gpa from sems_subj_score ";
+                    sql += "join student on sems_subj_score.ref_student_id=student.id ";
+                    sql += "join class on student.ref_class_id=class.id ";
+                    sql += "where class.grade_year=" + grade + " and sems_subj_score.school_year=" + schoolYear + " and sems_subj_score.semester=" + semester + " and student.status in (1,2)";
+
+                    dt = Instance._Q.Select(sql);
+                    int count = 0;
+                    decimal max = 0;
+                    decimal total = 0;
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        decimal d;
+                        decimal gpa = decimal.TryParse(row["gpa"] + "", out d) ? d : 0;
+
+                        if (gpa > max)
+                            max = gpa;
+
+                        total += gpa;
+                        count++;
+                    }
+
+                    decimal avg = 0;
+                    if (count > 0)
+                        avg = Math.Round(total / count, 2, MidpointRounding.AwayFromZero);
+
+                    gparef.Max = max;
+                    gparef.Avg = avg;
+
+                    string text = gparef.SchoolYear + "學年度" + gparef.Semester + "學期" + gparef.Grade + "年級";
+
+                    if (string.IsNullOrWhiteSpace(gparef.UID))
+                    {
+                        insert_log.Add(text + " 最高GPA:" + gparef.Max + " 平均GPA:" + gparef.Avg);
+                    }
+                    else
+                    {
+                        update_log.Add(text + "\r\n最高GPA由 " + old_max + " 改為 " + gparef.Max + "\r\n平均GPA由 " + old_avg + " 改為 " + gparef.Avg);
+                    }
+                        
+                    gparef.Save();
+                }
+                FISCA.Presentation.MotherForm.SetStatusBarMessage("GPA統計更新完成");
+            }
+
+            if(insert_log.Count > 0)
+                FISCA.LogAgent.ApplicationLog.Log("GPA統計", "自動新增", string.Join("\r\n", insert_log));
+
+            if (update_log.Count > 0)
+                FISCA.LogAgent.ApplicationLog.Log("GPA統計", "自動修改", string.Join("\r\n", update_log));
+
+            return approve;
         }
 
         public struct Domain

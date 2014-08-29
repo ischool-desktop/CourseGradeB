@@ -30,6 +30,9 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 }
             }
 
+            colType.Items.Add("Regular");
+            colType.Items.Add("Honor");
+
             ReLoad();
         }
 
@@ -51,6 +54,12 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 string type = s.Type;
                 row.Tag = s;
                 row.CreateCells(dgv, name, enName, group, type);
+
+                if (!colGroup.Items.Contains(group))
+                    colGroup.Items.Add(group);
+
+                if (!colType.Items.Contains(type))
+                    colType.Items.Add(type);
 
                 dgv.Rows.Add(row);
             }
@@ -102,6 +111,16 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                     row.Cells[colType.Index].ErrorText = "組別不可為空白";
                     pass = false;
                 }
+
+                row.ErrorText = "";
+                List<string> errors = new List<string>();
+                if (!string.IsNullOrWhiteSpace(row.Cells[colGroup.Index].ErrorText))
+                    errors.Add(row.Cells[colGroup.Index].ErrorText);
+
+                if (!string.IsNullOrWhiteSpace(row.Cells[colType.Index].ErrorText))
+                    errors.Add(row.Cells[colType.Index].ErrorText);
+
+                row.ErrorText = string.Join(",", errors);
 
                 SubjectRecord record = new SubjectRecord();
                 record.Name = row.Cells[colName.Index].Value + "";

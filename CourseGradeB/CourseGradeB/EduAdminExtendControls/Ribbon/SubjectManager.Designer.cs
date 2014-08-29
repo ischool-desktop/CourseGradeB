@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnSave = new DevComponents.DotNetBar.ButtonX();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGroup = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colGroup = new DevComponents.DotNetBar.Controls.DataGridViewComboBoxExColumn();
+            this.colType = new DevComponents.DotNetBar.Controls.DataGridViewComboBoxExColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,14 +46,14 @@
             this.colEnName,
             this.colGroup,
             this.colType});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgv.Location = new System.Drawing.Point(13, 13);
             this.dgv.Name = "dgv";
@@ -89,22 +89,31 @@
             // 
             // colGroup
             // 
-            this.colGroup.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.colGroup.DisplayMember = "Text";
+            this.colGroup.DropDownHeight = 106;
+            this.colGroup.DropDownWidth = 121;
+            this.colGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colGroup.HeaderText = "群組名稱";
+            this.colGroup.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.colGroup.ItemHeight = 17;
             this.colGroup.Name = "colGroup";
             this.colGroup.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colGroup.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colGroup.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.colGroup.Width = 150;
             // 
             // colType
             // 
-            this.colType.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.colType.DisplayMember = "Text";
+            this.colType.DropDownHeight = 106;
+            this.colType.DropDownWidth = 121;
+            this.colType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colType.HeaderText = "組別";
-            this.colType.Items.AddRange(new object[] {
-            "Regular",
-            "Honor"});
+            this.colType.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.colType.ItemHeight = 17;
             this.colType.Name = "colType";
             this.colType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colType.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.colType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colType.Width = 150;
             // 
             // SubjectManager
@@ -129,7 +138,7 @@
         private DevComponents.DotNetBar.ButtonX btnSave;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEnName;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colGroup;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colType;
+        private DevComponents.DotNetBar.Controls.DataGridViewComboBoxExColumn colGroup;
+        private DevComponents.DotNetBar.Controls.DataGridViewComboBoxExColumn colType;
     }
 }
