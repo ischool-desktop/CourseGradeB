@@ -193,7 +193,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         private void btnExport_Click(object sender, EventArgs e)
         {
             Aspose.Cells.Workbook wb = new Aspose.Cells.Workbook();
-            wb.Worksheets[0].Name = "評量輸入狀況檢視清單";
+            wb.Worksheets[0].Name = "Conduct輸入狀況檢視清單";
             Aspose.Cells.Cells cs = wb.Worksheets[0].Cells;
 
             wb.Worksheets[0].Cells.Columns[0].Width = 40;

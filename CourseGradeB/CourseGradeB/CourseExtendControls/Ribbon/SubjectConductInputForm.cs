@@ -272,6 +272,7 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
 
         private void Item_click(object sender, EventArgs e)
         {
+            bool alarm = false;
             ButtonItem item = sender as ButtonItem;
 
             //切換不同item
@@ -298,6 +299,20 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                 if (!string.IsNullOrWhiteSpace(record.Conduct))
                     doc.LoadXml(record.Conduct);
 
+                //Check alarm
+                foreach (XmlElement first in doc.SelectNodes("//Conduct[@Group]"))
+                {
+                    string group = first.GetAttribute("Group");
+                    foreach (XmlElement second in first.SelectNodes("Item"))
+                    {
+                        string title = second.GetAttribute("Title");
+                        string key = group + "_" + title;
+
+                        if (!_conductTemplate.Contains(key))
+                            alarm = true;
+                    }
+                }
+
                 //巡迴所有需要呈現的conductItem
                 foreach (string str in _conductTemplate)
                 {
@@ -323,6 +338,9 @@ namespace CourseGradeB.CourseExtendControls.Ribbon
                         cell.Tag = cell.Value;
                     }
                 }
+
+                if (alarm)
+                    MessageBox.Show("此學生資料有其他的Conduct紀錄,儲存後可能會造成資料遺失");
             }
         }
 
