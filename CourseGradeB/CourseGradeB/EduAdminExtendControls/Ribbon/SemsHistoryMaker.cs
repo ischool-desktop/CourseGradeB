@@ -1,5 +1,6 @@
 ﻿using FISCA.Data;
 using FISCA.Presentation.Controls;
+using Framework;
 using K12.Data;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace CourseGradeB.EduAdminExtendControls.Ribbon
 {
     public partial class SemsHistoryMaker : BaseForm
     {
+        private const string SchoolHodidayConfigString = "SCHOOL_HOLIDAY_CONFIG_STRING";
+        private const string configString = "CONFIG_STRING";
+
         int _schoolYear, _semester;
         BackgroundWorker _BW;
         QueryHelper _Q;
+        ConfigData _CD;
+        Dictionary<string, int?> _GradeSchoolDays;
+
         public SemsHistoryMaker()
         {
             InitializeComponent();
@@ -30,6 +39,34 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             _BW.DoWork += new DoWorkEventHandler(BW_DoWork);
             _BW.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BW_Completed);
             _Q = new QueryHelper();
+            _CD = JHSchool.School.Configuration[SchoolHodidayConfigString];
+            _GradeSchoolDays = new Dictionary<string, int?>();
+
+            //取得上課天數設定
+            XElement rootXml = null;
+            string xmlContent = _CD[configString];
+
+            if (!string.IsNullOrWhiteSpace(xmlContent))
+                rootXml = XElement.Parse(xmlContent);
+            else
+                rootXml = new XElement("SchoolHolidays");
+
+            //取得全校既有的年級並帶入設定
+            DataTable dt = _Q.Select("select distinct grade_year from class where grade_year is not null order by grade_year");
+            foreach (DataRow row in dt.Rows)
+            {
+                string grade = row["grade_year"] + "";
+                string elemGrade = "//SchoolDayCountG" + grade;
+                XElement elem = rootXml.XPathSelectElement(elemGrade);
+                string value = elem == null ? string.Empty : elem.Value;
+
+                if (!_GradeSchoolDays.ContainsKey(grade))
+                    _GradeSchoolDays.Add(grade, null);
+
+                int i;
+                if (int.TryParse(value, out i))
+                    _GradeSchoolDays[grade] = i;
+            }
         }
 
         private void BW_Completed(object sender, RunWorkerCompletedEventArgs e)
@@ -85,6 +122,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 item.SeatNo = student_obj_dic.ContainsKey(id) ? student_obj_dic[id].SeatNo : null;
                 item.ClassName = student_obj_dic.ContainsKey(id) ? student_obj_dic[id].ClassName : "";
                 item.Teacher = student_obj_dic.ContainsKey(id) ? student_obj_dic[id].TeacherName : "";
+                item.SchoolDayCount = _GradeSchoolDays.ContainsKey(item.GradeYear + "") ? _GradeSchoolDays[item.GradeYear + ""] : null;
 
                 r.SemesterHistoryItems.Add(item);
             }

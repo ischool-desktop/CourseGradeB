@@ -35,6 +35,7 @@
             this.lblStatus = new DevComponents.DotNetBar.LabelX();
             this.btnStart = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
+            this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
             this.SuspendLayout();
@@ -44,10 +45,11 @@
             this.groupPanel1.BackColor = System.Drawing.Color.Transparent;
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel1.Controls.Add(this.labelX2);
             this.groupPanel1.Controls.Add(this.labelX1);
             this.groupPanel1.Location = new System.Drawing.Point(13, 13);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(379, 78);
+            this.groupPanel1.Size = new System.Drawing.Size(379, 120);
             // 
             // 
             // 
@@ -91,13 +93,13 @@
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(366, 36);
             this.labelX1.TabIndex = 0;
-            this.labelX1.Text = "為全校生以現在的學年度學期及年級相關資料建立學期歷程";
+            this.labelX1.Text = "為在校生建立現在學年度學期的學期歷程";
             // 
             // picLoading
             // 
             this.picLoading.BackColor = System.Drawing.Color.Transparent;
             this.picLoading.Image = ((System.Drawing.Image)(resources.GetObject("picLoading.Image")));
-            this.picLoading.Location = new System.Drawing.Point(189, 98);
+            this.picLoading.Location = new System.Drawing.Point(189, 139);
             this.picLoading.Name = "picLoading";
             this.picLoading.Size = new System.Drawing.Size(40, 40);
             this.picLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -113,7 +115,7 @@
             // 
             this.lblStatus.BackgroundStyle.Class = "";
             this.lblStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblStatus.Location = new System.Drawing.Point(13, 98);
+            this.lblStatus.Location = new System.Drawing.Point(13, 139);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(230, 23);
             this.lblStatus.TabIndex = 1;
@@ -124,7 +126,7 @@
             this.btnStart.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnStart.BackColor = System.Drawing.Color.Transparent;
             this.btnStart.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnStart.Location = new System.Drawing.Point(235, 98);
+            this.btnStart.Location = new System.Drawing.Point(235, 139);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -137,7 +139,7 @@
             this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClose.Location = new System.Drawing.Point(317, 98);
+            this.btnClose.Location = new System.Drawing.Point(317, 139);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -145,11 +147,26 @@
             this.btnClose.Text = "離開";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // labelX2
+            // 
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX2.BackgroundStyle.Class = "";
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX2.ForeColor = System.Drawing.Color.Red;
+            this.labelX2.Location = new System.Drawing.Point(4, 46);
+            this.labelX2.Name = "labelX2";
+            this.labelX2.Size = new System.Drawing.Size(372, 36);
+            this.labelX2.TabIndex = 1;
+            this.labelX2.Text = "此功能會覆蓋既有的學期資料,請確認當前學年度學期是否正確";
+            // 
             // SemsHistoryMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 146);
+            this.ClientSize = new System.Drawing.Size(412, 179);
             this.Controls.Add(this.picLoading);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnStart);
@@ -173,5 +190,6 @@
         private DevComponents.DotNetBar.ButtonX btnStart;
         private DevComponents.DotNetBar.ButtonX btnClose;
         private System.Windows.Forms.PictureBox picLoading;
+        private DevComponents.DotNetBar.LabelX labelX2;
     }
 }
