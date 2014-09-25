@@ -188,6 +188,12 @@
     </Compile>
     <Compile Include="ConductRecord.cs" />
     <Compile Include="CourseExtendControls\CourseExtendRecord.cs" />
+    <Compile Include="CourseExtendControls\Ribbon\CourseGradeEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CourseExtendControls\Ribbon\CourseGradeEditor.Designer.cs">
+      <DependentUpon>CourseGradeEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="CourseExtendControls\NavViewNode.cs" />
     <Compile Include="CourseExtendControls\BasicInfoItem.cs">
       <SubType>UserControl</SubType>
@@ -478,6 +484,7 @@
     <None Include="Resources\sandglass_unlock_64.png" />
     <None Include="Resources\exam_write_64.png" />
     <None Include="Resources\loadering.gif" />
+    <None Include="Resources\record_b_write_64.png" />
     <Content Include="Resources\teacher_64.png" />
   </ItemGroup>
   <ItemGroup>
@@ -486,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CourseExtendControls\BasicInfoItem.resx">
       <DependentUpon>BasicInfoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CourseExtendControls\Ribbon\CourseGradeEditor.resx">
+      <DependentUpon>CourseGradeEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CourseExtendControls\Ribbon\AddCourse.resx" />
     <EmbeddedResource Include="CourseExtendControls\Ribbon\CourseScoreInputForm.resx">

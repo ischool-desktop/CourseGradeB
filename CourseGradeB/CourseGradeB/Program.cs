@@ -57,6 +57,7 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0021", "匯入課程修課學生"));
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0070.CourseScoreInputForm", "成績輸入"));
             ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0070.SubjectConductInputForm", "指標輸入"));
+            ribbon.Add(new RibbonFeature("JHSchool.Course.Ribbon0070.CourseGradeEditor", "批次修改開課年級"));
             ribbon = RoleAclSource.Instance["課程"]["資料項目"];
             ribbon.Add(new DetailItemFeature("JHSchool.Course.Detail.BasicInfo", "基本資料"));
             ribbon.Add(new DetailItemFeature("JHSchool.Course.Detail.AttendStudent", "修課學生"));
@@ -220,12 +221,46 @@ namespace CourseGradeB
                 conduct["指標輸入"].Enable = K12.Presentation.NLDPanels.Course.SelectedSource.Count == 1 && Framework.User.Acl["JHSchool.Course.Ribbon0070.SubjectConductInputForm"].Executable;
             };
 
+            RibbonBarItem editGrade = JHSchool.Course.Instance.RibbonBarItems["指定"];
+            editGrade["批次修改開課年級"].Size = RibbonBarButton.MenuButtonSize.Medium;
+            editGrade["批次修改開課年級"].Image = Properties.Resources.record_b_write_64;
+            editGrade["批次修改開課年級"].Enable = Framework.User.Acl["JHSchool.Course.Ribbon0070.CourseGradeEditor"].Executable;
+            editGrade["批次修改開課年級"].Click += delegate
+            {
+                if (K12.Presentation.NLDPanels.Course.SelectedSource.Count > 0)
+                {
+                    new CourseGradeB.CourseExtendControls.Ribbon.CourseGradeEditor(K12.Presentation.NLDPanels.Course.SelectedSource).ShowDialog();
+                }
+            };
+            K12.Presentation.NLDPanels.Course.SelectedSourceChanged += delegate
+            {
+                editGrade["批次修改開課年級"].Enable = K12.Presentation.NLDPanels.Course.SelectedSource.Count > 0 && Framework.User.Acl["JHSchool.Course.Ribbon0070.CourseGradeEditor"].Executable;
+            };
+
             #endregion
 
             #region 匯出/匯入
 
             RibbonBarButton rbItemExport = Student.Instance.RibbonBarItems["資料統計"]["匯出"];
             RibbonBarButton rbItemImport = Student.Instance.RibbonBarItems["資料統計"]["匯入"];
+
+            rbItemExport["成績相關匯出"]["匯出學期歷程"].Enable = User.Acl["JHSchool.Student.Ribbon0169"].Executable;
+            rbItemExport["成績相關匯出"]["匯出學期歷程"].Click += delegate
+            {
+                SmartSchool.API.PlugIn.Export.Exporter exporter = new CourseGradeB.ImportExport.ExportSemesterHistory();
+                CourseGradeB.ImportExport.ExportStudentV2 wizard = new CourseGradeB.ImportExport.ExportStudentV2(exporter.Text, exporter.Image);
+                exporter.InitializeExport(wizard);
+                wizard.ShowDialog();
+            };
+
+            rbItemImport["成績相關匯入"]["匯入學期歷程"].Enable = User.Acl["JHSchool.Student.Ribbon0170"].Executable;
+            rbItemImport["成績相關匯入"]["匯入學期歷程"].Click += delegate
+            {
+                SmartSchool.API.PlugIn.Import.Importer importer = new CourseGradeB.ImportExport.ImportSemesterHistory();
+                CourseGradeB.ImportExport.ImportStudentV2 wizard = new CourseGradeB.ImportExport.ImportStudentV2(importer.Text, importer.Image);
+                importer.InitializeImport(wizard);
+                wizard.ShowDialog();
+            };
 
             RibbonBarItem rbItemCourseImportExport = Course.Instance.RibbonBarItems["資料統計"];
             rbItemCourseImportExport["匯出"]["匯出課程修課學生"].Enable = User.Acl["JHSchool.Course.Ribbon0031"].Executable;
