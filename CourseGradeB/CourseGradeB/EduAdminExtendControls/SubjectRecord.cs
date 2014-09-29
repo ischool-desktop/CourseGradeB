@@ -12,8 +12,11 @@ namespace CourseGradeB.EduAdminExtendControls
         [FISCA.UDT.Field(Field = "name")]
         public string Name { get; set; }
 
-        [FISCA.UDT.Field(Field = "english_name")]
-        public string EnglishName { get; set; }
+        //[FISCA.UDT.Field(Field = "english_name")]
+        //public string EnglishName { get; set; }
+
+        [FISCA.UDT.Field(Field = "chinese_name")]
+        public string ChineseName { get; set; }
 
         [FISCA.UDT.Field(Field = "group")]
         public string Group { get; set; }

@@ -49,11 +49,13 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             {
                 DataGridViewRow row = new DataGridViewRow();
                 string name = s.Name;
-                string enName = s.EnglishName;
+                //string enName = s.EnglishName;
+                string chName = s.ChineseName;
                 string group = s.Group;
                 string type = s.Type;
                 row.Tag = s;
-                row.CreateCells(dgv, name, enName, group, type);
+                //row.CreateCells(dgv, name, enName, group, type);
+                row.CreateCells(dgv, name, chName, group, type);
 
                 if (!colGroup.Items.Contains(group))
                     colGroup.Items.Add(group);
@@ -124,7 +126,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 SubjectRecord record = new SubjectRecord();
                 record.Name = row.Cells[colName.Index].Value + "";
-                record.EnglishName = row.Cells[colEnName.Index].Value + "";
+                //record.EnglishName = row.Cells[colEnName.Index].Value + "";
+                record.ChineseName = row.Cells[colChName.Index].Value + "";
                 record.Group = row.Cells[colGroup.Index].Value + "";
                 record.Type = row.Cells[colType.Index].Value + "";
                 insert.Add(record);
