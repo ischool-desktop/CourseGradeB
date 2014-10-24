@@ -85,6 +85,7 @@ namespace CourseGradeB.CourseExtendControls
             cboRequired.Items.Add("必修");
             cboRequired.Items.Add("選修");
 
+            cboGradeYear.Items.Add("");
             for (int i = 1; i <= 12; i++)
                 cboGradeYear.Items.Add(i);
 
@@ -255,7 +256,7 @@ namespace CourseGradeB.CourseExtendControls
                 if (records.Count > 0)
                     cboGradeYear.Text = records[0].GradeYear + "";
                 else
-                    cboGradeYear.Text = "1";
+                    cboGradeYear.Text = "";
                 //cboExamTemplate.SelectedItem = content.GetText("Course/RefExamTemplateID"); //ComboBox 奧義
 
                 //if (content.GetText("Course/NotIncludedInCredit") == "否")
