@@ -427,6 +427,7 @@ namespace CourseGradeB.CourseExtendControls
                     desc.AppendLine("- " + info.Class + " " + info.StudentNumber + " " + info.StudentName + " ");
 
                 //CurrentUser.Instance.AppLog.Write(EntityType.Course, "修改課程修課學生", RunningID, desc.ToString(), "課程", "");
+                FISCA.LogAgent.ApplicationLog.Log("課程基本資料", "修改課程修課學生", desc.ToString());
 
                 #endregion
 
