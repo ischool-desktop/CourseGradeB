@@ -104,10 +104,10 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
             lblSave.Visible = false;
             txtComment.Text = "";
 
-            if (_gradeYear <= 6 && cboTerm.Text == "Final")
-                intInput.Enabled = true;
-            else
-                intInput.Enabled = false;
+            //if (_gradeYear <= 6 && cboTerm.Text == "Final")
+            //    intInput.Enabled = true;
+            //else
+            //    intInput.Enabled = false;
 
             GetConductRecord();
             FillItemPanel();
@@ -272,18 +272,18 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                 //Console.Write(doc.OuterXml);
 
                 //讀取缺席天數
-                intInput.Value = 0;
-                if (intInput.Enabled)
-                {
-                    XmlElement absence = doc.SelectSingleNode("//Conducts/Absence") as XmlElement;
-                    if(absence != null)
-                    {
-                        int i = 0;
-                        int.TryParse(absence.InnerText, out i);
-                        intInput.Value = i;
-                    }
-                }
-                intInput.Tag = intInput.Value;
+                //intInput.Value = 0;
+                //if (intInput.Enabled)
+                //{
+                //    XmlElement absence = doc.SelectSingleNode("//Conducts/Absence") as XmlElement;
+                //    if(absence != null)
+                //    {
+                //        int i = 0;
+                //        int.TryParse(absence.InnerText, out i);
+                //        intInput.Value = i;
+                //    }
+                //}
+                //intInput.Tag = intInput.Value;
 
                 //Check alarm
                 foreach (XmlElement first in doc.SelectNodes("//Conduct[@Group]"))
@@ -367,16 +367,16 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                 }
 
                 //出缺席節點
-                if(intInput.Enabled)
-                {
-                    XmlElement absence = root.OwnerDocument.CreateElement("Absence");
-                    absence.InnerText = intInput.Value + "";
+                //if(intInput.Enabled)
+                //{
+                //    XmlElement absence = root.OwnerDocument.CreateElement("Absence");
+                //    absence.InnerText = intInput.Value + "";
 
-                    root.AppendChild(absence);
+                //    root.AppendChild(absence);
 
-                    if(intInput.Tag + "" != intInput.Value + "")
-                        logStr.Add("缺席天數由『" + intInput.Tag + "』" + "改為『" + intInput.Value + "』");
-                }
+                //    if(intInput.Tag + "" != intInput.Value + "")
+                //        logStr.Add("缺席天數由『" + intInput.Tag + "』" + "改為『" + intInput.Value + "』");
+                //}
                 
                 record.Conduct = root.OuterXml;
                 if (txtComment.Tag + "" != txtComment.Text)
@@ -445,7 +445,8 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
                 if (_dirtyCellList.Contains(cell)) _dirtyCellList.Remove(cell);
             }
 
-            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
+            //lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
+            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text);
         }
 
         private class ComboBoxItem
@@ -477,7 +478,8 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
 
         private void txtComment_Leave(object sender, EventArgs e)
         {
-            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
+            //lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
+            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text);
         }
 
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -488,7 +490,8 @@ namespace CourseGradeB.ClassExtendControls.Ribbon
 
         private void intInput_Leave(object sender, EventArgs e)
         {
-            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
+            //lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text) || (intInput.Tag + "" != intInput.Value + "");
+            lblSave.Visible = (_dirtyCellList.Count > 0) || (txtComment.Tag + "" != txtComment.Text);
         }
     }
 }
