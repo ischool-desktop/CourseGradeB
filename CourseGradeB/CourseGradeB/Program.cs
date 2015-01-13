@@ -26,6 +26,10 @@ namespace CourseGradeB
         [MainMethod("")]
         public static void Main()
         {
+            //診斷模式不要執行 UDM 更新。
+            if (!RTContext.IsDiagMode)
+                ServerModule.AutoManaged("http://module.ischool.com.tw/module/137815/School_IBSH/udm.xml");
+
             // 課程加入教師檢視
             Course.Instance.AddView(new TeacherCategoryView());
 
