@@ -14,21 +14,28 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
     public partial class SubjectManager : BaseForm
     {
         AccessHelper _A;
+        List<string> _groupList;
 
         public SubjectManager()
         {
             InitializeComponent();
             _A = new AccessHelper();
+            _groupList = new List<string>();
 
             Dictionary<int, List<Tool.Domain>> dic = Tool.DomainDic;
             foreach (List<Tool.Domain> domains in dic.Values)
             {
                 foreach (Tool.Domain domain in domains)
                 {
-                    if (!colGroup.Items.Contains(domain.Name))
-                        colGroup.Items.Add(domain.Name);
+                    if (!_groupList.Contains(domain.Name))
+                        _groupList.Add(domain.Name);
                 }
             }
+
+            _groupList.Sort();
+
+            foreach (string group in _groupList)
+                colGroup.Items.Add(group);
 
             colType.Items.Add("Regular");
             colType.Items.Add("Honor");
@@ -79,6 +86,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 row.Cells[colName.Index].ErrorText = "";
                 row.Cells[colType.Index].ErrorText = "";
+                row.Cells[colGroup.Index].ErrorText = "";
 
                 string name = row.Cells[colName.Index].Value + "";
                 string type = row.Cells[colType.Index].Value + "";
@@ -104,7 +112,12 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 if (string.IsNullOrWhiteSpace(group))
                 {
-                    row.Cells[colGroup.Index].ErrorText = "群組不可為空白";
+                    row.Cells[colGroup.Index].ErrorText = "群組名稱不可為空白";
+                    pass = false;
+                }
+                else if (!_groupList.Contains(group))
+                {
+                    row.Cells[colGroup.Index].ErrorText = "群組名稱有誤,請選擇預設群組";
                     pass = false;
                 }
 
