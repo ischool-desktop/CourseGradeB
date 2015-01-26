@@ -36,8 +36,13 @@ namespace CourseGradeB
 
         public int Compare(string x, string y)
         {
-            int xi = _subjOrder.ContainsKey(x) ? _subjOrder[x] : int.MaxValue;
-            int yi = _subjOrder.ContainsKey(y) ? _subjOrder[y] : int.MaxValue;
+            int xi = _subjOrder.ContainsKey(x) ? _subjOrder[x] : int.MaxValue -1;
+            int yi = _subjOrder.ContainsKey(y) ? _subjOrder[y] : int.MaxValue -1;
+
+            if (x == "Homeroom")
+                xi = int.MaxValue;
+            if (y == "Homeroom")
+                yi = int.MaxValue;
 
             return xi.CompareTo(yi);
         }
