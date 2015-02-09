@@ -452,9 +452,10 @@ namespace CourseGradeB
 
             public static GPA Eval(decimal score)
             {
+                decimal round_score = Math.Round(score, 0, MidpointRounding.AwayFromZero);
                 foreach (GPA gpa in gpalist)
                 {
-                    if (score >= gpa.Limit)
+                    if (round_score >= gpa.Limit)
                         return gpa;
                 }
 
