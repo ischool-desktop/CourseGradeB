@@ -17,7 +17,7 @@ namespace CourseGradeB.StuAdminExtendControls
     public partial class ConductSettingForm : BaseForm
     {
         AccessHelper _A;
-        ConductSetting _LowGrade, _MediumGrade, _HighGrade;
+        ConductSetting _Grade1, _Grade2, _Grade3, _Grade4, _MediumGrade, _HighGrade;
 
         public ConductSettingForm()
         {
@@ -27,9 +27,21 @@ namespace CourseGradeB.StuAdminExtendControls
             List<ConductSetting> allConductList = _A.Select<ConductSetting>();
             foreach (ConductSetting record in allConductList)
             {
-                if (record.Grade <= 2)
+                if (record.Grade == 1)
                 {
-                    _LowGrade = record;
+                    _Grade1 = record;
+                }
+                else if (record.Grade == 2)
+                {
+                    _Grade2 = record;
+                }
+                else if (record.Grade == 3)
+                {
+                    _Grade3 = record;
+                }
+                else if (record.Grade == 4)
+                {
+                    _Grade4 = record;
                 }
                 else if (record.Grade <= 6)
                 {
@@ -41,10 +53,28 @@ namespace CourseGradeB.StuAdminExtendControls
                 }
             }
 
-            if (_LowGrade == null)
+            if (_Grade1 == null)
             {
-                _LowGrade = new ConductSetting(2);
-                _LowGrade.Save();
+                _Grade1 = new ConductSetting(1);
+                _Grade1.Save();
+            }
+
+            if (_Grade2 == null)
+            {
+                _Grade2 = new ConductSetting(2);
+                _Grade2.Save();
+            }
+
+            if (_Grade3 == null)
+            {
+                _Grade3 = new ConductSetting(3);
+                _Grade3.Save();
+            }
+
+            if (_Grade4 == null)
+            {
+                _Grade4 = new ConductSetting(4);
+                _Grade4.Save();
             }
 
             if (_MediumGrade == null)
@@ -63,9 +93,13 @@ namespace CourseGradeB.StuAdminExtendControls
         private void ConductTitleManager_Load(object sender, EventArgs e)
         {
             tabControl1_SelectedTabChanged(null, null);
-            LoadConduct(_LowGrade, dgv1);
-            LoadConduct(_MediumGrade, dgv2);
-            LoadConduct(_HighGrade, dgv3);
+            LoadConduct(_Grade1, dgv1);
+            LoadConduct(_Grade2, dgv2);
+            LoadConduct(_Grade3, dgv3);
+            LoadConduct(_Grade4, dgv4);
+
+            LoadConduct(_MediumGrade, dgv6);
+            LoadConduct(_HighGrade, dgv12);
         }
 
         private void LoadConduct(ConductSetting setting, DataGridView dgv)
@@ -94,9 +128,12 @@ namespace CourseGradeB.StuAdminExtendControls
 
         private void buttonX1_Click(object sender, EventArgs e)
         {
-            Save(_LowGrade, dgv1);
-            Save(_MediumGrade, dgv2);
-            Save(_HighGrade, dgv3);
+            Save(_Grade1, dgv1);
+            Save(_Grade2, dgv2);
+            Save(_Grade3, dgv3);
+            Save(_Grade4, dgv4);
+            Save(_MediumGrade, dgv6);
+            Save(_HighGrade, dgv12);
             this.Close();
         }
 
@@ -149,41 +186,30 @@ namespace CourseGradeB.StuAdminExtendControls
 
         private void tabControl1_SelectedTabChanged(object sender, DevComponents.DotNetBar.TabStripTabChangedEventArgs e)
         {
-            if (tabControl1.SelectedTab.Equals(tabItem1))
-                linkLabel1.Enabled = true;
-            else
+            if (tabControl1.SelectedTab.Equals(ti6) || tabControl1.SelectedTab.Equals(ti12))
                 linkLabel1.Enabled = false;
+            else
+                linkLabel1.Enabled = true;
         }
 
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            SubjectConductSettingForm form = new SubjectConductSettingForm(_LowGrade);
-            form.ShowDialog();
-        }
+            ConductSetting currentSetting = null;
 
-        private void dgv1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == -1)
-                dgv1.EndEdit();
-            else
-                dgv1.BeginEdit(true);
-        }
-
-        private void dgv2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == -1)
-                dgv2.EndEdit();
-            else
-                dgv2.BeginEdit(true);
-        }
-
-        private void dgv3_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == -1)
-                dgv3.EndEdit();
-            else
-                dgv3.BeginEdit(true);
+            if (tabControl1.SelectedTab.Equals(ti1))
+                currentSetting = _Grade1;
+            if (tabControl1.SelectedTab.Equals(ti2))
+                currentSetting = _Grade2;
+            if (tabControl1.SelectedTab.Equals(ti3))
+                currentSetting = _Grade3;
+            if (tabControl1.SelectedTab.Equals(ti4))
+                currentSetting = _Grade4;
+            if (currentSetting != null)
+            {
+                SubjectConductSettingForm form = new SubjectConductSettingForm(currentSetting);
+                form.ShowDialog();
+            }
         }
 
         private void SelectTogether(DataGridView dgv, DataGridViewCellEventArgs e)
@@ -201,29 +227,68 @@ namespace CourseGradeB.StuAdminExtendControls
             }
         }
 
-        private void dgv1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            DataGridView dgv = (DataGridView)sender;
+            if (e.ColumnIndex == -1)
+                dgv.EndEdit();
+            else
+                dgv.BeginEdit(true);
+        }
+        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
             if (e.ColumnIndex == colCommon.Index)
-                SelectTogether(dgv1, e);
+                SelectTogether(dgv, e);
         }
 
-        private void dgv1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == colCommon.Index)
-                SelectTogether(dgv1, e);
-        }
+        //private void dgv1_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == -1)
+        //        dgv2.EndEdit();
+        //    else
+        //        dgv2.BeginEdit(true);
+        //}
 
-        private void dgv2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == colCommon.Index)
-                SelectTogether(dgv2, e);
-        }
+        //private void dgv2_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == -1)
+        //        dgv6.EndEdit();
+        //    else
+        //        dgv6.BeginEdit(true);
+        //}
 
-        private void dgv2_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == colCommon.Index)
-                SelectTogether(dgv2, e);
-        }
+        //private void dgv3_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == -1)
+        //        dgv12.EndEdit();
+        //    else
+        //        dgv12.BeginEdit(true);
+        //}
+
+        //private void dgv1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == colCommon.Index)
+        //        SelectTogether(dgv2, e);
+        //}
+
+        //private void dgv1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == colCommon.Index)
+        //        SelectTogether(dgv2, e);
+        //}
+
+        //private void dgv2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == colCommon.Index)
+        //        SelectTogether(dgv6, e);
+        //}
+
+        //private void dgv2_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == colCommon.Index)
+        //        SelectTogether(dgv6, e);
+        //}
 
 
     }
