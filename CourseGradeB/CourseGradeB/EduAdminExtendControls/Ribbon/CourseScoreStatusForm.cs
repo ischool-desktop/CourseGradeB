@@ -56,7 +56,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             intSemester.Value = _semester;
 
             //Get Teacher Name
-            DataTable dt = _Q.Select("SELECT tc_instruct.ref_course_id,teacher.teacher_name FROM tc_instruct JOIN teacher ON tc_instruct.ref_teacher_id=teacher.id ORDER BY tc_instruct.sequence DESC");
+            DataTable dt = _Q.Select("SELECT tc_instruct.ref_course_id,teacher.teacher_name FROM tc_instruct LEFT OUTER JOIN teacher ON tc_instruct.ref_teacher_id=teacher.id ORDER BY tc_instruct.sequence DESC");
             foreach (DataRow row in dt.Rows)
             {
                 string course_id = row["ref_course_id"] + "";

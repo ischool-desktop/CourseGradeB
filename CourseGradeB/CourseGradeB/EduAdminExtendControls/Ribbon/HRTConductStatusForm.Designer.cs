@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chkNotFinishedOnly = new System.Windows.Forms.CheckBox();
             this.btnExport = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
@@ -39,6 +39,7 @@
             this.colExam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSYSM = new DevComponents.DotNetBar.LabelX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,12 +49,13 @@
             this.chkNotFinishedOnly.AutoSize = true;
             this.chkNotFinishedOnly.BackColor = System.Drawing.Color.Transparent;
             this.chkNotFinishedOnly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(66)))), ((int)(((byte)(139)))));
-            this.chkNotFinishedOnly.Location = new System.Drawing.Point(490, 10);
+            this.chkNotFinishedOnly.Location = new System.Drawing.Point(494, 459);
             this.chkNotFinishedOnly.Name = "chkNotFinishedOnly";
             this.chkNotFinishedOnly.Size = new System.Drawing.Size(170, 21);
             this.chkNotFinishedOnly.TabIndex = 3;
             this.chkNotFinishedOnly.Text = "僅顯示未完成輸入之班級";
             this.chkNotFinishedOnly.UseVisualStyleBackColor = false;
+            this.chkNotFinishedOnly.Visible = false;
             // 
             // btnExport
             // 
@@ -105,14 +107,14 @@
             this.colTeacher,
             this.colExam1,
             this.colExam2});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgv.Location = new System.Drawing.Point(6, 38);
             this.dgv.Name = "dgv";
@@ -164,11 +166,28 @@
             this.txtSYSM.TabIndex = 8;
             this.txtSYSM.Text = "現在學年度學期";
             // 
+            // labelX1
+            // 
+            this.labelX1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Location = new System.Drawing.Point(412, 8);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.labelX1.Size = new System.Drawing.Size(247, 21);
+            this.labelX1.TabIndex = 9;
+            this.labelX1.Text = "輸入所有評分項目( 輸入評語 ) / 總人數";
+            // 
             // HRTConductStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 486);
+            this.Controls.Add(this.labelX1);
             this.Controls.Add(this.txtSYSM);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.btnQuery);
@@ -180,6 +199,7 @@
             this.MinimumSize = new System.Drawing.Size(520, 300);
             this.Name = "HRTConductStatusForm";
             this.Text = "Conduct輸入狀況(班導師)";
+            this.Load += new System.EventHandler(this.HRTConductStatusForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -198,5 +218,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colExam1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExam2;
         private DevComponents.DotNetBar.LabelX txtSYSM;
+        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

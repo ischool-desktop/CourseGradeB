@@ -74,9 +74,9 @@ namespace CourseGradeB
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectScoreCalculateByGradeyear", "批次計算科目成績"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.GpaRefForm", "歷屆GPA統計"));
             ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SemsHistoryMaker", "產生學期歷程"));
-            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm", "評量輸入狀況檢視"));
-            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm", "Conduct輸入狀況檢視(授課老師)"));
-            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm", "Conduct輸入狀況檢視(班導師)"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm", "輸入狀況檢視(評量成績)"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm", "輸入狀況檢視(Conduct班導師)"));
+            ribbon.Add(new RibbonFeature("CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm", "輸入狀況檢視(Conduct授課老師)"));
             //ribbon.Add(new RibbonFeature("JHSchool.EduAdmin.Ribbon.ExamTemplateManager", "評分樣板設定"));
 
             //學務作業
@@ -345,27 +345,27 @@ namespace CourseGradeB
             };
 
             //評量輸入狀況檢視
-            eduitem2["成績作業"]["評量成績輸入狀況檢視"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm"].Executable;
+            eduitem2["成績作業"]["輸入狀況檢視(評量成績)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm"].Executable;
 
-            eduitem2["成績作業"]["評量成績輸入狀況檢視"].Click += delegate
+            eduitem2["成績作業"]["輸入狀況檢視(評量成績)"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm().ShowDialog();
             };
 
-            //Conduct輸入狀況檢視(授課老師)
-            eduitem2["成績作業"]["Conduct輸入狀況檢視(授課老師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm"].Executable;
-
-            eduitem2["成績作業"]["Conduct輸入狀況檢視(授課老師)"].Click += delegate
-            {
-                new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm().ShowDialog();
-            };
-
             //Conduct輸入狀況檢視(班導師)
-            eduitem2["成績作業"]["Conduct輸入狀況檢視(班導師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm"].Executable;
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct班導師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm"].Executable;
 
-            eduitem2["成績作業"]["Conduct輸入狀況檢視(班導師)"].Click += delegate
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct班導師)"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm().ShowDialog();
+            };
+
+            //Conduct輸入狀況檢視(授課老師)
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct授課老師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm"].Executable;
+
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct授課老師)"].Click += delegate
+            {
+                new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm().ShowDialog();
             };
 
             RibbonBarItem eduitem3 = EduAdmin.Instance.RibbonBarItems["基本設定"];

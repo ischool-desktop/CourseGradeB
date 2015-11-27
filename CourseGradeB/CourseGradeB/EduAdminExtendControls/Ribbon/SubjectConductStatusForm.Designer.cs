@@ -33,15 +33,23 @@
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.intSchoolYear = new DevComponents.Editors.IntegerInput();
             this.intSemester = new DevComponents.Editors.IntegerInput();
-            this.chkNotFinishedOnly = new System.Windows.Forms.CheckBox();
             this.btnExport = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cboFilter = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.colCourse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboItem4 = new DevComponents.Editors.ComboItem();
+            this.comboItem5 = new DevComponents.Editors.ComboItem();
+            this.comboItem6 = new DevComponents.Editors.ComboItem();
             ((System.ComponentModel.ISupportInitialize)(this.intSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intSemester)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -109,19 +117,6 @@
             this.intSemester.TabIndex = 1;
             this.intSemester.Value = 1;
             // 
-            // chkNotFinishedOnly
-            // 
-            this.chkNotFinishedOnly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkNotFinishedOnly.AutoSize = true;
-            this.chkNotFinishedOnly.BackColor = System.Drawing.Color.Transparent;
-            this.chkNotFinishedOnly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(66)))), ((int)(((byte)(139)))));
-            this.chkNotFinishedOnly.Location = new System.Drawing.Point(490, 10);
-            this.chkNotFinishedOnly.Name = "chkNotFinishedOnly";
-            this.chkNotFinishedOnly.Size = new System.Drawing.Size(170, 21);
-            this.chkNotFinishedOnly.TabIndex = 3;
-            this.chkNotFinishedOnly.Text = "僅顯示未完成輸入之課程";
-            this.chkNotFinishedOnly.UseVisualStyleBackColor = false;
-            // 
             // btnExport
             // 
             this.btnExport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -165,10 +160,14 @@
             // 
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.BackgroundColor = System.Drawing.Color.White;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCourse,
+            this.colClass,
             this.colTeacher,
             this.colExam1,
             this.colExam2});
@@ -188,12 +187,63 @@
             this.dgv.Size = new System.Drawing.Size(749, 413);
             this.dgv.TabIndex = 7;
             // 
+            // cboFilter
+            // 
+            this.cboFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboFilter.DisplayMember = "Text";
+            this.cboFilter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFilter.FormattingEnabled = true;
+            this.cboFilter.ItemHeight = 19;
+            this.cboFilter.Items.AddRange(new object[] {
+            this.comboItem4,
+            this.comboItem5,
+            this.comboItem6});
+            this.cboFilter.Location = new System.Drawing.Point(467, 7);
+            this.cboFilter.Name = "cboFilter";
+            this.cboFilter.Size = new System.Drawing.Size(195, 25);
+            this.cboFilter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboFilter.TabIndex = 11;
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "顯示全部";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "僅顯示Midterm未完成";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "僅顯示Final未完成";
+            // 
+            // labelX3
+            // 
+            this.labelX3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelX3.AutoSize = true;
+            this.labelX3.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(412, 9);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(47, 21);
+            this.labelX3.TabIndex = 10;
+            this.labelX3.Text = "篩　選";
+            // 
             // colCourse
             // 
+            this.colCourse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colCourse.HeaderText = "課程名稱";
             this.colCourse.Name = "colCourse";
             this.colCourse.ReadOnly = true;
-            this.colCourse.Width = 290;
+            // 
+            // colClass
+            // 
+            this.colClass.HeaderText = "開課年級";
+            this.colClass.Name = "colClass";
             // 
             // colTeacher
             // 
@@ -207,25 +257,36 @@
             this.colExam1.HeaderText = "Midterm";
             this.colExam1.Name = "colExam1";
             this.colExam1.ReadOnly = true;
-            this.colExam1.Width = 150;
             // 
             // colExam2
             // 
             this.colExam2.HeaderText = "Final";
             this.colExam2.Name = "colExam2";
             this.colExam2.ReadOnly = true;
-            this.colExam2.Width = 150;
             // 
-            // ConductStatusForm
+            // comboItem4
+            // 
+            this.comboItem4.Text = "顯示全部";
+            // 
+            // comboItem5
+            // 
+            this.comboItem5.Text = "僅顯示Midterm未完成";
+            // 
+            // comboItem6
+            // 
+            this.comboItem6.Text = "僅顯示Final未完成";
+            // 
+            // SubjectConductStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 486);
+            this.Controls.Add(this.cboFilter);
+            this.Controls.Add(this.labelX3);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.btnQuery);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.chkNotFinishedOnly);
             this.Controls.Add(this.intSemester);
             this.Controls.Add(this.intSchoolYear);
             this.Controls.Add(this.labelX2);
@@ -233,7 +294,7 @@
             this.DoubleBuffered = true;
             this.MaximizeBox = true;
             this.MinimumSize = new System.Drawing.Size(520, 300);
-            this.Name = "ConductStatusForm";
+            this.Name = "SubjectConductStatusForm";
             this.Text = "Conduct輸入狀況(授課老師)";
             ((System.ComponentModel.ISupportInitialize)(this.intSchoolYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intSemester)).EndInit();
@@ -249,14 +310,22 @@
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.Editors.IntegerInput intSchoolYear;
         private DevComponents.Editors.IntegerInput intSemester;
-        private System.Windows.Forms.CheckBox chkNotFinishedOnly;
         private DevComponents.DotNetBar.ButtonX btnExport;
         private DevComponents.DotNetBar.ButtonX btnClose;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboFilter;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.DotNetBar.LabelX labelX3;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCourse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTeacher;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExam1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExam2;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem6;
     }
 }

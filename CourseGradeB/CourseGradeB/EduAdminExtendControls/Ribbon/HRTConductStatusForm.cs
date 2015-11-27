@@ -17,7 +17,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
     {
         private int _schoolYear, _semester;
 
-        Dictionary<string, int> _StudentCounts;
+        Dictionary<string, int> _ConductFinishedStudentCounts;
+        Dictionary<string, int> _HasCommentStudentCounts;
         List<ClassObj> _ClassList;
 
         private QueryHelper _Q;
@@ -28,7 +29,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         {
             InitializeComponent();
 
-            _StudentCounts = new Dictionary<string, int>();
+            _ConductFinishedStudentCounts = new Dictionary<string, int>();
+            _HasCommentStudentCounts = new Dictionary<string, int>();
             _ClassList = new List<ClassObj>();
             _Q = new QueryHelper();
             _A = new AccessHelper();
@@ -44,6 +46,11 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             txtSYSM.Text = "現在學年度: " + _schoolYear + " 學期: " + _semester;
         }
 
+        private void HRTConductStatusForm_Load(object sender, EventArgs e)
+        {
+            btnQuery_Click(null, null);
+        }
+
         private void BW_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
             FormEnable(true);
@@ -57,10 +64,11 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
         private void QueryData()
         {
-            _StudentCounts.Clear();
+            _ConductFinishedStudentCounts.Clear();
+            _HasCommentStudentCounts.Clear();
             //取得學生相關資料
-            string sql = "select student.ref_class_id,term from $ischool.conduct";
-            sql += " join student on student.id=$ischool.conduct.ref_student_id";
+            string sql = "select student.ref_class_id, term, conduct, $ischool.conduct.comment from $ischool.conduct";
+            sql += " left join student on student.id=$ischool.conduct.ref_student_id";
             sql += " where $ischool.conduct.subject is null and $ischool.conduct.school_year=" + _schoolYear + " and $ischool.conduct.semester=" + _semester + " and student.status=1";
             DataTable dt = _Q.Select(sql);
             foreach (DataRow row in dt.Rows)
@@ -73,17 +81,42 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 string key = id + "_" + term;
 
-                if (!_StudentCounts.ContainsKey(key))
-                    _StudentCounts.Add(key, 0);
+                bool allFinished = true;
+                try
+                {
+                    System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+                    doc.LoadXml("" + row["conduct"]);
+                    foreach (System.Xml.XmlElement item in doc.SelectNodes("Conducts/Conduct/Item"))
+                    {
+                        if (item.GetAttribute("Grade") == "")
+                            allFinished = false;
+                    }
+                }
+                catch
+                {
+                    allFinished = false;
+                }
+                if (allFinished)
+                {
+                    if (!_ConductFinishedStudentCounts.ContainsKey(key))
+                        _ConductFinishedStudentCounts.Add(key, 0);
+                    _ConductFinishedStudentCounts[key]++;
+                }
 
-                _StudentCounts[key]++;
+                if ("" + row["comment"] != "")
+                {
+                    if (!_HasCommentStudentCounts.ContainsKey(key))
+                        _HasCommentStudentCounts.Add(key, 0);
+                    _HasCommentStudentCounts[key]++;
+                }
             }
 
             _ClassList.Clear();
             //取得課程相關資料
             sql = "select class.id as class_id,class.class_name,class.grade_year,teacher.teacher_name,count(student.id) from class";
-            sql += " left join student on student.ref_class_id=class.id and student.status=1";
+            sql += " left join student on student.ref_class_id=class.id";
             sql += " left join teacher on class.ref_teacher_id=teacher.id";
+            sql += " where student.status=1";
             sql += " group by class_id,class.grade_year,teacher.teacher_name,class.class_name";
             dt = _Q.Select(sql);
             foreach (DataRow row in dt.Rows)
@@ -112,33 +145,37 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 int total = co.Count;
                 string key1 = co.ID + "_1";
                 string key2 = co.ID + "_2";
-                int exam1 = _StudentCounts.ContainsKey(key1) ? _StudentCounts[key1] : 0;
-                int exam2 = _StudentCounts.ContainsKey(key2) ? _StudentCounts[key2] : 0;
+                int exam1 = _ConductFinishedStudentCounts.ContainsKey(key1) ? _ConductFinishedStudentCounts[key1] : 0;
+                int exam2 = _ConductFinishedStudentCounts.ContainsKey(key2) ? _ConductFinishedStudentCounts[key2] : 0;
+
+                int examC1 = _HasCommentStudentCounts.ContainsKey(key1) ? _HasCommentStudentCounts[key1] : 0;
+                int examC2 = _HasCommentStudentCounts.ContainsKey(key2) ? _HasCommentStudentCounts[key2] : 0;
 
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dgv);
                 row.Cells[0].Value = courseName;
                 row.Cells[1].Value = courseTeacher;
-                row.Cells[2].Value = exam1 + "/" + total;
-                row.Cells[3].Value = exam2 + "/" + total;
+                row.Cells[2].Value = string.Format("{0}( {1} ) / {2}", exam1, examC1, total);
+                row.Cells[3].Value = string.Format("{0}( {1} ) / {2}", exam2, examC2, total);
 
-                if (exam1 < total && row.Cells[2].Value + "" != "N/A")
+                if (exam1 < total)
                     row.Cells[2].Style.ForeColor = Color.Red;
 
                 if (exam2 < total)
                     row.Cells[3].Style.ForeColor = Color.Red;
 
-                if (chkNotFinishedOnly.Checked)
-                {
-                    if (co.GradeYear <= 2 && (exam1 < total || exam2 < total))
-                        dgv.Rows.Add(row);
-                    else if (co.GradeYear > 2 && exam2 < total)
-                        dgv.Rows.Add(row);
-                    else
-                        continue;
-                }
-                else
-                    dgv.Rows.Add(row);
+                dgv.Rows.Add(row);
+                //if (chkNotFinishedOnly.Checked)
+                //{
+                //    if (co.GradeYear <= 2 && (exam1 < total || exam2 < total))
+                //        dgv.Rows.Add(row);
+                //    else if (co.GradeYear > 2 && exam2 < total)
+                //        dgv.Rows.Add(row);
+                //    else
+                //        continue;
+                //}
+                //else
+                //    dgv.Rows.Add(row);
             }
             dgv.Refresh();
         }

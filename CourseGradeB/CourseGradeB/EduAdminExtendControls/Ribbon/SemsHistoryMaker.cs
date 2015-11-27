@@ -80,7 +80,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         {
             //撈取全部學生
             Dictionary<string, StudentObj> student_obj_dic = new Dictionary<string, StudentObj>();
-            string sqlcmd = "select student.id, student.seat_no,class.class_name,class.grade_year,teacher.teacher_name from student ";
+            string sqlcmd = "select student.id, student.seat_no,class.class_name,class.grade_year,teacher.teacher_name,teacher.nickname from student ";
             sqlcmd += "left join class on class.id=student.ref_class_id ";
             sqlcmd += "left join teacher on class.ref_teacher_id=teacher.id ";
             sqlcmd += "where student.status=1";
@@ -151,15 +151,15 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
     public class StudentObj
     {
-        public string Id,ClassName, TeacherName;
-        private string gradeYear,seatNo;
+        public string Id, ClassName, TeacherName;
+        private string gradeYear, seatNo;
         public StudentObj(DataRow row)
         {
-            Id = row["id"] + "";
-            seatNo = row["seat_no"] + "";
-            ClassName = row["class_name"] + "";
-            gradeYear = row["grade_year"] + "";
-            TeacherName = row["teacher_name"] + "";
+            Id = "" + row["id"];
+            seatNo = "" + row["seat_no"];
+            ClassName = "" + row["class_name"];
+            gradeYear = "" + row["grade_year"];
+            TeacherName = ("" + row["teacher_name"]).Replace(" ", "") + (("" + row["nickname"] == "" ? "" : (" " + row["nickname"])));
         }
 
         public int GradeYear
