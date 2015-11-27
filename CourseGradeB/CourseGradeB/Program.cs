@@ -345,9 +345,9 @@ namespace CourseGradeB
             };
 
             //評量輸入狀況檢視
-            eduitem2["成績作業"]["評量輸入狀況檢視"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm"].Executable;
+            eduitem2["成績作業"]["評量成績輸入狀況檢視"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm"].Executable;
 
-            eduitem2["成績作業"]["評量輸入狀況檢視"].Click += delegate
+            eduitem2["成績作業"]["評量成績輸入狀況檢視"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.CourseScoreStatusForm().ShowDialog();
             };

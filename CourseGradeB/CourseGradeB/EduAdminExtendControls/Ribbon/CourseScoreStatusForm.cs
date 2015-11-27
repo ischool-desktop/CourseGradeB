@@ -32,6 +32,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         public CourseScoreStatusForm()
         {
             InitializeComponent();
+            cboFilter.SelectedIndex = 0;
+
             _invalidCourseId = new List<string>();
 
             _courseRecordsDic = new Dictionary<string, CourseRecord>();
@@ -81,7 +83,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         private void FillData()
         {
             dgv.Rows.Clear();
-            foreach(string id in _courseRecordsDic.Keys)
+            foreach (string id in _courseRecordsDic.Keys)
             {
                 if (_invalidCourseId.Contains(id))
                     continue;
@@ -106,14 +108,20 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 if (exam2 < total)
                     row.Cells[3].Style.ForeColor = Color.Red;
 
-                if (chkNotFinishedOnly.Checked)
-                {
-                    if (exam1 < total || exam2 < total)
-                        dgv.Rows.Add(row);
-                    else
-                        continue;
-                }
-                else
+                //if (chkNotFinishedOnly.Checked)
+                //{
+                //    if (exam1 < total || exam2 < total)
+                //        dgv.Rows.Add(row);
+                //    else
+                //        continue;
+                //}
+                //else
+                //    dgv.Rows.Add(row);
+                if (cboFilter.SelectedIndex == 0)
+                    dgv.Rows.Add(row);
+                else if (cboFilter.SelectedIndex == 1 && exam1 < total)
+                    dgv.Rows.Add(row);
+                else if (cboFilter.SelectedIndex == 2 && exam2 < total)
                     dgv.Rows.Add(row);
             }
             dgv.Refresh();
@@ -137,14 +145,17 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             Dictionary<string, string> attend_to_course = new Dictionary<string, string>();
             foreach (K12.Data.SCAttendRecord scr in K12.Data.SCAttend.SelectByCourseIDs(course_ids))
             {
-                if (!_attendTotalDic.ContainsKey(scr.RefCourseID))
-                    _attendTotalDic.Add(scr.RefCourseID, 0);
+                if (scr.Student.Status == StudentRecord.StudentStatus.一般)
+                {
+                    if (!_attendTotalDic.ContainsKey(scr.RefCourseID))
+                        _attendTotalDic.Add(scr.RefCourseID, 0);
 
-                _attendTotalDic[scr.RefCourseID]++;
+                    _attendTotalDic[scr.RefCourseID]++;
 
-                //for catch
-                if (!attend_to_course.ContainsKey(scr.ID))
-                    attend_to_course.Add(scr.ID, scr.RefCourseID);
+                    //for catch
+                    if (!attend_to_course.ContainsKey(scr.ID))
+                        attend_to_course.Add(scr.ID, scr.RefCourseID);
+                }
             }
 
             _exam1CountDic.Clear();
@@ -154,23 +165,29 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 //Exam1's Count
                 foreach (K12.Data.SCETakeRecord sce in K12.Data.SCETake.SelectByCourseAndExam(course_ids, "1"))
                 {
-                    string key = attend_to_course[sce.RefSCAttendID];
+                    if (sce.Student.Status == StudentRecord.StudentStatus.一般)
+                    {
+                        string key = attend_to_course[sce.RefSCAttendID];
 
-                    if (!_exam1CountDic.ContainsKey(key))
-                        _exam1CountDic.Add(key, 0);
+                        if (!_exam1CountDic.ContainsKey(key))
+                            _exam1CountDic.Add(key, 0);
 
-                    _exam1CountDic[key]++;
+                        _exam1CountDic[key]++;
+                    }
                 }
 
                 //Exam2's Count
                 foreach (K12.Data.SCETakeRecord sce in K12.Data.SCETake.SelectByCourseAndExam(course_ids, "2"))
                 {
-                    string key = attend_to_course[sce.RefSCAttendID];
+                    if (sce.Student.Status == StudentRecord.StudentStatus.一般)
+                    {
+                        string key = attend_to_course[sce.RefSCAttendID];
 
-                    if (!_exam2CountDic.ContainsKey(key))
-                        _exam2CountDic.Add(key, 0);
+                        if (!_exam2CountDic.ContainsKey(key))
+                            _exam2CountDic.Add(key, 0);
 
-                    _exam2CountDic[key]++;
+                        _exam2CountDic[key]++;
+                    }
                 }
 
                 //Get invalid course grade list
@@ -202,7 +219,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         private void FormEnable(bool b)
         {
             btnExport.Enabled = b;
-            chkNotFinishedOnly.Enabled = b;
+            cboFilter.Enabled = b;
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -222,7 +239,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             cs[0, 3].PutValue("Final");
 
             int index = 1;
-            foreach(DataGridViewRow row in dgv.Rows)
+            foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (row.IsNewRow)
                     continue;

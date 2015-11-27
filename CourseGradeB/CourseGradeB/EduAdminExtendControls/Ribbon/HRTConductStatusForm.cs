@@ -61,7 +61,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             //取得學生相關資料
             string sql = "select student.ref_class_id,term from $ischool.conduct";
             sql += " join student on student.id=$ischool.conduct.ref_student_id";
-            sql += " where $ischool.conduct.subject is null and $ischool.conduct.school_year=" + _schoolYear + " and $ischool.conduct.semester=" + _semester;
+            sql += " where $ischool.conduct.subject is null and $ischool.conduct.school_year=" + _schoolYear + " and $ischool.conduct.semester=" + _semester + " and student.status=1";
             DataTable dt = _Q.Select(sql);
             foreach (DataRow row in dt.Rows)
             {
@@ -82,7 +82,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             _ClassList.Clear();
             //取得課程相關資料
             sql = "select class.id as class_id,class.class_name,class.grade_year,teacher.teacher_name,count(student.id) from class";
-            sql += " left join student on student.ref_class_id=class.id";
+            sql += " left join student on student.ref_class_id=class.id and student.status=1";
             sql += " left join teacher on class.ref_teacher_id=teacher.id";
             sql += " group by class_id,class.grade_year,teacher.teacher_name,class.class_name";
             dt = _Q.Select(sql);
@@ -121,9 +121,6 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 row.Cells[1].Value = courseTeacher;
                 row.Cells[2].Value = exam1 + "/" + total;
                 row.Cells[3].Value = exam2 + "/" + total;
-
-                if (co.GradeYear > 2)
-                    row.Cells[2].Value = "N/A";
 
                 if (exam1 < total && row.Cells[2].Value + "" != "N/A")
                     row.Cells[2].Style.ForeColor = Color.Red;

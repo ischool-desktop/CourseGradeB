@@ -78,7 +78,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             //取得學生相關資料
             string sql = "select course.id,ic.term from $ischool.conduct as ic";
             sql += " join sc_attend on ic.ref_student_id=sc_attend.ref_student_id";
-            sql += " join course on sc_attend.ref_course_id=course.id and ic.school_year=course.school_year and ic.semester=course.semester and ic.subject=course.subject";
+            sql += " left join student on sc_attend.ref_student_id=student.id and student.status = 1 ";
+            sql += " join course on sc_attend.ref_course_id=course.id and ic.school_year=course.school_year and ic.semester=course.semester and ic.subject=course.subject ";
             sql += " where ic.school_year=" + _schoolYear + " and ic.semester=" + _semester;
             DataTable dt = _Q.Select(sql);
             foreach (DataRow row in dt.Rows)
@@ -99,9 +100,10 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
             _courses.Clear();
             //取得課程相關資料
-            sql = "select course.id,course.course_name,ice.grade_year,count(sc_attend.ref_student_id) from course ";
-            sql += "join sc_attend on sc_attend.ref_course_id=course.id ";
-            sql += "join $ischool.course.extend as ice on ice.ref_course_id=course.id ";
+            sql = "select course.id,course.course_name,ice.grade_year,count(student.id) from course ";
+            sql += "left join sc_attend on sc_attend.ref_course_id=course.id ";
+            sql += "left join student on sc_attend.ref_student_id=student.id and student.status = 1 ";
+            sql += "left join $ischool.course.extend as ice on ice.ref_course_id=course.id ";
             sql += "where course.school_year=" + _schoolYear + " and course.semester=" + _semester;
             sql += " group by course.id,course.course_name,ice.grade_year";
             dt = _Q.Select(sql);
@@ -146,7 +148,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 row.Cells[2].Value = exam1 + "/" + total;
                 row.Cells[3].Value = exam2 + "/" + total;
 
-                if (co.GradeYear > 2)
+                if (co.GradeYear > 4)
                     row.Cells[2].Value = "N/A";
 
                 if (exam1 < total && row.Cells[2].Value + "" != "N/A")
