@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chkNotFinishedOnly = new System.Windows.Forms.CheckBox();
             this.btnExport = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.txtSYSM = new DevComponents.DotNetBar.LabelX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtSYSM = new DevComponents.DotNetBar.LabelX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // chkNotFinishedOnly
             // 
-            this.chkNotFinishedOnly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkNotFinishedOnly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkNotFinishedOnly.AutoSize = true;
             this.chkNotFinishedOnly.BackColor = System.Drawing.Color.Transparent;
             this.chkNotFinishedOnly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(66)))), ((int)(((byte)(139)))));
@@ -86,7 +86,7 @@
             // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuery.BackColor = System.Drawing.Color.Transparent;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(665, 8);
@@ -100,6 +100,9 @@
             // 
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.BackgroundColor = System.Drawing.Color.White;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -107,14 +110,14 @@
             this.colTeacher,
             this.colExam1,
             this.colExam2});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgv.Location = new System.Drawing.Point(6, 38);
             this.dgv.Name = "dgv";
@@ -122,34 +125,6 @@
             this.dgv.RowTemplate.Height = 24;
             this.dgv.Size = new System.Drawing.Size(749, 413);
             this.dgv.TabIndex = 7;
-            // 
-            // colClassName
-            // 
-            this.colClassName.HeaderText = "班級名稱";
-            this.colClassName.Name = "colClassName";
-            this.colClassName.ReadOnly = true;
-            this.colClassName.Width = 290;
-            // 
-            // colTeacher
-            // 
-            this.colTeacher.HeaderText = "班導師";
-            this.colTeacher.Name = "colTeacher";
-            this.colTeacher.ReadOnly = true;
-            this.colTeacher.Width = 155;
-            // 
-            // colExam1
-            // 
-            this.colExam1.HeaderText = "Midterm";
-            this.colExam1.Name = "colExam1";
-            this.colExam1.ReadOnly = true;
-            this.colExam1.Width = 150;
-            // 
-            // colExam2
-            // 
-            this.colExam2.HeaderText = "Final";
-            this.colExam2.Name = "colExam2";
-            this.colExam2.ReadOnly = true;
-            this.colExam2.Width = 150;
             // 
             // txtSYSM
             // 
@@ -182,6 +157,34 @@
             this.labelX1.TabIndex = 9;
             this.labelX1.Text = "輸入所有評分項目( 輸入評語 ) / 總人數";
             // 
+            // colClassName
+            // 
+            this.colClassName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colClassName.HeaderText = "班級名稱";
+            this.colClassName.Name = "colClassName";
+            this.colClassName.ReadOnly = true;
+            // 
+            // colTeacher
+            // 
+            this.colTeacher.HeaderText = "班導師";
+            this.colTeacher.Name = "colTeacher";
+            this.colTeacher.ReadOnly = true;
+            this.colTeacher.Width = 155;
+            // 
+            // colExam1
+            // 
+            this.colExam1.HeaderText = "Midterm";
+            this.colExam1.Name = "colExam1";
+            this.colExam1.ReadOnly = true;
+            this.colExam1.Width = 150;
+            // 
+            // colExam2
+            // 
+            this.colExam2.HeaderText = "Final";
+            this.colExam2.Name = "colExam2";
+            this.colExam2.ReadOnly = true;
+            this.colExam2.Width = 150;
+            // 
             // HRTConductStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -213,11 +216,11 @@
         private DevComponents.DotNetBar.ButtonX btnClose;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
+        private DevComponents.DotNetBar.LabelX txtSYSM;
+        private DevComponents.DotNetBar.LabelX labelX1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTeacher;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExam1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExam2;
-        private DevComponents.DotNetBar.LabelX txtSYSM;
-        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

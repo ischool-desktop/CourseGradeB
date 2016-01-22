@@ -77,21 +77,24 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         {
             _attendStudents.Clear();
             //取得學生相關資料
-            string sql = "select course.id, ic.term, conduct from $ischool.conduct as ic";
+            string sql = "select course.id, ic.term, conduct, case when class.grade_year<=2 then '1-2' when class.grade_year<=4 then '3-4' when class.grade_year<=6 then '5-6' end as grade_year";
+            sql += " from $ischool.conduct as ic";
+            sql += " left join student on ic.ref_student_id=student.id";
+            sql += " left join class on student.ref_class_id = class.id";
             sql += " left join sc_attend on ic.ref_student_id=sc_attend.ref_student_id";
-            sql += " left join student on sc_attend.ref_student_id=student.id";
-            sql += " left join course on sc_attend.ref_course_id=course.id and ic.school_year=course.school_year and ic.semester=course.semester and ic.subject=course.subject ";
-            sql += " where ic.school_year=" + _schoolYear + " and ic.semester=" + _semester + " and student.status = 1";
+            sql += " left join course on sc_attend.ref_course_id=course.id and ic.school_year=course.school_year and ic.semester=course.semester ";
+            sql += " where ic.school_year=" + _schoolYear + " and ic.semester=" + _semester + " and student.status = 1 and ic.subject=course.subject and class.grade_year<=6";
             DataTable dt = _Q.Select(sql);
             foreach (DataRow row in dt.Rows)
             {
-                string id = row["id"] + "";
-                string term = row["term"] + "";
+                string id = "" + row["id"];
+                string term = "" + row["term"];
+                string gredeyear = "" + row["grade_year"];
 
                 if (string.IsNullOrWhiteSpace(term))
                     term = "2";
 
-                string key = id + "_" + term;
+                string key = id + "_" + term + "_" + gredeyear;
 
                 //if (!_attendStudents.ContainsKey(key))
                 //    _attendStudents.Add(key, 0);
@@ -123,12 +126,15 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
             _courses.Clear();
             //取得課程相關資料
-            sql = "select course.id,course.course_name,ice.grade_year,count(student.id) from course ";
+            sql = "select course.id,course.course_name,ice.grade_year,case when class.grade_year<=2 then '1-2' when class.grade_year<=4 then '3-4' when class.grade_year<=6 then '5-6' end as sgrade_year,case when cclass.ref_teacher_id = tc_instruct.ref_teacher_id then 'hr' else 'sbj' end as type,count(student.id) from course ";
             sql += "left join sc_attend on sc_attend.ref_course_id=course.id ";
             sql += "left join student on sc_attend.ref_student_id=student.id ";
+            sql += "left join class on student.ref_class_id = class.id ";
+            sql += "left join class as cclass on course.ref_class_id = cclass.id ";
             sql += "left join $ischool.course.extend as ice on ice.ref_course_id=course.id ";
-            sql += "where course.school_year=" + _schoolYear + " and course.semester=" + _semester + " and student.status = 1";
-            sql += " group by course.id,course.course_name,ice.grade_year";
+            sql += "left join tc_instruct on tc_instruct.ref_course_id = course.id and tc_instruct.sequence = 1 ";
+            sql += "where course.school_year=" + _schoolYear + " and course.semester=" + _semester + " and student.status = 1 and class.grade_year<=6 and ice.grade_year<=6";
+            sql += " group by course.id,course.course_name,ice.grade_year,tc_instruct.ref_teacher_id,cclass.ref_teacher_id,sgrade_year";
             dt = _Q.Select(sql);
             foreach (DataRow row in dt.Rows)
             {
@@ -142,8 +148,10 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             {
                 string xx = (x.GradeYear + "").PadLeft(3, '0');
                 xx += x.Name.PadLeft(50, '0');
+                xx += x.SGradeYear.PadLeft(3, '0');
                 string yy = (y.GradeYear + "").PadLeft(3, '0');
                 yy += y.Name.PadLeft(50, '0');
+                yy += y.SGradeYear.PadLeft(3, '0');
                 return xx.CompareTo(yy);
             });
         }
@@ -153,16 +161,16 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             dgv.Rows.Clear();
             foreach (CourseObj co in _courses)
             {
-                if (co.GradeYear > 6)
-                    continue;
+                //if (co.GradeYear > 6)
+                //    continue;
 
                 int total = co.Count;
 
                 if (total == 0)
                     continue;
 
-                string key1 = co.ID + "_1";
-                string key2 = co.ID + "_2";
+                string key1 = co.ID + "_1_" + co.SGradeYear;
+                string key2 = co.ID + "_2_" + co.SGradeYear;
                 int exam1 = _attendStudents.ContainsKey(key1) ? _attendStudents[key1] : 0;
                 int exam2 = _attendStudents.ContainsKey(key2) ? _attendStudents[key2] : 0;
 
@@ -170,18 +178,21 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 row.CreateCells(dgv);
                 row.Cells[0].Value = co.Name;
                 row.Cells[1].Value = co.GradeYear;
-                row.Cells[2].Value = co.TeacherName;
-                row.Cells[3].Value = exam1 + "/" + total;
-                row.Cells[4].Value = exam2 + "/" + total;
+                row.Cells[2].Value = co.SGradeYear;
+                row.Cells[3].Value = co.TeacherName;
+                row.Cells[4].Value = exam1 + "/" + total;
+                row.Cells[5].Value = exam2 + "/" + total;
 
+                if (co.Type == "hr")
+                    row.DefaultCellStyle.ForeColor = Color.Gray;
                 if (co.GradeYear > 4)
-                    row.Cells[3].Value = "N/A";
+                    row.Cells[4].Value = "N/A";
 
-                if (exam1 < total && "" + row.Cells[3].Value != "N/A")
-                    row.Cells[3].Style.ForeColor = Color.Red;
+                if (exam1 < total && "" + row.Cells[4].Value != "N/A")
+                    row.Cells[4].Style.ForeColor = Color.Red;
 
                 if (exam2 < total)
-                    row.Cells[4].Style.ForeColor = Color.Red;
+                    row.Cells[5].Style.ForeColor = Color.Red;
 
                 //if (chkNotFinishedOnly.Checked)
                 //{
@@ -235,12 +246,14 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             wb.Worksheets[0].Cells.Columns[2].Width = 20;
             wb.Worksheets[0].Cells.Columns[3].Width = 20;
             wb.Worksheets[0].Cells.Columns[4].Width = 20;
+            wb.Worksheets[0].Cells.Columns[5].Width = 20;
 
             cs[0, 0].PutValue("課程名稱");
             cs[0, 1].PutValue("開課年級");
-            cs[0, 2].PutValue("授課老師");
-            cs[0, 3].PutValue("Midterm");
-            cs[0, 4].PutValue("Final");
+            cs[0, 2].PutValue("學生年級");
+            cs[0, 3].PutValue("授課老師");
+            cs[0, 4].PutValue("Midterm");
+            cs[0, 5].PutValue("Final");
 
             int index = 1;
             foreach (DataGridViewRow row in dgv.Rows)
@@ -255,9 +268,10 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 cs[index, 0].PutValue(course_name);
                 cs[index, 1].PutValue("" + row.Cells[colClass.Index].Value);
-                cs[index, 2].PutValue(teacher_name);
-                cs[index, 3].PutValue(midterm);
-                cs[index, 4].PutValue(final);
+                cs[index, 2].PutValue("" + row.Cells[colSGradeYear.Index].Value);
+                cs[index, 3].PutValue(teacher_name);
+                cs[index, 4].PutValue(midterm);
+                cs[index, 5].PutValue(final);
                 index++;
             }
 
@@ -294,6 +308,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             public string TeacherName;
             public int GradeYear;
             public int Count;
+            public string Type;
+            public string SGradeYear;
             public CourseObj(DataRow row)
             {
                 int i;
@@ -301,6 +317,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 this.Name = "" + row["course_name"];
                 this.GradeYear = int.TryParse(row["grade_year"] + "", out i) ? i : 0;
                 this.Count = int.TryParse(row["count"] + "", out i) ? i : 0;
+                this.Type = "" + row["type"];
+                this.SGradeYear = "" + row["sgrade_year"];
             }
         }
     }

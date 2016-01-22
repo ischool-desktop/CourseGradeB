@@ -61,7 +61,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 string group = s.Group;
                 string type = s.Type;
                 row.Tag = s;
-                //row.CreateCells(dgv, name, enName, group, type);
+                //row.CreateCells(dgv, name, enName, group, Type);
                 row.CreateCells(dgv, name, chName, group, type);
 
                 if (!colGroup.Items.Contains(group))

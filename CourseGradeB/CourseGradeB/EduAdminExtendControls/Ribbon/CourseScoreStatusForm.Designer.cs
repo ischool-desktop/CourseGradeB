@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.intSchoolYear = new DevComponents.Editors.IntegerInput();
@@ -37,15 +37,15 @@
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.cboFilter = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.colCourse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cboFilter = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.comboItem1 = new DevComponents.Editors.ComboItem();
-            this.comboItem2 = new DevComponents.Editors.ComboItem();
-            this.comboItem3 = new DevComponents.Editors.ComboItem();
             ((System.ComponentModel.ISupportInitialize)(this.intSchoolYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intSemester)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -142,7 +142,7 @@
             // btnQuery
             // 
             this.btnQuery.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuery.BackColor = System.Drawing.Color.Transparent;
             this.btnQuery.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnQuery.Location = new System.Drawing.Point(665, 8);
@@ -156,6 +156,9 @@
             // 
             this.dgv.AllowUserToAddRows = false;
             this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.BackgroundColor = System.Drawing.Color.White;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -163,14 +166,14 @@
             this.colTeacher,
             this.colExam1,
             this.colExam2});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgv.Location = new System.Drawing.Point(6, 38);
             this.dgv.Name = "dgv";
@@ -179,12 +182,58 @@
             this.dgv.Size = new System.Drawing.Size(749, 413);
             this.dgv.TabIndex = 7;
             // 
+            // cboFilter
+            // 
+            this.cboFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboFilter.DisplayMember = "Text";
+            this.cboFilter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFilter.FormattingEnabled = true;
+            this.cboFilter.ItemHeight = 19;
+            this.cboFilter.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2,
+            this.comboItem3});
+            this.cboFilter.Location = new System.Drawing.Point(464, 7);
+            this.cboFilter.Name = "cboFilter";
+            this.cboFilter.Size = new System.Drawing.Size(195, 25);
+            this.cboFilter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboFilter.TabIndex = 9;
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "顯示全部";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "僅顯示Midterm未完成";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "僅顯示Final未完成";
+            // 
+            // labelX3
+            // 
+            this.labelX3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelX3.AutoSize = true;
+            this.labelX3.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(409, 9);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(47, 21);
+            this.labelX3.TabIndex = 8;
+            this.labelX3.Text = "篩　選";
+            // 
             // colCourse
             // 
+            this.colCourse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colCourse.HeaderText = "課程名稱";
             this.colCourse.Name = "colCourse";
             this.colCourse.ReadOnly = true;
-            this.colCourse.Width = 290;
             // 
             // colTeacher
             // 
@@ -206,50 +255,6 @@
             this.colExam2.Name = "colExam2";
             this.colExam2.ReadOnly = true;
             this.colExam2.Width = 150;
-            // 
-            // cboFilter
-            // 
-            this.cboFilter.DisplayMember = "Text";
-            this.cboFilter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFilter.FormattingEnabled = true;
-            this.cboFilter.ItemHeight = 19;
-            this.cboFilter.Items.AddRange(new object[] {
-            this.comboItem1,
-            this.comboItem2,
-            this.comboItem3});
-            this.cboFilter.Location = new System.Drawing.Point(464, 7);
-            this.cboFilter.Name = "cboFilter";
-            this.cboFilter.Size = new System.Drawing.Size(195, 25);
-            this.cboFilter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboFilter.TabIndex = 9;
-            // 
-            // labelX3
-            // 
-            this.labelX3.AutoSize = true;
-            this.labelX3.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX3.BackgroundStyle.Class = "";
-            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(409, 9);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(47, 21);
-            this.labelX3.TabIndex = 8;
-            this.labelX3.Text = "篩　選";
-            // 
-            // comboItem1
-            // 
-            this.comboItem1.Text = "顯示全部";
-            // 
-            // comboItem2
-            // 
-            this.comboItem2.Text = "僅顯示Midterm未完成";
-            // 
-            // comboItem3
-            // 
-            this.comboItem3.Text = "僅顯示Final未完成";
             // 
             // CourseScoreStatusForm
             // 
@@ -289,14 +294,14 @@
         private DevComponents.DotNetBar.ButtonX btnClose;
         private DevComponents.DotNetBar.ButtonX btnQuery;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCourse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTeacher;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExam1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExam2;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboFilter;
         private DevComponents.Editors.ComboItem comboItem1;
         private DevComponents.Editors.ComboItem comboItem2;
         private DevComponents.Editors.ComboItem comboItem3;
         private DevComponents.DotNetBar.LabelX labelX3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCourse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTeacher;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExam1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExam2;
     }
 }
