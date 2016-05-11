@@ -45,9 +45,9 @@ namespace CourseGradeB
         /// 取得科目排序(每次呼叫都會更新資料)
         /// </summary>
         /// <returns></returns>
-        public static SubjectCompare GetSubjectCompare()
+        public static SubjectCompare GetSubjectCompare(List<CourseGradeB.Tool.Domain> list)
         {
-            return new SubjectCompare();
+            return new SubjectCompare(list);
         }
 
         /// <summary>
