@@ -45,8 +45,9 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             _schoolYear = int.TryParse(K12.Data.School.DefaultSchoolYear, out i) ? i : 97;
             _semester = int.TryParse(K12.Data.School.DefaultSemester, out i) ? i : 1;
 
-            intSchoolYear.Value = _schoolYear;
-            intSemester.Value = _semester;
+            //intSchoolYear.Value = _schoolYear;
+            //intSemester.Value = _semester;
+            labelX1.Text = "現在學年度: " + _schoolYear + " 學期: " + _semester;
 
             //Get Teacher Name
             DataTable dt = _Q.Select("SELECT tc_instruct.ref_course_id,teacher.teacher_name FROM tc_instruct JOIN teacher ON tc_instruct.ref_teacher_id=teacher.id ORDER BY tc_instruct.sequence DESC");
@@ -60,6 +61,11 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
                 _teacherName[course_id] = teacherName;
             }
+        }
+
+        private void SubjectConductStatusForm_Load(object sender, EventArgs e)
+        {
+            btnQuery_Click(null, null);
         }
 
         private void BW_Completed(object sender, RunWorkerCompletedEventArgs e)
@@ -144,7 +150,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             }
 
             //排序
-            _courses.Sort(delegate(CourseObj x, CourseObj y)
+            _courses.Sort(delegate (CourseObj x, CourseObj y)
             {
                 string xx = (x.GradeYear + "").PadLeft(3, '0');
                 xx += x.Name.PadLeft(50, '0');
@@ -164,6 +170,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 //if (co.GradeYear > 6)
                 //    continue;
 
+                if (co.Type == "hr" && co.GradeYear <= 4)
+                    continue;
                 int total = co.Count;
 
                 if (total == 0)
@@ -183,8 +191,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 row.Cells[4].Value = exam1 + "/" + total;
                 row.Cells[5].Value = exam2 + "/" + total;
 
-                if (co.Type == "hr")
-                    row.DefaultCellStyle.ForeColor = Color.Gray;
+                //if (co.Type == "hr")
+                //    row.DefaultCellStyle.ForeColor = Color.Gray;
                 if (co.GradeYear > 4)
                     row.Cells[4].Value = "N/A";
 
@@ -217,8 +225,8 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            _schoolYear = intSchoolYear.Value;
-            _semester = intSemester.Value;
+            //_schoolYear = intSchoolYear.Value;
+            //_semester = intSemester.Value;
 
             if (_BW.IsBusy)
                 MessageBox.Show("系統忙碌,請稍後再試...");

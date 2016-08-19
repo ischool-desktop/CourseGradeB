@@ -29,33 +29,18 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.chkNotFinishedOnly = new System.Windows.Forms.CheckBox();
             this.btnExport = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.txtSYSM = new DevComponents.DotNetBar.LabelX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.colClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTeacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtSYSM = new DevComponents.DotNetBar.LabelX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
-            // 
-            // chkNotFinishedOnly
-            // 
-            this.chkNotFinishedOnly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkNotFinishedOnly.AutoSize = true;
-            this.chkNotFinishedOnly.BackColor = System.Drawing.Color.Transparent;
-            this.chkNotFinishedOnly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(66)))), ((int)(((byte)(139)))));
-            this.chkNotFinishedOnly.Location = new System.Drawing.Point(494, 459);
-            this.chkNotFinishedOnly.Name = "chkNotFinishedOnly";
-            this.chkNotFinishedOnly.Size = new System.Drawing.Size(170, 21);
-            this.chkNotFinishedOnly.TabIndex = 3;
-            this.chkNotFinishedOnly.Text = "僅顯示未完成輸入之班級";
-            this.chkNotFinishedOnly.UseVisualStyleBackColor = false;
-            this.chkNotFinishedOnly.Visible = false;
             // 
             // btnExport
             // 
@@ -126,6 +111,34 @@
             this.dgv.Size = new System.Drawing.Size(749, 413);
             this.dgv.TabIndex = 7;
             // 
+            // colClassName
+            // 
+            this.colClassName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colClassName.HeaderText = "班級名稱";
+            this.colClassName.Name = "colClassName";
+            this.colClassName.ReadOnly = true;
+            // 
+            // colTeacher
+            // 
+            this.colTeacher.HeaderText = "班導師";
+            this.colTeacher.Name = "colTeacher";
+            this.colTeacher.ReadOnly = true;
+            this.colTeacher.Width = 155;
+            // 
+            // colExam1
+            // 
+            this.colExam1.HeaderText = "Midterm";
+            this.colExam1.Name = "colExam1";
+            this.colExam1.ReadOnly = true;
+            this.colExam1.Width = 150;
+            // 
+            // colExam2
+            // 
+            this.colExam2.HeaderText = "Final";
+            this.colExam2.Name = "colExam2";
+            this.colExam2.ReadOnly = true;
+            this.colExam2.Width = 150;
+            // 
             // txtSYSM
             // 
             this.txtSYSM.BackColor = System.Drawing.Color.Transparent;
@@ -157,34 +170,6 @@
             this.labelX1.TabIndex = 9;
             this.labelX1.Text = "輸入所有評分項目( 輸入評語 ) / 總人數";
             // 
-            // colClassName
-            // 
-            this.colClassName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colClassName.HeaderText = "班級名稱";
-            this.colClassName.Name = "colClassName";
-            this.colClassName.ReadOnly = true;
-            // 
-            // colTeacher
-            // 
-            this.colTeacher.HeaderText = "班導師";
-            this.colTeacher.Name = "colTeacher";
-            this.colTeacher.ReadOnly = true;
-            this.colTeacher.Width = 155;
-            // 
-            // colExam1
-            // 
-            this.colExam1.HeaderText = "Midterm";
-            this.colExam1.Name = "colExam1";
-            this.colExam1.ReadOnly = true;
-            this.colExam1.Width = 150;
-            // 
-            // colExam2
-            // 
-            this.colExam2.HeaderText = "Final";
-            this.colExam2.Name = "colExam2";
-            this.colExam2.ReadOnly = true;
-            this.colExam2.Width = 150;
-            // 
             // HRTConductStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -196,7 +181,6 @@
             this.Controls.Add(this.btnQuery);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.chkNotFinishedOnly);
             this.DoubleBuffered = true;
             this.MaximizeBox = true;
             this.MinimumSize = new System.Drawing.Size(520, 300);
@@ -205,13 +189,10 @@
             this.Load += new System.EventHandler(this.HRTConductStatusForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox chkNotFinishedOnly;
         private DevComponents.DotNetBar.ButtonX btnExport;
         private DevComponents.DotNetBar.ButtonX btnClose;
         private DevComponents.DotNetBar.ButtonX btnQuery;

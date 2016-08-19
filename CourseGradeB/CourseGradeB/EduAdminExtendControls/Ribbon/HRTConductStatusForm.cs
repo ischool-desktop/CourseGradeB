@@ -125,7 +125,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
             }
 
             //排序
-            _ClassList.Sort(delegate(ClassObj x, ClassObj y)
+            _ClassList.Sort(delegate (ClassObj x, ClassObj y)
             {
                 string xx = (x.GradeYear + "").PadLeft(3, '0');
                 xx += x.Name.PadLeft(20, '0');
@@ -155,10 +155,13 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 row.CreateCells(dgv);
                 row.Cells[0].Value = courseName;
                 row.Cells[1].Value = courseTeacher;
-                row.Cells[2].Value = string.Format("{0}( {1} ) / {2}", exam1, examC1, total);
+                if (co.GradeYear <= 4)
+                    row.Cells[2].Value = string.Format("{0}( {1} ) / {2}", exam1, examC1, total);
+                else
+                    row.Cells[2].Value = "N/A";
                 row.Cells[3].Value = string.Format("{0}( {1} ) / {2}", exam2, examC2, total);
 
-                if (exam1 < total)
+                if (co.GradeYear <= 4 && exam1 < total)
                     row.Cells[2].Style.ForeColor = Color.Red;
 
                 if (exam2 < total)
@@ -194,7 +197,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
         private void FormEnable(bool b)
         {
             btnExport.Enabled = b;
-            chkNotFinishedOnly.Enabled = b;
+            //chkNotFinishedOnly.Enabled = b;
         }
 
         private void btnExport_Click(object sender, EventArgs e)

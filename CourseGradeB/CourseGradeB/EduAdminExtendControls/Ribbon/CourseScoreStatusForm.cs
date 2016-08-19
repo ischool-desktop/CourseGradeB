@@ -193,7 +193,7 @@ namespace CourseGradeB.EduAdminExtendControls.Ribbon
                 //Get invalid course grade list
                 string ids = string.Join(",", course_ids);
                 _invalidCourseId.Clear();
-                foreach (CourseExtendRecord cer in _A.Select<CourseExtendRecord>("ref_course_id in (" + ids + ") and grade_year <= 2"))
+                foreach (CourseExtendRecord cer in _A.Select<CourseExtendRecord>("ref_course_id in (" + ids + ") and grade_year <= 4"))
                 {
                     string id = cer.Ref_course_id + "";
                     if (!_invalidCourseId.Contains(id))

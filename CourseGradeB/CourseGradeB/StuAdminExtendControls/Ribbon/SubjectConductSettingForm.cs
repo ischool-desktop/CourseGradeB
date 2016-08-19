@@ -32,13 +32,21 @@ namespace CourseGradeB.StuAdminExtendControls
 
             _A = new AccessHelper();
 
+            int index = 0;
             foreach (SubjectRecord s in _A.Select<SubjectRecord>())
             {
                 ButtonItem item = new ButtonItem();
                 item.OptionGroup = "subject";
                 item.Text = s.Name;
                 item.Click += new EventHandler(item_click);
-                itemPanle1.Items.Add(item);
+                if (_doc.SelectNodes("//Conduct[@Subject=" + Tool.XPathLiteral(s.Name) + "]").Count > 0)
+                {
+                    item.ForeColor = Color.Red;
+
+                    itemPanle1.Items.Insert(index++, item);
+                }
+                else
+                    itemPanle1.Items.Add(item);
 
                 if (!_subjects.Contains(s.Name))
                     _subjects.Add(s.Name);

@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.intSchoolYear = new DevComponents.Editors.IntegerInput();
-            this.intSemester = new DevComponents.Editors.IntegerInput();
             this.btnExport = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnQuery = new DevComponents.DotNetBar.ButtonX();
             this.dgv = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.colCourse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSGradeYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTeacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cboFilter = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.comboItem5 = new DevComponents.Editors.ComboItem();
@@ -45,20 +48,13 @@
             this.comboItem2 = new DevComponents.Editors.ComboItem();
             this.comboItem3 = new DevComponents.Editors.ComboItem();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.colCourse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSGradeYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTeacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExam1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExam2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
-            ((System.ComponentModel.ISupportInitialize)(this.intSchoolYear)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.intSemester)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // labelX1
             // 
+            this.labelX1.AutoSize = true;
             this.labelX1.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
@@ -67,57 +63,9 @@
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Location = new System.Drawing.Point(6, 8);
             this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(75, 23);
+            this.labelX1.Size = new System.Drawing.Size(74, 21);
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "學    年    度";
-            // 
-            // labelX2
-            // 
-            this.labelX2.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.Class = "";
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(193, 8);
-            this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(46, 23);
-            this.labelX2.TabIndex = 0;
-            this.labelX2.Text = "學    期";
-            // 
-            // intSchoolYear
-            // 
-            this.intSchoolYear.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.intSchoolYear.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.intSchoolYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.intSchoolYear.Location = new System.Drawing.Point(84, 7);
-            this.intSchoolYear.MaxValue = 1000;
-            this.intSchoolYear.MinValue = 50;
-            this.intSchoolYear.Name = "intSchoolYear";
-            this.intSchoolYear.ShowUpDown = true;
-            this.intSchoolYear.Size = new System.Drawing.Size(86, 25);
-            this.intSchoolYear.TabIndex = 0;
-            this.intSchoolYear.Value = 50;
-            // 
-            // intSemester
-            // 
-            this.intSemester.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.intSemester.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.intSemester.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.intSemester.Location = new System.Drawing.Point(246, 7);
-            this.intSemester.MaxValue = 2;
-            this.intSemester.MinValue = 1;
-            this.intSemester.Name = "intSemester";
-            this.intSemester.ShowUpDown = true;
-            this.intSemester.Size = new System.Drawing.Size(69, 25);
-            this.intSemester.TabIndex = 1;
-            this.intSemester.Value = 1;
             // 
             // btnExport
             // 
@@ -174,14 +122,14 @@
             this.colTeacher,
             this.colExam1,
             this.colExam2});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgv.Location = new System.Drawing.Point(6, 38);
             this.dgv.Name = "dgv";
@@ -189,6 +137,42 @@
             this.dgv.RowTemplate.Height = 24;
             this.dgv.Size = new System.Drawing.Size(749, 413);
             this.dgv.TabIndex = 7;
+            // 
+            // colCourse
+            // 
+            this.colCourse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCourse.HeaderText = "課程名稱";
+            this.colCourse.Name = "colCourse";
+            this.colCourse.ReadOnly = true;
+            // 
+            // colClass
+            // 
+            this.colClass.HeaderText = "開課年級";
+            this.colClass.Name = "colClass";
+            // 
+            // colSGradeYear
+            // 
+            this.colSGradeYear.HeaderText = "學生年級";
+            this.colSGradeYear.Name = "colSGradeYear";
+            // 
+            // colTeacher
+            // 
+            this.colTeacher.HeaderText = "授課老師";
+            this.colTeacher.Name = "colTeacher";
+            this.colTeacher.ReadOnly = true;
+            this.colTeacher.Width = 155;
+            // 
+            // colExam1
+            // 
+            this.colExam1.HeaderText = "Midterm";
+            this.colExam1.Name = "colExam1";
+            this.colExam1.ReadOnly = true;
+            // 
+            // colExam2
+            // 
+            this.colExam2.HeaderText = "Final";
+            this.colExam2.Name = "colExam2";
+            this.colExam2.ReadOnly = true;
             // 
             // cboFilter
             // 
@@ -207,6 +191,7 @@
             this.cboFilter.Size = new System.Drawing.Size(195, 25);
             this.cboFilter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboFilter.TabIndex = 11;
+            this.cboFilter.Visible = false;
             // 
             // comboItem4
             // 
@@ -247,42 +232,7 @@
             this.labelX3.Size = new System.Drawing.Size(47, 21);
             this.labelX3.TabIndex = 10;
             this.labelX3.Text = "篩　選";
-            // 
-            // colCourse
-            // 
-            this.colCourse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCourse.HeaderText = "課程名稱";
-            this.colCourse.Name = "colCourse";
-            this.colCourse.ReadOnly = true;
-            // 
-            // colClass
-            // 
-            this.colClass.HeaderText = "開課年級";
-            this.colClass.Name = "colClass";
-            // 
-            // colSGradeYear
-            // 
-            this.colSGradeYear.HeaderText = "學生年級";
-            this.colSGradeYear.Name = "colSGradeYear";
-            // 
-            // colTeacher
-            // 
-            this.colTeacher.HeaderText = "授課老師";
-            this.colTeacher.Name = "colTeacher";
-            this.colTeacher.ReadOnly = true;
-            this.colTeacher.Width = 155;
-            // 
-            // colExam1
-            // 
-            this.colExam1.HeaderText = "Midterm";
-            this.colExam1.Name = "colExam1";
-            this.colExam1.ReadOnly = true;
-            // 
-            // colExam2
-            // 
-            this.colExam2.HeaderText = "Final";
-            this.colExam2.Name = "colExam2";
-            this.colExam2.ReadOnly = true;
+            this.labelX3.Visible = false;
             // 
             // labelX4
             // 
@@ -312,17 +262,13 @@
             this.Controls.Add(this.btnQuery);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.intSemester);
-            this.Controls.Add(this.intSchoolYear);
-            this.Controls.Add(this.labelX2);
             this.Controls.Add(this.labelX1);
             this.DoubleBuffered = true;
             this.MaximizeBox = true;
             this.MinimumSize = new System.Drawing.Size(520, 300);
             this.Name = "SubjectConductStatusForm";
             this.Text = "Conduct輸入狀況(授課老師)";
-            ((System.ComponentModel.ISupportInitialize)(this.intSchoolYear)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.intSemester)).EndInit();
+            this.Load += new System.EventHandler(this.SubjectConductStatusForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -332,9 +278,6 @@
         #endregion
 
         private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.Editors.IntegerInput intSchoolYear;
-        private DevComponents.Editors.IntegerInput intSemester;
         private DevComponents.DotNetBar.ButtonX btnExport;
         private DevComponents.DotNetBar.ButtonX btnClose;
         private DevComponents.DotNetBar.ButtonX btnQuery;

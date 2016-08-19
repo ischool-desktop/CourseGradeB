@@ -353,17 +353,17 @@ namespace CourseGradeB
             };
 
             //Conduct輸入狀況檢視(班導師)
-            eduitem2["成績作業"]["輸入狀況檢視(Conduct班導師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm"].Executable;
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct、StandardBase班導師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm"].Executable;
 
-            eduitem2["成績作業"]["輸入狀況檢視(Conduct班導師)"].Click += delegate
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct、StandardBase班導師)"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.HRTConductStatusForm().ShowDialog();
             };
 
             //Conduct輸入狀況檢視(授課老師)
-            eduitem2["成績作業"]["輸入狀況檢視(Conduct授課老師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm"].Executable;
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct、StandardBase授課老師)"].Enable = User.Acl["CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm"].Executable;
 
-            eduitem2["成績作業"]["輸入狀況檢視(Conduct授課老師)"].Click += delegate
+            eduitem2["成績作業"]["輸入狀況檢視(Conduct、StandardBase授課老師)"].Click += delegate
             {
                 new CourseGradeB.EduAdminExtendControls.Ribbon.SubjectConductStatusForm().ShowDialog();
             };
