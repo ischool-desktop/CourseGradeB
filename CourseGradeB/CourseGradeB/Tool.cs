@@ -353,13 +353,13 @@ namespace CourseGradeB
                     {
                         update_log.Add(text + "\r\n最高GPA由 " + old_max + " 改為 " + gparef.Max + "\r\n平均GPA由 " + old_avg + " 改為 " + gparef.Avg);
                     }
-                        
+
                     gparef.Save();
                 }
                 FISCA.Presentation.MotherForm.SetStatusBarMessage("GPA統計更新完成");
             }
 
-            if(insert_log.Count > 0)
+            if (insert_log.Count > 0)
                 FISCA.LogAgent.ApplicationLog.Log("GPA統計", "自動新增", string.Join("\r\n", insert_log));
 
             if (update_log.Count > 0)
@@ -422,7 +422,12 @@ namespace CourseGradeB
                 {new Domain{Name="Science",Hours=5,DisplayOrder=4,ShortName="Science"}},
                 {new Domain{Name="Social Studies",Hours=4,DisplayOrder=5,ShortName="S.S."}},
                 {new Domain{Name="Physical Education",Hours=2,DisplayOrder=6,ShortName="P.E."}},
-                {new Domain{Name="Elective",Hours=4,DisplayOrder=7,ShortName="Elective"}}
+                {new Domain{Name="Guidance",Hours=1,DisplayOrder=7,ShortName="Guidance"}},
+                {new Domain{Name="Health",Hours=2,DisplayOrder=8,ShortName="Health"}},
+                {new Domain{Name="International Relations",Hours=2,DisplayOrder=9,ShortName="International Relations"}},
+                {new Domain{Name="Art",Hours=2,DisplayOrder=10,ShortName="Art"}},
+                {new Domain{Name="Technology",Hours=2,DisplayOrder=11,ShortName="Technology"}},
+                {new Domain{Name="Elective",Hours=4,DisplayOrder=12,ShortName="Elective"}}
             }}
         };
 

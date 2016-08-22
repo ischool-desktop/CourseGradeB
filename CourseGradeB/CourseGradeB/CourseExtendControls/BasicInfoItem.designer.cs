@@ -88,7 +88,6 @@ namespace CourseGradeB.CourseExtendControls
             this.txtCourseName.Border.Class = "TextBoxBorder";
             this.txtCourseName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtCourseName.Location = new System.Drawing.Point(113, 19);
-            this.txtCourseName.MaxLength = 50;
             this.txtCourseName.Name = "txtCourseName";
             this.txtCourseName.Size = new System.Drawing.Size(151, 25);
             this.txtCourseName.TabIndex = 0;
@@ -102,7 +101,6 @@ namespace CourseGradeB.CourseExtendControls
             this.txtSubject.Border.Class = "TextBoxBorder";
             this.txtSubject.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtSubject.Location = new System.Drawing.Point(113, 48);
-            this.txtSubject.MaxLength = 50;
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.Size = new System.Drawing.Size(151, 25);
             this.txtSubject.TabIndex = 1;
