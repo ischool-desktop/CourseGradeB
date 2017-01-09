@@ -427,7 +427,9 @@ namespace CourseGradeB
                 {new Domain{Name="International Relations",Hours=2,DisplayOrder=9,ShortName="International Relations"}},
                 {new Domain{Name="Art",Hours=2,DisplayOrder=10,ShortName="Art"}},
                 {new Domain{Name="Technology",Hours=2,DisplayOrder=11,ShortName="Technology"}},
-                {new Domain{Name="Elective",Hours=4,DisplayOrder=12,ShortName="Elective"}}
+                {new Domain{Name="Art & Technology",Hours=2,DisplayOrder=12,ShortName="Art & Technology"}},
+                {new Domain{Name="Elective",Hours=4,DisplayOrder=13,ShortName="Elective"}},
+                {new Domain{Name="Others",Hours=1,DisplayOrder=14,ShortName="Others"}}
             }}
         };
 
